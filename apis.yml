@@ -1,0 +1,19 @@
+aid: guidewire
+url: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/apis.yml
+apis:
+- aid: guidewire:guidewire-api
+  name: Guidewire Insurance Platform API
+  tags:
+  - Insurance
+  - Policy
+  - Claims
+  - Billing
+  - P&C
+  image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
+  humanURL: https://developer.guidewire.com/
+  baseURL: https://api.guidewire.example.com
+  properties:
+  - url: https://developer.guidewire.com/
+    type: Documentation
+  description: >-
+    Guidewire provides the insurance industry's leading platform including PolicyCenter, ClaimCenter, and BillingCenter. REST APIs enable policy lifecycle management, claims processing, payment orchestration, and underwriting workflows for P&C carriers.
