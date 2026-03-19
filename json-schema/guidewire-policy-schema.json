@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/guidewire/json-schema/guidewire-policy-schema.json",
+  "title": "Guidewire Policy",
+  "description": "JSON Schema for a Guidewire PolicyCenter insurance policy including coverages, insured parties, and premium information.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Guidewire PublicID for the policy"
+    },
+    "policyNumber": {
+      "type": "string",
+      "description": "Human-readable policy number"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["In Force", "Expired", "Cancelled", "Pending Cancelled"],
+      "description": "Current policy status"
+    },
+    "product": {
+      "type": "string",
+      "description": "Insurance product type (e.g., BusinessOwners, CommercialProperty, PersonalAuto)"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Policy effective date"
+    },
+    "expirationDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Policy expiration date"
+    },
+    "issuedDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date policy was issued"
+    },
+    "totalPremium": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total annual premium amount"
+    },
+    "currency": {
+      "type": "string",
+      "default": "USD",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "account": { "$ref": "#/$defs/AccountRef" },
+    "insured": { "$ref": "#/$defs/ContactRef" },
+    "coverages": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Coverage" }
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedDate": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["id", "policyNumber", "status", "product", "effectiveDate"],
+  "$defs": {
+    "AccountRef": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "accountNumber": { "type": "string" },
+        "name": { "type": "string" }
+      },
+      "required": ["id"]
+    },
+    "ContactRef": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "displayName": { "type": "string" }
+      },
+      "required": ["id"]
+    },
+    "Coverage": {
+      "type": "object",
+      "description": "An insurance coverage line on the policy",
+      "properties": {
+        "id": { "type": "string" },
+        "type": {
+          "type": "string",
+          "description": "Coverage type code (e.g., 'BOPBuildingCov', 'BOPBusinessPersonalPropertyCov')"
+        },
+        "limit": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Coverage limit in policy currency"
+        },
+        "deductible": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Coverage deductible amount"
+        },
+        "premium": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Premium attributable to this coverage"
+        },
+        "description": {
+          "type": "string"
+        },
+        "terms": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/CoverageTerm" }
+        }
+      },
+      "required": ["id", "type"]
+    },
+    "CoverageTerm": {
+      "type": "object",
+      "description": "A specific term or condition on a coverage",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "value": { "type": "string" }
+      }
+    }
+  }
+}

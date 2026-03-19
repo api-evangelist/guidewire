@@ -1,0 +1,329 @@
+asyncapi: 2.6.0
+info:
+  title: Guidewire Integration Gateway Events
+  version: 1.0.0
+  description: >-
+    Guidewire Integration Gateway AsyncAPI specification for event-driven integrations.
+    The gateway publishes webhook events when key policy, claim, and billing lifecycle
+    events occur in Guidewire Cloud applications. Subscribers can register webhook
+    endpoints to receive real-time notifications for downstream system integration.
+  contact:
+    name: Guidewire Developer Support
+    url: https://community.guidewire.com/
+  license:
+    name: Guidewire License
+    url: https://www.guidewire.com/
+
+servers:
+  production:
+    url: https://{tenant}.guidewire.com/ig/webhooks
+    protocol: https
+    description: Guidewire Integration Gateway production webhook endpoint
+    variables:
+      tenant:
+        description: Guidewire Cloud tenant identifier
+
+defaultContentType: application/json
+
+channels:
+  policy/issued:
+    description: Triggered when a new policy is issued in PolicyCenter
+    subscribe:
+      operationId: onPolicyIssued
+      summary: Policy issued event
+      description: Published when a new policy is successfully issued. Contains policy number, effective dates, product, insured details, and premium.
+      tags:
+        - name: Policy
+        - name: PolicyCenter
+      message:
+        $ref: '#/components/messages/PolicyIssuedEvent'
+
+  policy/cancelled:
+    description: Triggered when a policy is cancelled in PolicyCenter
+    subscribe:
+      operationId: onPolicyCancelled
+      summary: Policy cancelled event
+      description: Published when a policy is cancelled. Contains the cancellation reason, effective date, and return premium details.
+      tags:
+        - name: Policy
+        - name: PolicyCenter
+      message:
+        $ref: '#/components/messages/PolicyCancelledEvent'
+
+  policy/renewed:
+    description: Triggered when a policy is renewed
+    subscribe:
+      operationId: onPolicyRenewed
+      summary: Policy renewed event
+      description: Published when a policy renewal is bound. Contains new policy period details and premium change information.
+      tags:
+        - name: Policy
+        - name: PolicyCenter
+      message:
+        $ref: '#/components/messages/PolicyRenewedEvent'
+
+  claim/created:
+    description: Triggered when a new claim is created in ClaimCenter
+    subscribe:
+      operationId: onClaimCreated
+      summary: Claim created event
+      description: Published when a new FNOL (First Notice of Loss) claim is created. Contains loss date, type, policy reference, and initial assignment.
+      tags:
+        - name: Claim
+        - name: ClaimCenter
+      message:
+        $ref: '#/components/messages/ClaimCreatedEvent'
+
+  claim/closed:
+    description: Triggered when a claim is closed in ClaimCenter
+    subscribe:
+      operationId: onClaimClosed
+      summary: Claim closed event
+      description: Published when a claim is closed. Contains final incurred amounts, paid totals, and closure reason.
+      tags:
+        - name: Claim
+        - name: ClaimCenter
+      message:
+        $ref: '#/components/messages/ClaimClosedEvent'
+
+  payment/issued:
+    description: Triggered when a claim payment is issued in ClaimCenter
+    subscribe:
+      operationId: onClaimPaymentIssued
+      summary: Claim payment issued event
+      description: Published when a claim payment (check or EFT) is approved and issued. Contains payment details, payee, and claim reference.
+      tags:
+        - name: Payment
+        - name: ClaimCenter
+      message:
+        $ref: '#/components/messages/ClaimPaymentIssuedEvent'
+
+components:
+  messages:
+    PolicyIssuedEvent:
+      name: PolicyIssuedEvent
+      title: Policy Issued
+      contentType: application/json
+      payload:
+        type: object
+        required: [eventId, eventType, timestamp, data]
+        properties:
+          eventId:
+            type: string
+            description: Unique event identifier
+          eventType:
+            type: string
+            enum: [policy.issued]
+          timestamp:
+            type: string
+            format: date-time
+          tenantId:
+            type: string
+          data:
+            type: object
+            properties:
+              policyId:
+                type: string
+              policyNumber:
+                type: string
+              product:
+                type: string
+              status:
+                type: string
+              effectiveDate:
+                type: string
+                format: date
+              expirationDate:
+                type: string
+                format: date
+              totalPremium:
+                type: number
+              currency:
+                type: string
+              insuredName:
+                type: string
+              accountId:
+                type: string
+
+    PolicyCancelledEvent:
+      name: PolicyCancelledEvent
+      title: Policy Cancelled
+      contentType: application/json
+      payload:
+        type: object
+        required: [eventId, eventType, timestamp, data]
+        properties:
+          eventId:
+            type: string
+          eventType:
+            type: string
+            enum: [policy.cancelled]
+          timestamp:
+            type: string
+            format: date-time
+          tenantId:
+            type: string
+          data:
+            type: object
+            properties:
+              policyId:
+                type: string
+              policyNumber:
+                type: string
+              cancellationDate:
+                type: string
+                format: date
+              cancellationReason:
+                type: string
+              returnPremium:
+                type: number
+
+    PolicyRenewedEvent:
+      name: PolicyRenewedEvent
+      title: Policy Renewed
+      contentType: application/json
+      payload:
+        type: object
+        required: [eventId, eventType, timestamp, data]
+        properties:
+          eventId:
+            type: string
+          eventType:
+            type: string
+            enum: [policy.renewed]
+          timestamp:
+            type: string
+            format: date-time
+          tenantId:
+            type: string
+          data:
+            type: object
+            properties:
+              priorPolicyId:
+                type: string
+              newPolicyId:
+                type: string
+              policyNumber:
+                type: string
+              effectiveDate:
+                type: string
+                format: date
+              expirationDate:
+                type: string
+                format: date
+              newTotalPremium:
+                type: number
+              premiumChange:
+                type: number
+
+    ClaimCreatedEvent:
+      name: ClaimCreatedEvent
+      title: Claim Created
+      contentType: application/json
+      payload:
+        type: object
+        required: [eventId, eventType, timestamp, data]
+        properties:
+          eventId:
+            type: string
+          eventType:
+            type: string
+            enum: [claim.created]
+          timestamp:
+            type: string
+            format: date-time
+          tenantId:
+            type: string
+          data:
+            type: object
+            properties:
+              claimId:
+                type: string
+              claimNumber:
+                type: string
+              policyNumber:
+                type: string
+              lossDate:
+                type: string
+                format: date
+              lossType:
+                type: string
+              lossDescription:
+                type: string
+              assignedAdjusterId:
+                type: string
+
+    ClaimClosedEvent:
+      name: ClaimClosedEvent
+      title: Claim Closed
+      contentType: application/json
+      payload:
+        type: object
+        required: [eventId, eventType, timestamp, data]
+        properties:
+          eventId:
+            type: string
+          eventType:
+            type: string
+            enum: [claim.closed]
+          timestamp:
+            type: string
+            format: date-time
+          tenantId:
+            type: string
+          data:
+            type: object
+            properties:
+              claimId:
+                type: string
+              claimNumber:
+                type: string
+              closedDate:
+                type: string
+                format: date
+              closureReason:
+                type: string
+              totalPaid:
+                type: number
+              totalIncurred:
+                type: number
+
+    ClaimPaymentIssuedEvent:
+      name: ClaimPaymentIssuedEvent
+      title: Claim Payment Issued
+      contentType: application/json
+      payload:
+        type: object
+        required: [eventId, eventType, timestamp, data]
+        properties:
+          eventId:
+            type: string
+          eventType:
+            type: string
+            enum: [payment.issued]
+          timestamp:
+            type: string
+            format: date-time
+          tenantId:
+            type: string
+          data:
+            type: object
+            properties:
+              paymentId:
+                type: string
+              claimId:
+                type: string
+              claimNumber:
+                type: string
+              amount:
+                type: number
+              currency:
+                type: string
+              paymentType:
+                type: string
+                enum: [Check, EFT, Wire]
+              payeeName:
+                type: string
+              issueDate:
+                type: string
+                format: date

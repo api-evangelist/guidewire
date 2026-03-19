@@ -1,0 +1,94 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "fibo": "https://spec.edmcouncil.org/fibo/ontology/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dct": "http://purl.org/dc/terms/",
+
+    "Policy": {
+      "@id": "schema:Service",
+      "@type": "@id"
+    },
+    "Claim": {
+      "@id": "schema:ReportedDoseSchedule",
+      "@type": "@id"
+    },
+    "Account": {
+      "@id": "schema:Organization",
+      "@type": "@id"
+    },
+    "Coverage": {
+      "@id": "schema:InsuranceAgency",
+      "@type": "@id"
+    },
+
+    "id": "schema:identifier",
+    "policyNumber": "schema:identifier",
+    "claimNumber": "schema:identifier",
+    "accountNumber": "schema:identifier",
+    "status": "schema:itemCondition",
+    "product": "schema:serviceType",
+    "effectiveDate": {
+      "@id": "schema:validFrom",
+      "@type": "xsd:date"
+    },
+    "expirationDate": {
+      "@id": "schema:validThrough",
+      "@type": "xsd:date"
+    },
+    "issuedDate": {
+      "@id": "schema:dateIssued",
+      "@type": "xsd:date"
+    },
+    "totalPremium": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "currency": "schema:priceCurrency",
+    "createdDate": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updatedDate": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+
+    "insured": {
+      "@id": "schema:customer",
+      "@type": "@id"
+    },
+    "account": {
+      "@id": "schema:provider",
+      "@type": "@id"
+    },
+    "coverages": {
+      "@id": "schema:offers",
+      "@type": "@id",
+      "@container": "@set"
+    },
+
+    "lossDate": {
+      "@id": "schema:startDate",
+      "@type": "xsd:date"
+    },
+    "lossType": "schema:additionalType",
+    "lossDescription": "schema:description",
+    "reportedDate": {
+      "@id": "schema:datePosted",
+      "@type": "xsd:dateTime"
+    },
+    "totalIncurred": {
+      "@id": "schema:totalPaymentDue",
+      "@type": "xsd:decimal"
+    },
+    "totalPaid": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+
+    "displayName": "schema:name",
+    "name": "schema:name"
+  }
+}

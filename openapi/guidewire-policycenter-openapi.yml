@@ -1,0 +1,533 @@
+openapi: 3.1.0
+info:
+  title: Guidewire PolicyCenter API
+  description: >-
+    Guidewire PolicyCenter REST API for property and casualty insurance policy
+    lifecycle management. Provides endpoints for policy creation, quoting,
+    underwriting, issuance, endorsements, renewals, cancellations, and reinstatement.
+    Deployed on Guidewire Cloud with OAuth 2.0 authentication.
+  version: 1.0.0
+  contact:
+    name: Guidewire Developer Support
+    url: https://community.guidewire.com/
+  license:
+    name: Guidewire License
+    url: https://www.guidewire.com/
+externalDocs:
+  description: Guidewire PolicyCenter Documentation
+  url: https://docs.guidewire.com/
+
+servers:
+  - url: https://{tenant}.guidewire.com/pc/rest/v1
+    variables:
+      tenant:
+        default: yourcompany
+        description: Your Guidewire Cloud tenant identifier
+
+security:
+  - OAuth2: []
+
+tags:
+  - name: Policies
+    description: Policy lifecycle management
+  - name: Quotes
+    description: Policy quoting and rating
+  - name: Accounts
+    description: Customer account management
+  - name: Contacts
+    description: Contact and party information
+
+paths:
+  /policies:
+    get:
+      operationId: listPolicies
+      summary: List policies
+      description: Returns a paginated list of policies accessible to the authenticated user. Supports filtering by policy number, status, product, and effective date range.
+      tags: [Policies]
+      parameters:
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 25
+            maximum: 100
+        - name: pageNumber
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [In Force, Expired, Cancelled]
+        - name: policyNumber
+          in: query
+          schema:
+            type: string
+        - name: product
+          in: query
+          schema:
+            type: string
+            description: Product type code (e.g., "BusinessOwners", "CommercialProperty")
+      responses:
+        '200':
+          description: Policy list returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyList'
+        '401':
+          description: Unauthorized
+
+  /policies/{policyId}:
+    get:
+      operationId: getPolicy
+      summary: Get policy details
+      description: Returns complete policy details including coverages, limits, deductibles, insured parties, and premium information.
+      tags: [Policies]
+      parameters:
+        - name: policyId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique policy identifier (PublicID)
+      responses:
+        '200':
+          description: Policy details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+        '404':
+          description: Policy not found
+
+  /policies/{policyId}/transactions:
+    get:
+      operationId: listPolicyTransactions
+      summary: List policy transactions
+      description: Returns all transactions (endorsements, renewals, cancellations) associated with a policy.
+      tags: [Policies]
+      parameters:
+        - name: policyId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Transactions returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionList'
+
+  /submissions:
+    post:
+      operationId: createSubmission
+      summary: Create new policy submission
+      description: Creates a new policy submission (quote request) for underwriting. Returns a submission ID for tracking through the quoting and issuance workflow.
+      tags: [Quotes]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionRequest'
+      responses:
+        '201':
+          description: Submission created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+        '400':
+          description: Invalid submission data
+        '422':
+          description: Underwriting rule violation
+
+  /submissions/{submissionId}:
+    get:
+      operationId: getSubmission
+      summary: Get submission details
+      description: Returns the current state of a policy submission including underwriting decisions and quoted premiums.
+      tags: [Quotes]
+      parameters:
+        - name: submissionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Submission returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+        '404':
+          description: Submission not found
+
+  /submissions/{submissionId}/quote:
+    post:
+      operationId: quoteSubmission
+      summary: Request a quote for a submission
+      description: Triggers rating and underwriting for a submission to produce a quoted premium. Returns rated coverages and premium breakdown.
+      tags: [Quotes]
+      parameters:
+        - name: submissionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Quote produced
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '422':
+          description: Rating error or underwriting declination
+
+  /submissions/{submissionId}/issue:
+    post:
+      operationId: issuePolicy
+      summary: Issue policy from submission
+      description: Issues a bound policy from an approved submission. Returns the new policy number and effective dates.
+      tags: [Policies]
+      parameters:
+        - name: submissionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Policy issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+        '409':
+          description: Submission not in quotable state
+
+  /accounts:
+    get:
+      operationId: listAccounts
+      summary: List accounts
+      description: Returns customer accounts with optional search by name or account number.
+      tags: [Accounts]
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+          description: Search query for account name
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: Account list returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountList'
+
+  /accounts/{accountId}:
+    get:
+      operationId: getAccount
+      summary: Get account details
+      description: Returns the account record including all associated contacts and policy references.
+      tags: [Accounts]
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Account returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: Account not found
+
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.guidewire.com/oauth/authorize
+          tokenUrl: https://login.guidewire.com/oauth/token
+          scopes:
+            pc.policies.read: Read policy data
+            pc.policies.write: Write policy data
+            pc.accounts.read: Read account data
+
+  schemas:
+    Policy:
+      type: object
+      properties:
+        id:
+          type: string
+          description: PublicID of the policy
+        policyNumber:
+          type: string
+        status:
+          type: string
+          enum: ["In Force", "Expired", "Cancelled", "Pending Cancelled"]
+        product:
+          type: string
+          description: Insurance product type
+        effectiveDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        issuedDate:
+          type: string
+          format: date
+        totalPremium:
+          type: number
+          format: double
+        currency:
+          type: string
+          default: USD
+        account:
+          $ref: '#/components/schemas/AccountRef'
+        insured:
+          $ref: '#/components/schemas/ContactRef'
+        coverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coverage'
+        createdDate:
+          type: string
+          format: date-time
+        updatedDate:
+          type: string
+          format: date-time
+
+    PolicyList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Policy'
+        total:
+          type: integer
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+
+    Coverage:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          description: Coverage type code
+        limit:
+          type: number
+          format: double
+        deductible:
+          type: number
+          format: double
+        premium:
+          type: number
+          format: double
+        description:
+          type: string
+
+    Submission:
+      type: object
+      properties:
+        id:
+          type: string
+        submissionNumber:
+          type: string
+        status:
+          type: string
+          enum: [Draft, Quoted, Declined, Bound, Withdrawn]
+        product:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        account:
+          $ref: '#/components/schemas/AccountRef'
+        insured:
+          $ref: '#/components/schemas/ContactRef'
+        createdDate:
+          type: string
+          format: date-time
+
+    SubmissionRequest:
+      type: object
+      required: [product, effectiveDate, accountId]
+      properties:
+        product:
+          type: string
+          description: Insurance product code
+        effectiveDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        accountId:
+          type: string
+          description: Existing account ID or null to create new
+        insuredDetails:
+          $ref: '#/components/schemas/ContactDetails'
+
+    Quote:
+      type: object
+      properties:
+        submissionId:
+          type: string
+        status:
+          type: string
+          enum: [Quoted, Declined, Referred]
+        totalPremium:
+          type: number
+          format: double
+        annualPremium:
+          type: number
+          format: double
+        taxes:
+          type: number
+          format: double
+        fees:
+          type: number
+          format: double
+        coverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coverage'
+        validUntil:
+          type: string
+          format: date
+
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [Submission, PolicyChange, Renewal, Cancellation, Reinstatement]
+        status:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        premiumChange:
+          type: number
+          format: double
+        reason:
+          type: string
+
+    TransactionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        total:
+          type: integer
+
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+        accountNumber:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+          enum: [Person, Company]
+        primaryContact:
+          $ref: '#/components/schemas/ContactRef'
+        activePolicies:
+          type: integer
+        createdDate:
+          type: string
+          format: date-time
+
+    AccountList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        total:
+          type: integer
+
+    AccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+        accountNumber:
+          type: string
+        name:
+          type: string
+
+    ContactRef:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
+
+    ContactDetails:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        companyName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: object
+          properties:
+            addressLine1:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            postalCode:
+              type: string
+            country:
+              type: string
