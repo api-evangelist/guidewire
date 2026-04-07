@@ -28,15 +28,12 @@ security:
   - OAuth2: []
 
 tags:
+  - name: Accounts
+    description: Customer account management
   - name: Policies
     description: Policy lifecycle management
   - name: Quotes
     description: Policy quoting and rating
-  - name: Accounts
-    description: Customer account management
-  - name: Contacts
-    description: Contact and party information
-
 paths:
   /policies:
     get:

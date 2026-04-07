@@ -1,16 +1,14 @@
 aid: guidewire
-url: 
-  https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/apis.yml
 apis:
   - aid: guidewire:guidewire-policycenter-api
     name: Guidewire PolicyCenter API
     tags:
       - Insurance
-      - Policy
       - P&C
+      - Policy
       - Underwriting
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
+    image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
     humanURL: https://docs.guidewire.com/
     baseURL: https://api.guidewire.com
     properties:
@@ -28,12 +26,11 @@ apis:
   - aid: guidewire:guidewire-claimcenter-api
     name: Guidewire ClaimCenter API
     tags:
-      - Insurance
       - Claims
-      - P&C
+      - Insurance
       - Loss Adjustment
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
+      - P&C
+    image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
     humanURL: https://docs.guidewire.com/
     baseURL: https://api.guidewire.com
     properties:
@@ -51,12 +48,11 @@ apis:
   - aid: guidewire:guidewire-billingcenter-api
     name: Guidewire BillingCenter API
     tags:
-      - Insurance
       - Billing
-      - Payments
+      - Insurance
       - P&C
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
+      - Payments
+    image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
     humanURL: https://docs.guidewire.com/
     baseURL: https://api.guidewire.com
     properties:
@@ -76,8 +72,7 @@ apis:
       - Integration
       - Middleware
       - P&C
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
+    image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
     humanURL: https://docs.guidewire.com/
     baseURL: https://api.guidewire.com
     properties:
@@ -100,8 +95,7 @@ common:
     ClaimCenter, and BillingCenter. REST APIs enable policy lifecycle management,
     claims processing, payment orchestration, and underwriting workflows for P&C insurance
     carriers on the Guidewire Cloud platform.
-  image: 
-    https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
+  image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
   tags:
     - Insurance
     - Policy

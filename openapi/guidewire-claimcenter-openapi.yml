@@ -29,10 +29,10 @@ security:
 tags:
   - name: Claims
     description: Claims lifecycle management
-  - name: FNOL
-    description: First Notice of Loss intake
   - name: Exposures
     description: Claim exposure management
+  - name: FNOL
+    description: First Notice of Loss intake
   - name: Payments
     description: Claim payment and reserves
 
