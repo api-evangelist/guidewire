@@ -1,10 +1,21 @@
-# Unknown (guidewire)
+# Guidewire (guidewire)
+Guidewire provides the insurance industry's leading platform including PolicyCenter, ClaimCenter, and BillingCenter. REST APIs enable policy lifecycle management, claims processing, payment orchestration, and underwriting workflows for P&C insurance carriers on the Guidewire Cloud platform.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/apis.yml)
 
+## Scope
+
+- **Type:** Index
+- **Position:** Consuming
+- **Access:** 3rd-Party
+
+## Tags:
+
+ - Insurance, Policy, Claims, Billing, P&C
+
 ## Timestamps
 
-- **Modified:** 2026-03-18 
+- **Modified:** 2026-04-28
 
 ## APIs
 
@@ -13,6 +24,7 @@ The Guidewire PolicyCenter API provides REST endpoints for policy lifecycle mana
 
 **Human URL:** [https://docs.guidewire.com/](https://docs.guidewire.com/)
 
+**Base URL:** `https://api.guidewire.com`
 
 #### Tags:
 
@@ -29,6 +41,7 @@ The Guidewire ClaimCenter API provides REST endpoints for claims intake, assignm
 
 **Human URL:** [https://docs.guidewire.com/](https://docs.guidewire.com/)
 
+**Base URL:** `https://api.guidewire.com`
 
 #### Tags:
 
@@ -45,6 +58,7 @@ The Guidewire BillingCenter API provides REST endpoints for payment orchestratio
 
 **Human URL:** [https://docs.guidewire.com/](https://docs.guidewire.com/)
 
+**Base URL:** `https://api.guidewire.com`
 
 #### Tags:
 
@@ -60,6 +74,7 @@ The Guidewire Integration Gateway provides a managed API layer for connecting Gu
 
 **Human URL:** [https://docs.guidewire.com/](https://docs.guidewire.com/)
 
+**Base URL:** `https://api.guidewire.com`
 
 #### Tags:
 
@@ -72,3 +87,23 @@ The Guidewire Integration Gateway provides a managed API layer for connecting Gu
 - [AsyncAPI](asyncapi/guidewire-integration-gateway-asyncapi.yml)
 
 ## Common Properties
+
+- [Portal](https://www.guidewire.com/developers)
+- [Documentation](https://docs.guidewire.com/)
+- [Status](https://status.guidewire.com/)
+- [Support](https://community.guidewire.com/)
+- [Blog](https://www.guidewire.com/resources/blog)
+- [Website](https://www.guidewire.com/)
+- [Developer Tools](https://marketplace.guidewire.com/)
+- [GitHub Organization](https://github.com/guidewire-oss)
+- [OpenAPI - PolicyCenter](openapi/guidewire-policycenter-openapi.yml)
+- [OpenAPI - ClaimCenter](openapi/guidewire-claimcenter-openapi.yml)
+- [JSON Schema](json-schema/guidewire-policy-schema.json)
+- [JSON-LD Context](json-ld/guidewire-context.jsonld)
+- [AsyncAPI](asyncapi/guidewire-integration-gateway-asyncapi.yml)
+
+## Maintainers
+
+**FN:** Kin Lane
+
+**Email:** kin@apievangelist.com
