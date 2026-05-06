@@ -4,78 +4,33 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: guidewire
 providerId: guidewire
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
+  - Insurance
+  - P&C
   - Rate Limiting
   - Quotas
   - Throttling
-description: Machine-readable rate limit definitions for the guidewire API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
+description: Guidewire does not publish public, version-stable rate limits for its InsuranceSuite
+  APIs. Throttling and quota behavior is governed by the customer's Guidewire Cloud subscription
+  contract and is configured per tenant.
+notes: No public rate-limit documentation could be located. Numbers below are not present —
+  customers should reference their Guidewire Cloud admin console and contract for actual limits.
+sources:
+  - https://www.guidewire.com/products
+  - https://www.guidewire.com/developers
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
   retryAfter: Retry-After
-  policy: RateLimit-Policy
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Guidewire PolicyCenter API
-      - Guidewire ClaimCenter API
-      - Guidewire BillingCenter API
-      - Guidewire Integration Gateway API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Guidewire PolicyCenter API
-      - Guidewire ClaimCenter API
-      - Guidewire BillingCenter API
-      - Guidewire Integration Gateway API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Guidewire PolicyCenter API
-      - Guidewire ClaimCenter API
-      - Guidewire BillingCenter API
-      - Guidewire Integration Gateway API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Guidewire PolicyCenter API
-      - Guidewire ClaimCenter API
-      - Guidewire BillingCenter API
-      - Guidewire Integration Gateway API
   - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
+    name: Contract-defined per-tenant limit
+    scope: tenant
+    metric: varies
+    limit: see Guidewire Cloud contract / admin console
     applies:
       - Guidewire PolicyCenter API
       - Guidewire ClaimCenter API
@@ -83,15 +38,12 @@ limits:
       - Guidewire Integration Gateway API
 policies:
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
+    description: Clients should implement exponential backoff with jitter on 429 responses and honor
+      the Retry-After header where present.
+  - name: Tenant Scoping
+    description: Limits apply per Guidewire Cloud tenant; raises require working with the
+      Guidewire account team.
   - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+    description: Sustained traffic above contract-defined volumes may be subject to fair-use
+      throttling regardless of tenant scale.
 maintainers: []

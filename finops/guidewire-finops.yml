@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,28 +9,42 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: guidewire
 providerId: guidewire
-publisherName: guidewire
-serviceCategory: API
+publisherName: Guidewire Software, Inc.
+serviceCategory: Insurance Platform / SaaS
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
+  - Insurance
+  - P&C
+  - Policy
+  - Claims
+  - Billing
   - FinOps
   - Cost Management
   - FOCUS
-description: FinOps framework definition for the guidewire API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+description: 'FOCUS-aligned FinOps placeholder for Guidewire InsuranceSuite Cloud: enterprise
+  subscription bundled with Guidewire Cloud, no public pricing. Meters here describe likely
+  invoice-line shapes (subscription seats, transaction volume, environment count) for a P&C carrier
+  consuming Guidewire APIs.'
+notes: Pricing model is not publicly disclosed; meters are inferred from Guidewire Cloud public
+  marketing and typical enterprise SaaS billing shapes. Reconcile against the customer's MSA.
+sources:
+  - https://www.guidewire.com/products
+  - https://www.guidewire.com/developers
 principles:
   - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
+    description: Use the Guidewire Cloud Console usage views and integration logs to track per-API
+      call volume against contract entitlements.
   - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
+    description: Tag InsuranceSuite environments (Dev / QA / Prod / DR) and consuming applications
+      so spend can be split across business lines (Personal / Commercial / Specialty).
   - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
+    description: Right-size non-production Guidewire environments; consolidate downstream
+      integrations through the Integration Gateway to reduce per-environment overhead.
   - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
+    description: Designate a Guidewire program owner; review subscription utilization quarterly
+      against the contractual ramp.
 domains:
   - name: Understand Usage and Cost
     capabilities:
@@ -59,53 +74,48 @@ domains:
       - Onboarding Workloads
       - Intersecting Disciplines
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Subscription
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
     - Tax
     - Credit
     - Adjustment
   chargeFrequency: Recurring
 focusColumns:
-  ServiceName: guidewire
-  ServiceCategory: Developer Tools / API
-  ProviderName: guidewire
-  PublisherName: guidewire
-  InvoiceIssuerName: guidewire
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceName: Guidewire InsuranceSuite Cloud
+  ServiceCategory: Insurance Platform / SaaS
+  ProviderName: Guidewire
+  PublisherName: Guidewire Software, Inc.
+  InvoiceIssuerName: Guidewire Software, Inc.
+  PricingCategory: Subscription
+  PricingUnit: subscription
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: insurancesuite_subscription
+    description: Annual Guidewire Cloud InsuranceSuite subscription line
+    unit: subscription-year
+    aggregation: sum
+    dimensions:
+      - environment
+      - line_of_business
+  - name: api_transactions
+    description: Inferred transaction volume across PolicyCenter / ClaimCenter / BillingCenter
+      APIs (capacity allocation meter; see contract for billable thresholds)
+    unit: transaction
     aggregation: sum
     dimensions:
       - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - environment
+  - name: integration_gateway_messages
+    description: Messages flowing through the Integration Gateway (used for capacity allocation)
+    unit: message
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
+      - integration
+      - environment
 apis:
   - name: Guidewire PolicyCenter API
     baseURL: https://api.guidewire.com
@@ -144,10 +154,10 @@ apis:
     serviceName: Guidewire Integration Gateway API
     serviceCategory: API
 unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
+  - name: Cost per Policy In-Force
+    metric: billed_cost / policies_in_force
     target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
+  - name: Cost per Claim Processed
+    metric: billed_cost / claims_processed
     target: TBD
 maintainers: []
