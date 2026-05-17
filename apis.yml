@@ -15,7 +15,7 @@ apis:
       - url: https://docs.guidewire.com/
         type: Documentation
       - url: https://www.guidewire.com/developers
-        type: Getting Started
+        type: GettingStarted
       - url: openapi/guidewire-policycenter-openapi.yml
         type: OpenAPI
     description: >-
@@ -37,7 +37,7 @@ apis:
       - url: https://docs.guidewire.com/
         type: Documentation
       - url: https://www.guidewire.com/developers
-        type: Getting Started
+        type: GettingStarted
       - url: openapi/guidewire-claimcenter-openapi.yml
         type: OpenAPI
     description: >-
@@ -59,7 +59,7 @@ apis:
       - url: https://docs.guidewire.com/
         type: Documentation
       - url: https://www.guidewire.com/developers
-        type: Getting Started
+        type: GettingStarted
     description: >-
       The Guidewire BillingCenter API provides REST endpoints for payment orchestration,
       invoice generation, payment plans, disbursements, and collections management
@@ -79,7 +79,7 @@ apis:
       - url: https://docs.guidewire.com/
         type: Documentation
       - url: https://www.guidewire.com/developers
-        type: Getting Started
+        type: GettingStarted
       - url: asyncapi/guidewire-integration-gateway-asyncapi.yml
         type: AsyncAPI
     description: >-
@@ -108,9 +108,9 @@ common:
     - url: https://docs.guidewire.com/
       type: Documentation
     - url: https://www.guidewire.com/developers
-      type: Getting Started
+      type: GettingStarted
     - url: https://status.guidewire.com/
-      type: Status
+      type: StatusPage
     - url: https://community.guidewire.com/
       type: Support
     - url: https://www.guidewire.com/resources/blog
@@ -120,7 +120,7 @@ common:
     - url: https://marketplace.guidewire.com/
       type: Developer Tools
     - url: https://github.com/guidewire-oss
-      type: GitHub Organization
+      type: GitHubOrganization
     - url: openapi/guidewire-policycenter-openapi.yml
       type: OpenAPI
     - url: openapi/guidewire-claimcenter-openapi.yml
