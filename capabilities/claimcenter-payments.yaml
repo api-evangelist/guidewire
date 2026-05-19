@@ -1,0 +1,120 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Guidewire ClaimCenter API — Payments
+  description: 'Guidewire ClaimCenter API — Payments. 2 operations. Lead operation: List claim payments. Self-contained Naftiko
+    capability covering one Guidewire business surface.'
+  tags:
+  - Guidewire
+  - Payments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GUIDEWIRE_API_KEY: GUIDEWIRE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: claimcenter-payments
+    baseUri: https://{tenant}.guidewire.com/cc/rest/v1
+    description: Guidewire ClaimCenter API — Payments business capability. Self-contained, no shared references.
+    resources:
+    - name: claims-claimId-payments
+      path: /claims/{claimId}/payments
+      operations:
+      - name: listclaimpayments
+        method: GET
+        description: List claim payments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: claimId
+          in: path
+          type: string
+          required: true
+      - name: createclaimpayment
+        method: POST
+        description: Create claim payment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: claimId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GUIDEWIRE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: claimcenter-payments-rest
+    port: 8080
+    description: REST adapter for Guidewire ClaimCenter API — Payments. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/claims/{claimid}/payments
+      name: claims-claimid-payments
+      description: REST surface for claims-claimId-payments.
+      operations:
+      - method: GET
+        name: listclaimpayments
+        description: List claim payments
+        call: claimcenter-payments.listclaimpayments
+        with:
+          claimId: rest.claimId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createclaimpayment
+        description: Create claim payment
+        call: claimcenter-payments.createclaimpayment
+        with:
+          claimId: rest.claimId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: claimcenter-payments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Guidewire ClaimCenter API — Payments. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-claim-payments
+      description: List claim payments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: claimcenter-payments.listclaimpayments
+      with:
+        claimId: tools.claimId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-claim-payment
+      description: Create claim payment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: claimcenter-payments.createclaimpayment
+      with:
+        claimId: tools.claimId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

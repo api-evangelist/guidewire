@@ -1,0 +1,125 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Guidewire PolicyCenter API — Accounts
+  description: 'Guidewire PolicyCenter API — Accounts. 2 operations. Lead operation: List accounts. Self-contained Naftiko
+    capability covering one Guidewire business surface.'
+  tags:
+  - Guidewire
+  - Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GUIDEWIRE_API_KEY: GUIDEWIRE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: policycenter-accounts
+    baseUri: https://{tenant}.guidewire.com/pc/rest/v1
+    description: Guidewire PolicyCenter API — Accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts
+      path: /accounts
+      operations:
+      - name: listaccounts
+        method: GET
+        description: List accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: q
+          in: query
+          type: string
+          description: Search query for account name
+        - name: pageSize
+          in: query
+          type: integer
+    - name: accounts-accountId
+      path: /accounts/{accountId}
+      operations:
+      - name: getaccount
+        method: GET
+        description: Get account details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GUIDEWIRE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: policycenter-accounts-rest
+    port: 8080
+    description: REST adapter for Guidewire PolicyCenter API — Accounts. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/accounts
+      name: accounts
+      description: REST surface for accounts.
+      operations:
+      - method: GET
+        name: listaccounts
+        description: List accounts
+        call: policycenter-accounts.listaccounts
+        with:
+          q: rest.q
+          pageSize: rest.pageSize
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountid}
+      name: accounts-accountid
+      description: REST surface for accounts-accountId.
+      operations:
+      - method: GET
+        name: getaccount
+        description: Get account details
+        call: policycenter-accounts.getaccount
+        with:
+          accountId: rest.accountId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: policycenter-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Guidewire PolicyCenter API — Accounts. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-accounts
+      description: List accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: policycenter-accounts.listaccounts
+      with:
+        q: tools.q
+        pageSize: tools.pageSize
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-account-details
+      description: Get account details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: policycenter-accounts.getaccount
+      with:
+        accountId: tools.accountId
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,79 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Guidewire ClaimCenter API — Exposures
+  description: 'Guidewire ClaimCenter API — Exposures. 1 operations. Lead operation: List claim exposures. Self-contained
+    Naftiko capability covering one Guidewire business surface.'
+  tags:
+  - Guidewire
+  - Exposures
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GUIDEWIRE_API_KEY: GUIDEWIRE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: claimcenter-exposures
+    baseUri: https://{tenant}.guidewire.com/cc/rest/v1
+    description: Guidewire ClaimCenter API — Exposures business capability. Self-contained, no shared references.
+    resources:
+    - name: claims-claimId-exposures
+      path: /claims/{claimId}/exposures
+      operations:
+      - name: listexposures
+        method: GET
+        description: List claim exposures
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: claimId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GUIDEWIRE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: claimcenter-exposures-rest
+    port: 8080
+    description: REST adapter for Guidewire ClaimCenter API — Exposures. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/claims/{claimid}/exposures
+      name: claims-claimid-exposures
+      description: REST surface for claims-claimId-exposures.
+      operations:
+      - method: GET
+        name: listexposures
+        description: List claim exposures
+        call: claimcenter-exposures.listexposures
+        with:
+          claimId: rest.claimId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: claimcenter-exposures-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Guidewire ClaimCenter API — Exposures. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-claim-exposures
+      description: List claim exposures
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: claimcenter-exposures.listexposures
+      with:
+        claimId: tools.claimId
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -88,6 +88,8 @@ apis:
       and REST API extensions for the Guidewire insurance platform.
 
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/guidewire-software
   aid: guidewire
   name: Guidewire
   description: >-
