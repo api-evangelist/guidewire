@@ -90,49 +90,49 @@ apis:
 common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/guidewire-software
-  aid: guidewire
-  name: Guidewire
-  description: >-
-    Guidewire provides the insurance industry's leading platform including PolicyCenter,
-    ClaimCenter, and BillingCenter. REST APIs enable policy lifecycle management,
-    claims processing, payment orchestration, and underwriting workflows for P&C insurance
-    carriers on the Guidewire Cloud platform.
-  image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
-  tags:
-    - Insurance
-    - Policy
-    - Claims
-    - Billing
-    - P&C
-  properties:
-    - url: https://www.guidewire.com/developers
-      type: Portal
-    - url: https://docs.guidewire.com/
-      type: Documentation
-    - url: https://www.guidewire.com/developers
-      type: GettingStarted
-    - url: https://status.guidewire.com/
-      type: StatusPage
-    - url: https://community.guidewire.com/
-      type: Support
-    - url: https://www.guidewire.com/resources/blog
-      type: Blog
-    - url: https://www.guidewire.com/
-      type: Website
-    - url: https://marketplace.guidewire.com/
-      type: Developer Tools
-    - url: https://github.com/guidewire-oss
-      type: GitHubOrganization
-    - url: openapi/guidewire-policycenter-openapi.yml
-      type: OpenAPI
-    - url: openapi/guidewire-claimcenter-openapi.yml
-      type: OpenAPI
-    - url: json-schema/guidewire-policy-schema.json
-      type: JSONSchema
-    - url: json-ld/guidewire-context.jsonld
-      type: JSONLDContext
-    - url: asyncapi/guidewire-integration-gateway-asyncapi.yml
-      type: AsyncAPI
+aid: guidewire
+name: Guidewire
+description: >-
+  Guidewire provides the insurance industry's leading platform including PolicyCenter,
+  ClaimCenter, and BillingCenter. REST APIs enable policy lifecycle management,
+  claims processing, payment orchestration, and underwriting workflows for P&C insurance
+  carriers on the Guidewire Cloud platform.
+image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
+tags:
+  - Insurance
+  - Policy
+  - Claims
+  - Billing
+  - P&C
+properties:
+  - url: https://www.guidewire.com/developers
+    type: Portal
+  - url: https://docs.guidewire.com/
+    type: Documentation
+  - url: https://www.guidewire.com/developers
+    type: GettingStarted
+  - url: https://status.guidewire.com/
+    type: StatusPage
+  - url: https://community.guidewire.com/
+    type: Support
+  - url: https://www.guidewire.com/resources/blog
+    type: Blog
+  - url: https://www.guidewire.com/
+    type: Website
+  - url: https://marketplace.guidewire.com/
+    type: Developer Tools
+  - url: https://github.com/guidewire-oss
+    type: GitHubOrganization
+  - url: openapi/guidewire-policycenter-openapi.yml
+    type: OpenAPI
+  - url: openapi/guidewire-claimcenter-openapi.yml
+    type: OpenAPI
+  - url: json-schema/guidewire-policy-schema.json
+    type: JSONSchema
+  - url: json-ld/guidewire-context.jsonld
+    type: JSONLDContext
+  - url: asyncapi/guidewire-integration-gateway-asyncapi.yml
+    type: AsyncAPI
 maintainer:
   name: Kin Lane
   email: kin@apievangelist.com
