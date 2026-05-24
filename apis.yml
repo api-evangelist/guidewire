@@ -90,6 +90,8 @@ apis:
 common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/guidewire-software
+  - type: LLMsTxt
+    url: https://docs.guidewire.com/llms.txt
 aid: guidewire
 name: Guidewire
 description: >-
