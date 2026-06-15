@@ -1,0 +1,956 @@
+"""
+Guidewire GraphQL Schema
+Conceptual schema derived from Guidewire REST APIs for PolicyCenter, ClaimCenter, and BillingCenter.
+Covers property and casualty insurance: policies, quotes, billing accounts, claims, and payments.
+"""
+
+# ─── Scalars ─────────────────────────────────────────────────────────────────
+
+scalar Date
+scalar DateTime
+scalar Decimal
+scalar JSON
+
+# ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum PolicyStatus {
+  DRAFT
+  QUOTED
+  BOUND
+  IN_FORCE
+  CANCELLED
+  EXPIRED
+  RENEWED
+  PENDING_CANCELLATION
+  NON_RENEWED
+}
+
+enum ClaimStatus {
+  NEW
+  OPEN
+  REOPENED
+  CLOSED
+  DENIED
+  WITHDRAWN
+}
+
+enum BillingStatus {
+  CURRENT
+  OVERDUE
+  DELINQUENT
+  CANCELLED
+  PAID_IN_FULL
+  SUSPENDED
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSED
+  FAILED
+  REVERSED
+  VOID
+}
+
+enum PaymentMethod {
+  CHECK
+  ACH
+  CREDIT_CARD
+  WIRE_TRANSFER
+  EFT
+  CASH
+}
+
+enum CoverageType {
+  LIABILITY
+  PROPERTY_DAMAGE
+  BODILY_INJURY
+  COMPREHENSIVE
+  COLLISION
+  UNINSURED_MOTORIST
+  MEDICAL_PAYMENTS
+  PERSONAL_INJURY_PROTECTION
+  UMBRELLA
+  WORKERS_COMP
+  COMMERCIAL_AUTO
+  GENERAL_LIABILITY
+  PROFESSIONAL_LIABILITY
+}
+
+enum LineOfBusiness {
+  PERSONAL_AUTO
+  HOMEOWNERS
+  RENTERS
+  COMMERCIAL_PROPERTY
+  COMMERCIAL_AUTO
+  WORKERS_COMPENSATION
+  GENERAL_LIABILITY
+  PROFESSIONAL_LIABILITY
+  UMBRELLA
+  INLAND_MARINE
+  OCEAN_MARINE
+  FARM
+  SPECIALTY
+}
+
+enum ContactType {
+  NAMED_INSURED
+  ADDITIONAL_INSURED
+  LOSS_PAYEE
+  MORTGAGEE
+  CLAIMANT
+  ATTORNEY
+  VENDOR
+  AGENT
+  BROKER
+}
+
+enum TransactionType {
+  NEW_BUSINESS
+  RENEWAL
+  ENDORSEMENT
+  CANCELLATION
+  REINSTATEMENT
+  AUDIT
+  REWRITE
+}
+
+enum ReserveType {
+  INDEMNITY
+  EXPENSE
+  MEDICAL
+  LEGAL
+  PROPERTY_DAMAGE
+}
+
+enum InvoiceStatus {
+  DRAFT
+  DUE
+  OVERDUE
+  PAID
+  VOID
+  WAIVED
+}
+
+enum ActivityStatus {
+  OPEN
+  COMPLETE
+  SKIPPED
+  USER_CANCELLED
+}
+
+enum ActivityPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum ExposureStatus {
+  OPEN
+  CLOSED
+  DENIED
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  NONBINARY
+  UNKNOWN
+}
+
+enum MaritalStatus {
+  SINGLE
+  MARRIED
+  DIVORCED
+  WIDOWED
+  DOMESTIC_PARTNER
+  UNKNOWN
+}
+
+enum AddressType {
+  HOME
+  WORK
+  MAILING
+  BILLING
+  RISK
+  OTHER
+}
+
+# ─── Core Supporting Types ────────────────────────────────────────────────────
+
+type Address {
+  addressLine1: String
+  addressLine2: String
+  city: String
+  state: String
+  postalCode: String
+  county: String
+  country: String
+  addressType: AddressType
+  latitude: Decimal
+  longitude: Decimal
+}
+
+type MonetaryAmount {
+  amount: Decimal!
+  currency: String!
+}
+
+type DateRange {
+  startDate: Date!
+  endDate: Date!
+}
+
+type PhoneNumber {
+  number: String!
+  extension: String
+  phoneType: String
+  isPrimary: Boolean
+}
+
+type EmailAddress {
+  email: String!
+  isPrimary: Boolean
+}
+
+type AuditInfo {
+  createUser: String
+  createTime: DateTime
+  updateUser: String
+  updateTime: DateTime
+}
+
+# ─── Contact / Party ─────────────────────────────────────────────────────────
+
+type Contact {
+  id: ID!
+  externalId: String
+  contactType: ContactType!
+  displayName: String!
+  firstName: String
+  lastName: String
+  middleName: String
+  companyName: String
+  taxId: String
+  dateOfBirth: Date
+  gender: Gender
+  maritalStatus: MaritalStatus
+  primaryAddress: Address
+  addresses: [Address!]
+  phoneNumbers: [PhoneNumber!]
+  emailAddresses: [EmailAddress!]
+  licenseNumber: String
+  licenseState: String
+  auditInfo: AuditInfo
+}
+
+type ContactInput {
+  externalId: String
+  contactType: ContactType!
+  firstName: String
+  lastName: String
+  companyName: String
+  primaryAddress: AddressInput
+}
+
+# ─── Agent / Producer ─────────────────────────────────────────────────────────
+
+type Agent {
+  id: ID!
+  agentCode: String!
+  displayName: String!
+  agencyName: String
+  licenseNumber: String
+  licenseStates: [String!]
+  contact: Contact
+  commissionRate: Decimal
+  active: Boolean!
+}
+
+type Agency {
+  id: ID!
+  agencyCode: String!
+  agencyName: String!
+  agents: [Agent!]
+  primaryContact: Contact
+  address: Address
+}
+
+# ─── Coverage ─────────────────────────────────────────────────────────────────
+
+type CoverageLimit {
+  limitType: String!
+  limitAmount: MonetaryAmount!
+  perOccurrence: MonetaryAmount
+  aggregate: MonetaryAmount
+}
+
+type Coverage {
+  id: ID!
+  coverageType: CoverageType!
+  coverageName: String!
+  effectiveDate: Date!
+  expirationDate: Date!
+  limits: [CoverageLimit!]
+  deductible: MonetaryAmount
+  premium: MonetaryAmount
+  isOptional: Boolean!
+  endorsementNumber: String
+}
+
+# ─── Risk / Insured Item ──────────────────────────────────────────────────────
+
+type Vehicle {
+  id: ID!
+  vin: String
+  year: Int
+  make: String
+  model: String
+  trim: String
+  bodyType: String
+  engineSize: String
+  mileage: Int
+  garageAddress: Address
+  usage: String
+  coverages: [Coverage!]
+}
+
+type Property {
+  id: ID!
+  propertyType: String!
+  address: Address!
+  yearBuilt: Int
+  squareFootage: Decimal
+  constructionType: String
+  roofType: String
+  numberOfStories: Int
+  replacementCostValue: MonetaryAmount
+  marketValue: MonetaryAmount
+  coverages: [Coverage!]
+}
+
+type Driver {
+  id: ID!
+  contact: Contact!
+  licenseNumber: String!
+  licenseState: String!
+  licenseClass: String
+  yearsLicensed: Int
+  violations: [String!]
+  accidents: [String!]
+  excluded: Boolean!
+}
+
+# ─── Policy ───────────────────────────────────────────────────────────────────
+
+type PolicyPeriod {
+  id: ID!
+  periodNumber: Int!
+  effectiveDate: Date!
+  expirationDate: Date!
+  status: PolicyStatus!
+  transactionType: TransactionType!
+  totalPremium: MonetaryAmount
+  writtenPremium: MonetaryAmount
+  endorsementNumber: String
+  isRenewal: Boolean!
+}
+
+type Policy {
+  id: ID!
+  policyNumber: String!
+  lineOfBusiness: LineOfBusiness!
+  status: PolicyStatus!
+  effectiveDate: Date!
+  expirationDate: Date!
+  namedInsured: Contact!
+  additionalInsureds: [Contact!]
+  agent: Agent
+  agency: Agency
+  currentPeriod: PolicyPeriod!
+  periods: [PolicyPeriod!]
+  vehicles: [Vehicle!]
+  properties: [Property!]
+  drivers: [Driver!]
+  coverages: [Coverage!]
+  totalPremium: MonetaryAmount
+  annualPremium: MonetaryAmount
+  billingAccountId: ID
+  underwritingScore: Decimal
+  notes: String
+  auditInfo: AuditInfo
+}
+
+# ─── Quote ────────────────────────────────────────────────────────────────────
+
+type QuotePremiumBreakdown {
+  coverageType: CoverageType!
+  basePremium: MonetaryAmount!
+  discounts: MonetaryAmount
+  surcharges: MonetaryAmount
+  netPremium: MonetaryAmount!
+}
+
+type Quote {
+  id: ID!
+  quoteNumber: String!
+  status: PolicyStatus!
+  lineOfBusiness: LineOfBusiness!
+  effectiveDate: Date!
+  expirationDate: Date!
+  namedInsured: Contact!
+  agent: Agent
+  coverages: [Coverage!]
+  premiumBreakdown: [QuotePremiumBreakdown!]
+  totalPremium: MonetaryAmount
+  validUntil: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ─── Billing ──────────────────────────────────────────────────────────────────
+
+type PaymentPlan {
+  id: ID!
+  planName: String!
+  numberOfInstallments: Int!
+  installmentFee: MonetaryAmount
+  downPaymentPercent: Decimal
+  isDefault: Boolean!
+}
+
+type Invoice {
+  id: ID!
+  invoiceNumber: String!
+  billingAccountId: ID!
+  status: InvoiceStatus!
+  dueDate: Date!
+  invoiceDate: Date!
+  amountDue: MonetaryAmount!
+  amountPaid: MonetaryAmount!
+  amountOutstanding: MonetaryAmount!
+  lineItems: [InvoiceLineItem!]
+}
+
+type InvoiceLineItem {
+  id: ID!
+  description: String!
+  policyNumber: String
+  amount: MonetaryAmount!
+  effectiveDate: Date
+}
+
+type Payment {
+  id: ID!
+  paymentNumber: String!
+  billingAccountId: ID!
+  status: PaymentStatus!
+  paymentMethod: PaymentMethod!
+  amount: MonetaryAmount!
+  paymentDate: Date!
+  referenceNumber: String
+  checkNumber: String
+  memo: String
+  appliedInvoices: [Invoice!]
+  auditInfo: AuditInfo
+}
+
+type BillingAccount {
+  id: ID!
+  accountNumber: String!
+  status: BillingStatus!
+  primaryPayer: Contact!
+  paymentPlan: PaymentPlan
+  invoices: [Invoice!]
+  payments: [Payment!]
+  currentBalance: MonetaryAmount!
+  pastDueAmount: MonetaryAmount!
+  policies: [Policy!]
+  auditInfo: AuditInfo
+}
+
+# ─── Claims ───────────────────────────────────────────────────────────────────
+
+type LossLocation {
+  address: Address!
+  description: String
+  latitude: Decimal
+  longitude: Decimal
+}
+
+type Claimant {
+  id: ID!
+  contact: Contact!
+  injuryDescription: String
+  propertyDamageDescription: String
+  attorney: Contact
+  representedByAttorney: Boolean!
+}
+
+type Reserve {
+  id: ID!
+  reserveType: ReserveType!
+  amount: MonetaryAmount!
+  effectiveDate: Date!
+  note: String
+  setBy: String
+}
+
+type ClaimPayment {
+  id: ID!
+  checkNumber: String
+  paymentDate: Date!
+  payee: Contact!
+  amount: MonetaryAmount!
+  reserveType: ReserveType!
+  memo: String
+  status: PaymentStatus!
+}
+
+type Exposure {
+  id: ID!
+  exposureNumber: String!
+  status: ExposureStatus!
+  claimant: Claimant!
+  coverageType: CoverageType!
+  incidentDescription: String
+  reserves: [Reserve!]
+  payments: [ClaimPayment!]
+  totalReserves: MonetaryAmount
+  totalPaid: MonetaryAmount
+  adjuster: Contact
+}
+
+type Claim {
+  id: ID!
+  claimNumber: String!
+  policyNumber: String!
+  policy: Policy
+  status: ClaimStatus!
+  lossDate: Date!
+  reportedDate: Date!
+  closedDate: Date
+  lossLocation: LossLocation
+  lossDescription: String!
+  lossType: String!
+  lineOfBusiness: LineOfBusiness!
+  namedInsured: Contact!
+  claimants: [Claimant!]
+  exposures: [Exposure!]
+  adjuster: Contact
+  supervisor: Contact
+  agent: Agent
+  totalReserves: MonetaryAmount
+  totalPaid: MonetaryAmount
+  totalIncurred: MonetaryAmount
+  activities: [Activity!]
+  notes: [ClaimNote!]
+  documents: [Document!]
+  catCode: String
+  litigated: Boolean!
+  auditInfo: AuditInfo
+}
+
+# ─── Activity / Notes / Documents ─────────────────────────────────────────────
+
+type Activity {
+  id: ID!
+  activityType: String!
+  subject: String!
+  description: String
+  status: ActivityStatus!
+  priority: ActivityPriority!
+  dueDate: Date
+  completedDate: Date
+  assignedTo: String
+  relatedEntityId: ID
+  relatedEntityType: String
+  auditInfo: AuditInfo
+}
+
+type ClaimNote {
+  id: ID!
+  subject: String!
+  body: String!
+  author: String!
+  confidential: Boolean!
+  createdAt: DateTime!
+}
+
+type Document {
+  id: ID!
+  documentName: String!
+  documentType: String!
+  mimeType: String!
+  sizeBytes: Int
+  uploadedBy: String!
+  uploadedAt: DateTime!
+  url: String
+  description: String
+}
+
+# ─── Underwriting ─────────────────────────────────────────────────────────────
+
+type UnderwritingIssue {
+  id: ID!
+  issueType: String!
+  severity: String!
+  description: String!
+  blocking: Boolean!
+  policyId: ID
+  quoteId: ID
+}
+
+type PriorLoss {
+  id: ID!
+  lossDate: Date!
+  lossType: String!
+  amountPaid: MonetaryAmount
+  claimNumber: String
+  description: String
+}
+
+# ─── Pagination & Connection ──────────────────────────────────────────────────
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int
+}
+
+type PolicyConnection {
+  edges: [PolicyEdge!]
+  pageInfo: PageInfo!
+}
+
+type PolicyEdge {
+  node: Policy!
+  cursor: String!
+}
+
+type ClaimConnection {
+  edges: [ClaimEdge!]
+  pageInfo: PageInfo!
+}
+
+type ClaimEdge {
+  node: Claim!
+  cursor: String!
+}
+
+type QuoteConnection {
+  edges: [QuoteEdge!]
+  pageInfo: PageInfo!
+}
+
+type QuoteEdge {
+  node: Quote!
+  cursor: String!
+}
+
+type BillingAccountConnection {
+  edges: [BillingAccountEdge!]
+  pageInfo: PageInfo!
+}
+
+type BillingAccountEdge {
+  node: BillingAccount!
+  cursor: String!
+}
+
+# ─── Input Types ──────────────────────────────────────────────────────────────
+
+input AddressInput {
+  addressLine1: String!
+  addressLine2: String
+  city: String!
+  state: String!
+  postalCode: String!
+  county: String
+  country: String
+  addressType: AddressType
+}
+
+input ContactCreateInput {
+  contactType: ContactType!
+  firstName: String
+  lastName: String
+  companyName: String
+  taxId: String
+  dateOfBirth: Date
+  gender: Gender
+  maritalStatus: MaritalStatus
+  primaryAddress: AddressInput
+  phoneNumber: String
+  emailAddress: String
+}
+
+input VehicleInput {
+  vin: String!
+  year: Int!
+  make: String!
+  model: String!
+  trim: String
+  mileage: Int
+  garageAddress: AddressInput
+  usage: String
+}
+
+input PropertyInput {
+  propertyType: String!
+  address: AddressInput!
+  yearBuilt: Int
+  squareFootage: Decimal
+  constructionType: String
+  roofType: String
+  replacementCostValue: Decimal
+}
+
+input DriverInput {
+  contactId: ID
+  contact: ContactCreateInput
+  licenseNumber: String!
+  licenseState: String!
+  excluded: Boolean
+}
+
+input CoverageLimitInput {
+  limitType: String!
+  limitAmount: Decimal!
+  perOccurrence: Decimal
+  aggregate: Decimal
+}
+
+input CoverageInput {
+  coverageType: CoverageType!
+  deductible: Decimal
+  limits: [CoverageLimitInput!]
+}
+
+input QuoteCreateInput {
+  lineOfBusiness: LineOfBusiness!
+  effectiveDate: Date!
+  namedInsured: ContactCreateInput!
+  agentId: ID
+  vehicles: [VehicleInput!]
+  properties: [PropertyInput!]
+  drivers: [DriverInput!]
+  coverages: [CoverageInput!]
+}
+
+input PolicyBindInput {
+  quoteId: ID!
+  paymentPlanId: ID
+  paymentMethod: PaymentMethod
+  downPaymentAmount: Decimal
+}
+
+input PolicyCancelInput {
+  policyId: ID!
+  cancellationDate: Date!
+  cancellationReason: String!
+  refundMethod: PaymentMethod
+}
+
+input PolicyEndorseInput {
+  policyId: ID!
+  effectiveDate: Date!
+  endorsementDescription: String!
+  vehiclesToAdd: [VehicleInput!]
+  vehiclesToRemove: [ID!]
+  coverageChanges: [CoverageInput!]
+}
+
+input ClaimCreateInput {
+  policyNumber: String!
+  lossDate: Date!
+  lossDescription: String!
+  lossType: String!
+  lossLocation: AddressInput
+  contactId: ID
+  catCode: String
+}
+
+input ExposureCreateInput {
+  claimId: ID!
+  claimantId: ID!
+  coverageType: CoverageType!
+  incidentDescription: String
+}
+
+input ReserveSetInput {
+  exposureId: ID!
+  reserveType: ReserveType!
+  amount: Decimal!
+  note: String
+}
+
+input ClaimPaymentInput {
+  exposureId: ID!
+  payeeContactId: ID!
+  amount: Decimal!
+  reserveType: ReserveType!
+  memo: String
+  checkNumber: String
+}
+
+input PaymentCreateInput {
+  billingAccountId: ID!
+  amount: Decimal!
+  paymentMethod: PaymentMethod!
+  referenceNumber: String
+  checkNumber: String
+  memo: String
+}
+
+input PolicyFilterInput {
+  policyNumber: String
+  namedInsuredName: String
+  status: PolicyStatus
+  lineOfBusiness: LineOfBusiness
+  effectiveDateFrom: Date
+  effectiveDateTo: Date
+  agentId: ID
+}
+
+input ClaimFilterInput {
+  claimNumber: String
+  policyNumber: String
+  status: ClaimStatus
+  lineOfBusiness: LineOfBusiness
+  loseDateFrom: Date
+  loseDateTo: Date
+  adjusterId: ID
+}
+
+input PaginationInput {
+  first: Int
+  after: String
+  last: Int
+  before: String
+}
+
+# ─── Mutation Result Types ────────────────────────────────────────────────────
+
+type QuoteResult {
+  success: Boolean!
+  quote: Quote
+  underwritingIssues: [UnderwritingIssue!]
+  errors: [String!]
+}
+
+type PolicyResult {
+  success: Boolean!
+  policy: Policy
+  errors: [String!]
+}
+
+type ClaimResult {
+  success: Boolean!
+  claim: Claim
+  errors: [String!]
+}
+
+type ExposureResult {
+  success: Boolean!
+  exposure: Exposure
+  errors: [String!]
+}
+
+type PaymentResult {
+  success: Boolean!
+  payment: Payment
+  errors: [String!]
+}
+
+type ReserveResult {
+  success: Boolean!
+  reserve: Reserve
+  errors: [String!]
+}
+
+type ClaimPaymentResult {
+  success: Boolean!
+  claimPayment: ClaimPayment
+  errors: [String!]
+}
+
+# ─── Query Root ───────────────────────────────────────────────────────────────
+
+type Query {
+  # Policy queries
+  policy(id: ID!): Policy
+  policyByNumber(policyNumber: String!): Policy
+  policies(filter: PolicyFilterInput, pagination: PaginationInput): PolicyConnection!
+
+  # Quote queries
+  quote(id: ID!): Quote
+  quoteByNumber(quoteNumber: String!): Quote
+  quotes(namedInsuredId: ID, agentId: ID, pagination: PaginationInput): QuoteConnection!
+
+  # Billing queries
+  billingAccount(id: ID!): BillingAccount
+  billingAccountByNumber(accountNumber: String!): BillingAccount
+  billingAccounts(contactId: ID, pagination: PaginationInput): BillingAccountConnection!
+  invoice(id: ID!): Invoice
+  payment(id: ID!): Payment
+  paymentPlans(lineOfBusiness: LineOfBusiness): [PaymentPlan!]!
+
+  # Claim queries
+  claim(id: ID!): Claim
+  claimByNumber(claimNumber: String!): Claim
+  claims(filter: ClaimFilterInput, pagination: PaginationInput): ClaimConnection!
+  exposure(id: ID!): Exposure
+
+  # Contact queries
+  contact(id: ID!): Contact
+  contacts(name: String, taxId: String): [Contact!]!
+
+  # Agent / Agency queries
+  agent(id: ID!): Agent
+  agentByCode(agentCode: String!): Agent
+  agents(agencyId: ID, active: Boolean): [Agent!]!
+  agency(id: ID!): Agency
+  agencies: [Agency!]!
+
+  # Activity queries
+  activities(assignedTo: String, status: ActivityStatus, dueDateFrom: Date, dueDateTo: Date): [Activity!]!
+}
+
+# ─── Mutation Root ────────────────────────────────────────────────────────────
+
+type Mutation {
+  # Quote mutations
+  createQuote(input: QuoteCreateInput!): QuoteResult!
+  updateQuote(id: ID!, input: QuoteCreateInput!): QuoteResult!
+  bindPolicy(input: PolicyBindInput!): PolicyResult!
+
+  # Policy mutations
+  endorsePolicy(input: PolicyEndorseInput!): PolicyResult!
+  cancelPolicy(input: PolicyCancelInput!): PolicyResult!
+  reinstatePolicy(policyId: ID!, effectiveDate: Date!, reason: String!): PolicyResult!
+  renewPolicy(policyId: ID!, effectiveDate: Date!): PolicyResult!
+
+  # Claim mutations
+  createClaim(input: ClaimCreateInput!): ClaimResult!
+  updateClaim(id: ID!, lossDescription: String, catCode: String): ClaimResult!
+  closeClaim(id: ID!, closeReason: String!): ClaimResult!
+  reopenClaim(id: ID!, reason: String!): ClaimResult!
+  assignClaim(id: ID!, adjusterId: ID!): ClaimResult!
+  createExposure(input: ExposureCreateInput!): ExposureResult!
+  closeExposure(id: ID!, closeReason: String!): ExposureResult!
+  setReserve(input: ReserveSetInput!): ReserveResult!
+  issueClaimPayment(input: ClaimPaymentInput!): ClaimPaymentResult!
+
+  # Billing mutations
+  createPayment(input: PaymentCreateInput!): PaymentResult!
+  voidPayment(id: ID!, reason: String!): PaymentResult!
+  reversePayment(id: ID!, reason: String!): PaymentResult!
+  updatePaymentPlan(billingAccountId: ID!, paymentPlanId: ID!): BillingAccount
+
+  # Contact mutations
+  createContact(input: ContactCreateInput!): Contact!
+  updateContact(id: ID!, input: ContactCreateInput!): Contact!
+}
