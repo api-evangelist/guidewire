@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Guidewire ClaimCenter API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.guidewire.com/oauth/authorize",
+      "accessTokenUrl": "https://login.guidewire.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Claims",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List claims",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.guidewire.com/cc/rest/v1/claims",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "policyNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "claimNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "lossDateFrom",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "lossDateTo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns paginated list of claims with optional filtering by status, policy number, loss date range, and assigned adjuster."
+        },
+        {
+          "info": {
+            "name": "Get claim details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.guidewire.com/cc/rest/v1/claims/:claimId",
+            "params": [
+              {
+                "name": "claimId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns complete claim details including loss information, coverages, exposures, reserves, and payment history."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "FNOL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit First Notice of Loss",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.guidewire.com/cc/rest/v1/fnol",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new claim from first notice of loss data. Initiates coverage verification, assignment, and claims workflow in ClaimCenter."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Exposures",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List claim exposures",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.guidewire.com/cc/rest/v1/claims/:claimId/exposures",
+            "params": [
+              {
+                "name": "claimId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all exposures (coverage lines being investigated) for a claim."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List claim payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.guidewire.com/cc/rest/v1/claims/:claimId/payments",
+            "params": [
+              {
+                "name": "claimId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all payments (checks, EFTs) associated with a claim including status and payment details."
+        },
+        {
+          "info": {
+            "name": "Create claim payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.guidewire.com/cc/rest/v1/claims/:claimId/payments",
+            "params": [
+              {
+                "name": "claimId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new claim payment (check or EFT) for a specified payee and exposure."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
