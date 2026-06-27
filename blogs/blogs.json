@@ -3,12 +3,13 @@
   "feeds": [
     {
       "source": "https://www.guidewire.com/resources/blog",
-      "feed_url": "https://www.guidewire.com/resources/blog",
-      "title": "",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
+      "method": "agent-scrape",
+      "note": "listing has no dates; featured posts already saved or out-of-window (newest unfamiliar post 2026-06-08); none in 2026-06-20..27"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 2,
+  "fetched": "2026-06-27T12:45:22Z",
+  "agent_pulled": "2026-06-27"
 }

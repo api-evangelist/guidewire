@@ -84,7 +84,7 @@ apis:
 common:
 - type: LinkedIn
   url: https://www.linkedin.com/company/guidewire-software
-- type: LLMsTxt
+- type: LlmsText
   url: https://docs.guidewire.com/llms.txt
 name: Guidewire
 description: Guidewire provides the insurance industry's leading platform including
