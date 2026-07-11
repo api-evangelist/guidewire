@@ -82,6 +82,8 @@ apis:
     connecting Guidewire Cloud applications to third-party systems, enabling event-driven
     integrations and REST API extensions for the Guidewire insurance platform.
 common:
+- type: OAuthScopes
+  url: scopes/guidewire-scopes.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/guidewire-software
 - type: LlmsText

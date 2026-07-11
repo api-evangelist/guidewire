@@ -1,0 +1,53 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/guidewire-claimcenter-openapi.yml, openapi/guidewire-policycenter-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/guidewire-claimcenter-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.guidewire.com/oauth/authorize
+    tokenUrl: https://login.guidewire.com/oauth/token
+- name: OAuth2
+  source: openapi/guidewire-policycenter-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.guidewire.com/oauth/authorize
+    tokenUrl: https://login.guidewire.com/oauth/token
+scopes:
+- scope: cc.claims.read
+  description: Read claim data
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/guidewire-claimcenter-openapi.yml
+- scope: cc.claims.write
+  description: Create and update claims
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/guidewire-claimcenter-openapi.yml
+- scope: cc.payments.write
+  description: Create claim payments
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/guidewire-claimcenter-openapi.yml
+- scope: pc.accounts.read
+  description: Read account data
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/guidewire-policycenter-openapi.yml
+- scope: pc.policies.read
+  description: Read policy data
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/guidewire-policycenter-openapi.yml
+- scope: pc.policies.write
+  description: Write policy data
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/guidewire-policycenter-openapi.yml
