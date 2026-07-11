@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/guidewire-claimcenter-openapi.yml, openapi/guidewire-policycenter-openapi.yml
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.guidewire.com/oauth/authorize
+    tokenUrl: https://login.guidewire.com/oauth/token
+    scopes: 3
+  sources:
+  - openapi/guidewire-claimcenter-openapi.yml
+  - openapi/guidewire-policycenter-openapi.yml
