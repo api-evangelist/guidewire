@@ -1,0 +1,250 @@
+openapi: 3.1.0
+info:
+  title: Guidewire ClaimCenter Accounts Quotes API
+  description: Guidewire ClaimCenter REST API for P&C insurance claims management. Provides endpoints for first notice of loss (FNOL), claims assignment, investigation, coverage verification, reserving, payment processing, and claims closure.
+  version: 1.0.0
+  contact:
+    name: Guidewire Developer Support
+    url: https://community.guidewire.com/
+  license:
+    name: Guidewire License
+    url: https://www.guidewire.com/
+servers:
+- url: https://{tenant}.guidewire.com/cc/rest/v1
+  variables:
+    tenant:
+      default: yourcompany
+      description: Your Guidewire Cloud tenant identifier
+security:
+- OAuth2: []
+tags:
+- name: Quotes
+  description: Policy quoting and rating
+paths:
+  /submissions:
+    post:
+      operationId: createSubmission
+      summary: Create new policy submission
+      description: Creates a new policy submission (quote request) for underwriting. Returns a submission ID for tracking through the quoting and issuance workflow.
+      tags:
+      - Quotes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionRequest'
+      responses:
+        '201':
+          description: Submission created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+        '400':
+          description: Invalid submission data
+        '422':
+          description: Underwriting rule violation
+  /submissions/{submissionId}:
+    get:
+      operationId: getSubmission
+      summary: Get submission details
+      description: Returns the current state of a policy submission including underwriting decisions and quoted premiums.
+      tags:
+      - Quotes
+      parameters:
+      - name: submissionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Submission returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+        '404':
+          description: Submission not found
+  /submissions/{submissionId}/quote:
+    post:
+      operationId: quoteSubmission
+      summary: Request a quote for a submission
+      description: Triggers rating and underwriting for a submission to produce a quoted premium. Returns rated coverages and premium breakdown.
+      tags:
+      - Quotes
+      parameters:
+      - name: submissionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Quote produced
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '422':
+          description: Rating error or underwriting declination
+components:
+  schemas:
+    ContactRef:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
+    Coverage:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          description: Coverage type code
+        limit:
+          type: number
+          format: double
+        deductible:
+          type: number
+          format: double
+        premium:
+          type: number
+          format: double
+        description:
+          type: string
+    SubmissionRequest:
+      type: object
+      required:
+      - product
+      - effectiveDate
+      - accountId
+      properties:
+        product:
+          type: string
+          description: Insurance product code
+        effectiveDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        accountId:
+          type: string
+          description: Existing account ID or null to create new
+        insuredDetails:
+          $ref: '#/components/schemas/ContactDetails'
+    Submission:
+      type: object
+      properties:
+        id:
+          type: string
+        submissionNumber:
+          type: string
+        status:
+          type: string
+          enum:
+          - Draft
+          - Quoted
+          - Declined
+          - Bound
+          - Withdrawn
+        product:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        account:
+          $ref: '#/components/schemas/AccountRef'
+        insured:
+          $ref: '#/components/schemas/ContactRef'
+        createdDate:
+          type: string
+          format: date-time
+    Quote:
+      type: object
+      properties:
+        submissionId:
+          type: string
+        status:
+          type: string
+          enum:
+          - Quoted
+          - Declined
+          - Referred
+        totalPremium:
+          type: number
+          format: double
+        annualPremium:
+          type: number
+          format: double
+        taxes:
+          type: number
+          format: double
+        fees:
+          type: number
+          format: double
+        coverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coverage'
+        validUntil:
+          type: string
+          format: date
+    AccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+        accountNumber:
+          type: string
+        name:
+          type: string
+    ContactDetails:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        companyName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: object
+          properties:
+            addressLine1:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            postalCode:
+              type: string
+            country:
+              type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.guidewire.com/oauth/authorize
+          tokenUrl: https://login.guidewire.com/oauth/token
+          scopes:
+            cc.claims.read: Read claim data
+            cc.claims.write: Create and update claims
+            cc.payments.write: Create claim payments
+externalDocs:
+  description: Guidewire ClaimCenter Documentation
+  url: https://docs.guidewire.com/

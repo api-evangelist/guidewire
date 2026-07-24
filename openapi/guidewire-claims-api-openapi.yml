@@ -1,0 +1,211 @@
+openapi: 3.1.0
+info:
+  title: Guidewire ClaimCenter Accounts Claims API
+  description: Guidewire ClaimCenter REST API for P&C insurance claims management. Provides endpoints for first notice of loss (FNOL), claims assignment, investigation, coverage verification, reserving, payment processing, and claims closure.
+  version: 1.0.0
+  contact:
+    name: Guidewire Developer Support
+    url: https://community.guidewire.com/
+  license:
+    name: Guidewire License
+    url: https://www.guidewire.com/
+servers:
+- url: https://{tenant}.guidewire.com/cc/rest/v1
+  variables:
+    tenant:
+      default: yourcompany
+      description: Your Guidewire Cloud tenant identifier
+security:
+- OAuth2: []
+tags:
+- name: Claims
+  description: Claims lifecycle management
+paths:
+  /claims:
+    get:
+      operationId: listClaims
+      summary: List claims
+      description: Returns paginated list of claims with optional filtering by status, policy number, loss date range, and assigned adjuster.
+      tags:
+      - Claims
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - Open
+          - Closed
+          - Reopened
+      - name: policyNumber
+        in: query
+        schema:
+          type: string
+      - name: claimNumber
+        in: query
+        schema:
+          type: string
+      - name: lossDateFrom
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: lossDateTo
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          default: 25
+          maximum: 100
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: Claims list returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimList'
+  /claims/{claimId}:
+    get:
+      operationId: getClaim
+      summary: Get claim details
+      description: Returns complete claim details including loss information, coverages, exposures, reserves, and payment history.
+      tags:
+      - Claims
+      parameters:
+      - name: claimId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Claim returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+        '404':
+          description: Claim not found
+components:
+  schemas:
+    Exposure:
+      type: object
+      properties:
+        id:
+          type: string
+        coverageType:
+          type: string
+        claimant:
+          type: object
+          properties:
+            id:
+              type: string
+            displayName:
+              type: string
+        status:
+          type: string
+          enum:
+          - Open
+          - Closed
+        reserve:
+          type: number
+          format: double
+        paid:
+          type: number
+          format: double
+        incurred:
+          type: number
+          format: double
+    Claim:
+      type: object
+      properties:
+        id:
+          type: string
+        claimNumber:
+          type: string
+        status:
+          type: string
+          enum:
+          - Open
+          - Closed
+          - Reopened
+        lossType:
+          type: string
+          description: Type of loss (e.g., "AUTO", "PROPERTY", "LIABILITY")
+        lossDate:
+          type: string
+          format: date
+        lossDescription:
+          type: string
+        reportedDate:
+          type: string
+          format: date-time
+        policyNumber:
+          type: string
+        insured:
+          type: object
+          properties:
+            id:
+              type: string
+            displayName:
+              type: string
+        assignedAdjuster:
+          type: object
+          properties:
+            id:
+              type: string
+            displayName:
+              type: string
+        totalIncurred:
+          type: number
+          format: double
+          description: Total incurred losses (reserves + paid)
+        totalPaid:
+          type: number
+          format: double
+        exposures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Exposure'
+        createdDate:
+          type: string
+          format: date-time
+        closedDate:
+          type: string
+          format: date
+    ClaimList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Claim'
+        total:
+          type: integer
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.guidewire.com/oauth/authorize
+          tokenUrl: https://login.guidewire.com/oauth/token
+          scopes:
+            cc.claims.read: Read claim data
+            cc.claims.write: Create and update claims
+            cc.payments.write: Create claim payments
+externalDocs:
+  description: Guidewire ClaimCenter Documentation
+  url: https://docs.guidewire.com/

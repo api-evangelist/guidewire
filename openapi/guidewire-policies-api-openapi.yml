@@ -1,0 +1,276 @@
+openapi: 3.1.0
+info:
+  title: Guidewire ClaimCenter Accounts Policies API
+  description: Guidewire ClaimCenter REST API for P&C insurance claims management. Provides endpoints for first notice of loss (FNOL), claims assignment, investigation, coverage verification, reserving, payment processing, and claims closure.
+  version: 1.0.0
+  contact:
+    name: Guidewire Developer Support
+    url: https://community.guidewire.com/
+  license:
+    name: Guidewire License
+    url: https://www.guidewire.com/
+servers:
+- url: https://{tenant}.guidewire.com/cc/rest/v1
+  variables:
+    tenant:
+      default: yourcompany
+      description: Your Guidewire Cloud tenant identifier
+security:
+- OAuth2: []
+tags:
+- name: Policies
+  description: Policy lifecycle management
+paths:
+  /policies:
+    get:
+      operationId: listPolicies
+      summary: List policies
+      description: Returns a paginated list of policies accessible to the authenticated user. Supports filtering by policy number, status, product, and effective date range.
+      tags:
+      - Policies
+      parameters:
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          default: 25
+          maximum: 100
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - In Force
+          - Expired
+          - Cancelled
+      - name: policyNumber
+        in: query
+        schema:
+          type: string
+      - name: product
+        in: query
+        schema:
+          type: string
+          description: Product type code (e.g., "BusinessOwners", "CommercialProperty")
+      responses:
+        '200':
+          description: Policy list returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyList'
+        '401':
+          description: Unauthorized
+  /policies/{policyId}:
+    get:
+      operationId: getPolicy
+      summary: Get policy details
+      description: Returns complete policy details including coverages, limits, deductibles, insured parties, and premium information.
+      tags:
+      - Policies
+      parameters:
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique policy identifier (PublicID)
+      responses:
+        '200':
+          description: Policy details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+        '404':
+          description: Policy not found
+  /policies/{policyId}/transactions:
+    get:
+      operationId: listPolicyTransactions
+      summary: List policy transactions
+      description: Returns all transactions (endorsements, renewals, cancellations) associated with a policy.
+      tags:
+      - Policies
+      parameters:
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Transactions returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionList'
+  /submissions/{submissionId}/issue:
+    post:
+      operationId: issuePolicy
+      summary: Issue policy from submission
+      description: Issues a bound policy from an approved submission. Returns the new policy number and effective dates.
+      tags:
+      - Policies
+      parameters:
+      - name: submissionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Policy issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+        '409':
+          description: Submission not in quotable state
+components:
+  schemas:
+    ContactRef:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
+    Coverage:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          description: Coverage type code
+        limit:
+          type: number
+          format: double
+        deductible:
+          type: number
+          format: double
+        premium:
+          type: number
+          format: double
+        description:
+          type: string
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - Submission
+          - PolicyChange
+          - Renewal
+          - Cancellation
+          - Reinstatement
+        status:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        premiumChange:
+          type: number
+          format: double
+        reason:
+          type: string
+    AccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+        accountNumber:
+          type: string
+        name:
+          type: string
+    TransactionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        total:
+          type: integer
+    Policy:
+      type: object
+      properties:
+        id:
+          type: string
+          description: PublicID of the policy
+        policyNumber:
+          type: string
+        status:
+          type: string
+          enum:
+          - In Force
+          - Expired
+          - Cancelled
+          - Pending Cancelled
+        product:
+          type: string
+          description: Insurance product type
+        effectiveDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        issuedDate:
+          type: string
+          format: date
+        totalPremium:
+          type: number
+          format: double
+        currency:
+          type: string
+          default: USD
+        account:
+          $ref: '#/components/schemas/AccountRef'
+        insured:
+          $ref: '#/components/schemas/ContactRef'
+        coverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coverage'
+        createdDate:
+          type: string
+          format: date-time
+        updatedDate:
+          type: string
+          format: date-time
+    PolicyList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Policy'
+        total:
+          type: integer
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.guidewire.com/oauth/authorize
+          tokenUrl: https://login.guidewire.com/oauth/token
+          scopes:
+            cc.claims.read: Read claim data
+            cc.claims.write: Create and update claims
+            cc.payments.write: Create claim payments
+externalDocs:
+  description: Guidewire ClaimCenter Documentation
+  url: https://docs.guidewire.com/

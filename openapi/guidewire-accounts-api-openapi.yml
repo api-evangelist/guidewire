@@ -1,0 +1,125 @@
+openapi: 3.1.0
+info:
+  title: Guidewire ClaimCenter Accounts API
+  description: Guidewire ClaimCenter REST API for P&C insurance claims management. Provides endpoints for first notice of loss (FNOL), claims assignment, investigation, coverage verification, reserving, payment processing, and claims closure.
+  version: 1.0.0
+  contact:
+    name: Guidewire Developer Support
+    url: https://community.guidewire.com/
+  license:
+    name: Guidewire License
+    url: https://www.guidewire.com/
+servers:
+- url: https://{tenant}.guidewire.com/cc/rest/v1
+  variables:
+    tenant:
+      default: yourcompany
+      description: Your Guidewire Cloud tenant identifier
+security:
+- OAuth2: []
+tags:
+- name: Accounts
+  description: Customer account management
+paths:
+  /accounts:
+    get:
+      operationId: listAccounts
+      summary: List accounts
+      description: Returns customer accounts with optional search by name or account number.
+      tags:
+      - Accounts
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+        description: Search query for account name
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          default: 25
+      responses:
+        '200':
+          description: Account list returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountList'
+  /accounts/{accountId}:
+    get:
+      operationId: getAccount
+      summary: Get account details
+      description: Returns the account record including all associated contacts and policy references.
+      tags:
+      - Accounts
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: Account not found
+components:
+  schemas:
+    ContactRef:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
+    AccountList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        total:
+          type: integer
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+        accountNumber:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+          enum:
+          - Person
+          - Company
+        primaryContact:
+          $ref: '#/components/schemas/ContactRef'
+        activePolicies:
+          type: integer
+        createdDate:
+          type: string
+          format: date-time
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.guidewire.com/oauth/authorize
+          tokenUrl: https://login.guidewire.com/oauth/token
+          scopes:
+            cc.claims.read: Read claim data
+            cc.claims.write: Create and update claims
+            cc.payments.write: Create claim payments
+externalDocs:
+  description: Guidewire ClaimCenter Documentation
+  url: https://docs.guidewire.com/
