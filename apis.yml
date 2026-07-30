@@ -1,48 +1,6 @@
 aid: guidewire
 url: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/apis.yml
 apis:
-- aid: guidewire:guidewire-policycenter-api
-  name: Guidewire PolicyCenter API
-  tags:
-  - Insurance
-  - P&C
-  - Policy
-  - Underwriting
-  image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
-  humanURL: https://docs.guidewire.com/
-  baseURL: https://api.guidewire.com
-  properties:
-  - url: https://docs.guidewire.com/
-    type: Documentation
-  - url: https://www.guidewire.com/developers
-    type: GettingStarted
-  - url: openapi/guidewire-policycenter-openapi.yml
-    type: OpenAPI
-  - url: graphql/guidewire-graphql.md
-    type: GraphQL
-  description: The Guidewire PolicyCenter API provides REST endpoints for policy lifecycle
-    management, underwriting workflows, policy issuance, endorsements, renewals, and
-    cancellations for property and casualty insurance carriers.
-- aid: guidewire:guidewire-claimcenter-api
-  name: Guidewire ClaimCenter API
-  tags:
-  - Claims
-  - Insurance
-  - Loss Adjustment
-  - P&C
-  image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
-  humanURL: https://docs.guidewire.com/
-  baseURL: https://api.guidewire.com
-  properties:
-  - url: https://docs.guidewire.com/
-    type: Documentation
-  - url: https://www.guidewire.com/developers
-    type: GettingStarted
-  - url: openapi/guidewire-claimcenter-openapi.yml
-    type: OpenAPI
-  description: The Guidewire ClaimCenter API provides REST endpoints for claims intake,
-    assignment, investigation, reserving, payment processing, and closure workflows
-    for P&C insurance claim operations.
 - aid: guidewire:guidewire-billingcenter-api
   name: Guidewire BillingCenter API
   tags:
@@ -58,9 +16,9 @@ apis:
     type: Documentation
   - url: https://www.guidewire.com/developers
     type: GettingStarted
-  description: The Guidewire BillingCenter API provides REST endpoints for payment
-    orchestration, invoice generation, payment plans, disbursements, and collections
-    management for insurance billing operations.
+  description: >-
+    The Guidewire BillingCenter API provides REST endpoints for payment orchestration, invoice generation,
+    payment plans, disbursements, and collections management for insurance billing operations.
 - aid: guidewire:guidewire-integration-gateway-api
   name: Guidewire Integration Gateway API
   tags:
@@ -78,9 +36,122 @@ apis:
     type: GettingStarted
   - url: asyncapi/guidewire-integration-gateway-asyncapi.yml
     type: AsyncAPI
-  description: The Guidewire Integration Gateway provides a managed API layer for
-    connecting Guidewire Cloud applications to third-party systems, enabling event-driven
-    integrations and REST API extensions for the Guidewire insurance platform.
+  description: >-
+    The Guidewire Integration Gateway provides a managed API layer for connecting Guidewire Cloud applications
+    to third-party systems, enabling event-driven integrations and REST API extensions for the Guidewire
+    insurance platform.
+- aid: guidewire:guidewire-accounts-api
+  name: Guidewire Accounts API
+  description: Customer account management
+  humanURL: https://docs.guidewire.com/
+  baseURL: https://api.guidewire.com
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/guidewire-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.guidewire.com/
+  - type: GettingStarted
+    url: https://www.guidewire.com/developers
+  - type: GraphQL
+    url: graphql/guidewire-graphql.md
+- aid: guidewire:guidewire-claims-api
+  name: Guidewire Claims API
+  description: Claims lifecycle management
+  humanURL: https://docs.guidewire.com/
+  baseURL: https://api.guidewire.com
+  tags:
+  - Claims
+  properties:
+  - type: OpenAPI
+    url: openapi/guidewire-claims-api-openapi.yml
+  - type: Documentation
+    url: https://docs.guidewire.com/
+  - type: GettingStarted
+    url: https://www.guidewire.com/developers
+  - type: GraphQL
+    url: graphql/guidewire-graphql.md
+- aid: guidewire:guidewire-exposures-api
+  name: Guidewire Exposures API
+  description: Claim exposure management
+  humanURL: https://docs.guidewire.com/
+  baseURL: https://api.guidewire.com
+  tags:
+  - Exposures
+  properties:
+  - type: OpenAPI
+    url: openapi/guidewire-exposures-api-openapi.yml
+  - type: Documentation
+    url: https://docs.guidewire.com/
+  - type: GettingStarted
+    url: https://www.guidewire.com/developers
+  - type: GraphQL
+    url: graphql/guidewire-graphql.md
+- aid: guidewire:guidewire-fnol-api
+  name: Guidewire FNOL API
+  description: First Notice of Loss intake
+  humanURL: https://docs.guidewire.com/
+  baseURL: https://api.guidewire.com
+  tags:
+  - FNOL
+  properties:
+  - type: OpenAPI
+    url: openapi/guidewire-fnol-api-openapi.yml
+  - type: Documentation
+    url: https://docs.guidewire.com/
+  - type: GettingStarted
+    url: https://www.guidewire.com/developers
+  - type: GraphQL
+    url: graphql/guidewire-graphql.md
+- aid: guidewire:guidewire-payments-api
+  name: Guidewire Payments API
+  description: Claim payment and reserves
+  humanURL: https://docs.guidewire.com/
+  baseURL: https://api.guidewire.com
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/guidewire-payments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.guidewire.com/
+  - type: GettingStarted
+    url: https://www.guidewire.com/developers
+  - type: GraphQL
+    url: graphql/guidewire-graphql.md
+- aid: guidewire:guidewire-policies-api
+  name: Guidewire Policies API
+  description: Policy lifecycle management
+  humanURL: https://docs.guidewire.com/
+  baseURL: https://api.guidewire.com
+  tags:
+  - Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/guidewire-policies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.guidewire.com/
+  - type: GettingStarted
+    url: https://www.guidewire.com/developers
+  - type: GraphQL
+    url: graphql/guidewire-graphql.md
+- aid: guidewire:guidewire-quotes-api
+  name: Guidewire Quotes API
+  description: Policy quoting and rating
+  humanURL: https://docs.guidewire.com/
+  baseURL: https://api.guidewire.com
+  tags:
+  - Quotes
+  properties:
+  - type: OpenAPI
+    url: openapi/guidewire-quotes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.guidewire.com/
+  - type: GettingStarted
+    url: https://www.guidewire.com/developers
+  - type: GraphQL
+    url: graphql/guidewire-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/guidewire-agentic-access.yml
@@ -99,6 +170,19 @@ description: Guidewire provides the insurance industry's leading platform includ
   PolicyCenter, ClaimCenter, and BillingCenter. REST APIs enable policy lifecycle
   management, claims processing, payment orchestration, and underwriting workflows
   for P&C insurance carriers on the Guidewire Cloud platform.
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
 tags:
 - Insurance
