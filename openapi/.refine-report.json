@@ -1,0 +1,26 @@
+{
+  "provider": "guidewire",
+  "sources": [
+    "guidewire-accounts-api-openapi.yml",
+    "guidewire-claims-api-openapi.yml",
+    "guidewire-exposures-api-openapi.yml",
+    "guidewire-fnol-api-openapi.yml",
+    "guidewire-payments-api-openapi.yml",
+    "guidewire-policies-api-openapi.yml",
+    "guidewire-quotes-api-openapi.yml"
+  ],
+  "outputs": [
+    "guidewire-accounts-api-openapi.yml",
+    "guidewire-claims-api-openapi.yml",
+    "guidewire-exposures-api-openapi.yml",
+    "guidewire-fnol-api-openapi.yml",
+    "guidewire-payments-api-openapi.yml",
+    "guidewire-policies-api-openapi.yml",
+    "guidewire-quotes-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
