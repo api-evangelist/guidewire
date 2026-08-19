@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Guidewire ClaimCenter Accounts Payments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.guidewire.com/oauth/authorize",
+      "accessTokenUrl": "https://login.guidewire.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List claim payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.guidewire.com/cc/rest/v1/claims/:claimId/payments",
+            "params": [
+              {
+                "name": "claimId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all payments (checks, EFTs) associated with a claim including status and payment details."
+        },
+        {
+          "info": {
+            "name": "Create claim payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.guidewire.com/cc/rest/v1/claims/:claimId/payments",
+            "params": [
+              {
+                "name": "claimId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new claim payment (check or EFT) for a specified payee and exposure."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

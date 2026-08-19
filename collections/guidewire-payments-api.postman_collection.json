@@ -1,0 +1,429 @@
+{
+  "item": [
+    {
+      "id": "8aa66255-8eeb-4864-b5bd-fcc66b264af8",
+      "name": "Payments",
+      "description": {
+        "content": "Claim payment and reserves",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "50397abb-269c-4a2e-84f4-5be332e2ac2f",
+          "name": "List claim payments",
+          "request": {
+            "name": "List claim payments",
+            "description": {
+              "content": "Returns all payments (checks, EFTs) associated with a claim including status and payment details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "claims",
+                ":claimId",
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "claimId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Guidewire Cloud tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cf92608f-02cf-47f3-94e8-a8c9e3d54ea7",
+              "name": "Payments returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    ":claimId",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "claimId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"claimId\": \"string\",\n      \"paymentNumber\": \"string\",\n      \"status\": \"Approved\",\n      \"amount\": 8507.211493869134,\n      \"currency\": \"USD\",\n      \"paymentType\": \"EFT\",\n      \"payee\": {\n        \"id\": \"string\",\n        \"displayName\": \"string\"\n      },\n      \"memo\": \"string\",\n      \"issueDate\": \"2010-12-03\",\n      \"createdDate\": \"2013-07-16T20:23:02.590Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"claimId\": \"string\",\n      \"paymentNumber\": \"string\",\n      \"status\": \"Voided\",\n      \"amount\": 8965.052724352025,\n      \"currency\": \"USD\",\n      \"paymentType\": \"EFT\",\n      \"payee\": {\n        \"id\": \"string\",\n        \"displayName\": \"string\"\n      },\n      \"memo\": \"string\",\n      \"issueDate\": \"2006-09-18\",\n      \"createdDate\": \"1962-05-17T14:15:16.532Z\"\n    }\n  ],\n  \"total\": 9194\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29be58c6-ca61-4e7d-a443-358393447b67",
+          "name": "Create claim payment",
+          "request": {
+            "name": "Create claim payment",
+            "description": {
+              "content": "Creates a new claim payment (check or EFT) for a specified payee and exposure.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "claims",
+                ":claimId",
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "claimId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Guidewire Cloud tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"exposureId\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"payeeId\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"memo\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6c33220d-92e6-4071-8a28-7b90ddfb6527",
+              "name": "Payment created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    ":claimId",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "claimId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"exposureId\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"payeeId\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"memo\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"claimId\": \"string\",\n  \"paymentNumber\": \"string\",\n  \"status\": \"Issued\",\n  \"amount\": 6206.143280407927,\n  \"currency\": \"USD\",\n  \"paymentType\": \"EFT\",\n  \"payee\": {\n    \"id\": \"string\",\n    \"displayName\": \"string\"\n  },\n  \"memo\": \"string\",\n  \"issueDate\": \"1950-07-26\",\n  \"createdDate\": \"1948-03-11T12:59:29.808Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "649c3a95-3b21-4c49-a4c0-6aa1d5be53e5",
+              "name": "Invalid payment request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    ":claimId",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "claimId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"exposureId\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"payeeId\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"memo\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a86df25-4b10-4887-a3c1-027d5749525a",
+              "name": "Reserve insufficient",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    ":claimId",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "claimId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"exposureId\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"payeeId\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"memo\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Guidewire Cloud tenant identifier",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "yourcompany",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.guidewire.com/cc/rest/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "cc.claims.read cc.claims.write cc.payments.write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.guidewire.com/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.guidewire.com/oauth/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0c0cd50f-25b7-4943-a9a0-9f3e8449fb11",
+    "name": "Guidewire ClaimCenter Accounts Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Guidewire ClaimCenter REST API for P&C insurance claims management. Provides endpoints for first notice of loss (FNOL), claims assignment, investigation, coverage verification, reserving, payment processing, and claims closure.\n\nContact Support:\n Name: Guidewire Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

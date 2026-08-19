@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Guidewire ClaimCenter Accounts FNOL API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.guidewire.com/oauth/authorize",
+      "accessTokenUrl": "https://login.guidewire.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "FNOL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit First Notice of Loss",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.guidewire.com/cc/rest/v1/fnol",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new claim from first notice of loss data. Initiates coverage verification, assignment, and claims workflow in ClaimCenter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

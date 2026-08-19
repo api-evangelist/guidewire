@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Guidewire ClaimCenter Accounts Quotes API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.guidewire.com/oauth/authorize",
+      "accessTokenUrl": "https://login.guidewire.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create new policy submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.guidewire.com/cc/rest/v1/submissions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new policy submission (quote request) for underwriting. Returns a submission ID for tracking through the quoting and issuance workflow."
+        },
+        {
+          "info": {
+            "name": "Get submission details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.guidewire.com/cc/rest/v1/submissions/:submissionId",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the current state of a policy submission including underwriting decisions and quoted premiums."
+        },
+        {
+          "info": {
+            "name": "Request a quote for a submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.guidewire.com/cc/rest/v1/submissions/:submissionId/quote",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Triggers rating and underwriting for a submission to produce a quoted premium. Returns rated coverages and premium breakdown."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

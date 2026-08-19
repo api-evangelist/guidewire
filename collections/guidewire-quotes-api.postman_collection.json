@@ -1,0 +1,610 @@
+{
+  "item": [
+    {
+      "id": "f64216d3-155f-4446-9485-efd5d75494f5",
+      "name": "Quotes",
+      "description": {
+        "content": "Policy quoting and rating",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2b2e1e5e-ad3e-45c7-a484-ec7d03684a6c",
+          "name": "Create new policy submission",
+          "request": {
+            "name": "Create new policy submission",
+            "description": {
+              "content": "Creates a new policy submission (quote request) for underwriting. Returns a submission ID for tracking through the quoting and issuance workflow.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Guidewire Cloud tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"accountId\": \"<string>\",\n  \"expirationDate\": \"<date>\",\n  \"insuredDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"address\": {\n      \"addressLine1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"country\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6a17b309-b292-41d7-bc1d-d992e95d18d4",
+              "name": "Submission created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"accountId\": \"<string>\",\n  \"expirationDate\": \"<date>\",\n  \"insuredDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"companyName\": \"string\",\n    \"email\": \"lw2KXMFTD7I@uxNZUvUpIwlYIpQNrvuLzfYNgRDfos.emzh\",\n    \"phone\": \"string\",\n    \"address\": {\n      \"addressLine1\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postalCode\": \"string\",\n      \"country\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"submissionNumber\": \"string\",\n  \"status\": \"Quoted\",\n  \"product\": \"string\",\n  \"effectiveDate\": \"1976-07-07\",\n  \"expirationDate\": \"1950-04-01\",\n  \"account\": {\n    \"id\": \"string\",\n    \"accountNumber\": \"string\",\n    \"name\": \"string\"\n  },\n  \"insured\": {\n    \"id\": \"string\",\n    \"displayName\": \"string\"\n  },\n  \"createdDate\": \"1989-07-31T07:18:52.971Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81ad2b47-0ea1-4d08-aaa0-e1cdfb321471",
+              "name": "Invalid submission data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"accountId\": \"<string>\",\n  \"expirationDate\": \"<date>\",\n  \"insuredDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"companyName\": \"string\",\n    \"email\": \"lw2KXMFTD7I@uxNZUvUpIwlYIpQNrvuLzfYNgRDfos.emzh\",\n    \"phone\": \"string\",\n    \"address\": {\n      \"addressLine1\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postalCode\": \"string\",\n      \"country\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "81c59d68-cfa8-417b-b242-edb2d6696119",
+              "name": "Underwriting rule violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"accountId\": \"<string>\",\n  \"expirationDate\": \"<date>\",\n  \"insuredDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"companyName\": \"string\",\n    \"email\": \"lw2KXMFTD7I@uxNZUvUpIwlYIpQNrvuLzfYNgRDfos.emzh\",\n    \"phone\": \"string\",\n    \"address\": {\n      \"addressLine1\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postalCode\": \"string\",\n      \"country\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae49c077-a2ab-4507-9513-fe8045c2de49",
+          "name": "Get submission details",
+          "request": {
+            "name": "Get submission details",
+            "description": {
+              "content": "Returns the current state of a policy submission including underwriting decisions and quoted premiums.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Guidewire Cloud tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c858d6e4-edd3-489e-ae5f-27912e6ea6f7",
+              "name": "Submission returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"submissionNumber\": \"string\",\n  \"status\": \"Quoted\",\n  \"product\": \"string\",\n  \"effectiveDate\": \"1976-07-07\",\n  \"expirationDate\": \"1950-04-01\",\n  \"account\": {\n    \"id\": \"string\",\n    \"accountNumber\": \"string\",\n    \"name\": \"string\"\n  },\n  \"insured\": {\n    \"id\": \"string\",\n    \"displayName\": \"string\"\n  },\n  \"createdDate\": \"1989-07-31T07:18:52.971Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cfcd5c4-87a5-4a38-8c6c-ba0759ac994d",
+              "name": "Submission not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9aeabaa8-0e1b-4d9f-84f4-aa1cc7ec5ae0",
+          "name": "Request a quote for a submission",
+          "request": {
+            "name": "Request a quote for a submission",
+            "description": {
+              "content": "Triggers rating and underwriting for a submission to produce a quoted premium. Returns rated coverages and premium breakdown.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId",
+                "quote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Guidewire Cloud tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b0a43249-2a61-4d6a-a77c-7fe7df195c7b",
+              "name": "Quote produced",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"submissionId\": \"string\",\n  \"status\": \"Quoted\",\n  \"totalPremium\": 1397.2360708257092,\n  \"annualPremium\": 2264.6118569575615,\n  \"taxes\": 5081.4377589511305,\n  \"fees\": 4863.80104132478,\n  \"coverages\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"limit\": 6237.10289068602,\n      \"deductible\": 2745.3848774175417,\n      \"premium\": 2119.5486701325763,\n      \"description\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"limit\": 9859.349282626834,\n      \"deductible\": 7781.526228347395,\n      \"premium\": 1786.8469735697213,\n      \"description\": \"string\"\n    }\n  ],\n  \"validUntil\": \"1978-02-24\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ab7ab27-5c95-4761-b83c-fbb05eb5dc7e",
+              "name": "Rating error or underwriting declination",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Guidewire Cloud tenant identifier",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "yourcompany",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.guidewire.com/cc/rest/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "cc.claims.read cc.claims.write cc.payments.write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.guidewire.com/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.guidewire.com/oauth/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f6c85456-851f-45a6-aae7-f2d08e8807e7",
+    "name": "Guidewire ClaimCenter Accounts Quotes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Guidewire ClaimCenter REST API for P&C insurance claims management. Provides endpoints for first notice of loss (FNOL), claims assignment, investigation, coverage verification, reserving, payment processing, and claims closure.\n\nContact Support:\n Name: Guidewire Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

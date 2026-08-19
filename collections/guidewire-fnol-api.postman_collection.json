@@ -1,0 +1,283 @@
+{
+  "item": [
+    {
+      "id": "120a4722-4625-4474-a0be-61c4103c056c",
+      "name": "FNOL",
+      "description": {
+        "content": "First Notice of Loss intake",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b6474cce-b023-4162-abcc-ff9b31d0ef5d",
+          "name": "Submit First Notice of Loss",
+          "request": {
+            "name": "Submit First Notice of Loss",
+            "description": {
+              "content": "Creates a new claim from first notice of loss data. Initiates coverage verification, assignment, and claims workflow in ClaimCenter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fnol"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Guidewire Cloud tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policyNumber\": \"<string>\",\n  \"lossDate\": \"<date>\",\n  \"lossType\": \"<string>\",\n  \"lossTime\": \"<time>\",\n  \"lossDescription\": \"<string>\",\n  \"lossLocation\": {\n    \"addressLine1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"reporter\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<email>\",\n    \"relationship\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7317b2e7-fd87-4fe4-af42-9ff8d14ecac1",
+              "name": "Claim created from FNOL",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fnol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyNumber\": \"<string>\",\n  \"lossDate\": \"<date>\",\n  \"lossType\": \"<string>\",\n  \"lossTime\": \"<time>\",\n  \"lossDescription\": \"<string>\",\n  \"lossLocation\": {\n    \"addressLine1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"reporter\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<email>\",\n    \"relationship\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"claimNumber\": \"string\",\n  \"status\": \"Reopened\",\n  \"lossType\": \"string\",\n  \"lossDate\": \"1958-03-13\",\n  \"lossDescription\": \"string\",\n  \"reportedDate\": \"1998-09-01T08:45:05.927Z\",\n  \"policyNumber\": \"string\",\n  \"insured\": {\n    \"id\": \"string\",\n    \"displayName\": \"string\"\n  },\n  \"assignedAdjuster\": {\n    \"id\": \"string\",\n    \"displayName\": \"string\"\n  },\n  \"totalIncurred\": 3486.782980025962,\n  \"totalPaid\": 1429.1434892828358,\n  \"exposures\": [\n    {\n      \"id\": \"string\",\n      \"coverageType\": \"string\",\n      \"claimant\": {\n        \"id\": \"string\",\n        \"displayName\": \"string\"\n      },\n      \"status\": \"Closed\",\n      \"reserve\": 9931.495231602506,\n      \"paid\": 5512.642940536235,\n      \"incurred\": 849.7522758470577\n    },\n    {\n      \"id\": \"string\",\n      \"coverageType\": \"string\",\n      \"claimant\": {\n        \"id\": \"string\",\n        \"displayName\": \"string\"\n      },\n      \"status\": \"Open\",\n      \"reserve\": 2714.4891708941786,\n      \"paid\": 8420.645229331321,\n      \"incurred\": 6131.639988602533\n    }\n  ],\n  \"createdDate\": \"2002-09-01T05:34:47.459Z\",\n  \"closedDate\": \"1969-07-15\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "192f1aa3-e251-44c8-921e-2736209076cc",
+              "name": "Invalid FNOL data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fnol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyNumber\": \"<string>\",\n  \"lossDate\": \"<date>\",\n  \"lossType\": \"<string>\",\n  \"lossTime\": \"<time>\",\n  \"lossDescription\": \"<string>\",\n  \"lossLocation\": {\n    \"addressLine1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"reporter\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<email>\",\n    \"relationship\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "522b1dbf-632d-4c64-919c-55826902aba8",
+              "name": "Policy not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fnol"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyNumber\": \"<string>\",\n  \"lossDate\": \"<date>\",\n  \"lossType\": \"<string>\",\n  \"lossTime\": \"<time>\",\n  \"lossDescription\": \"<string>\",\n  \"lossLocation\": {\n    \"addressLine1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"reporter\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<email>\",\n    \"relationship\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Guidewire Cloud tenant identifier",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "yourcompany",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.guidewire.com/cc/rest/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "cc.claims.read cc.claims.write cc.payments.write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.guidewire.com/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.guidewire.com/oauth/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "40adf240-61d1-4665-8bed-c305fb202057",
+    "name": "Guidewire ClaimCenter Accounts FNOL API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Guidewire ClaimCenter REST API for P&C insurance claims management. Provides endpoints for first notice of loss (FNOL), claims assignment, investigation, coverage verification, reserving, payment processing, and claims closure.\n\nContact Support:\n Name: Guidewire Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

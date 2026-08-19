@@ -1,0 +1,705 @@
+{
+  "item": [
+    {
+      "id": "14b072b5-e4dd-4e46-9f8d-446efdee56de",
+      "name": "Policies",
+      "description": {
+        "content": "Policy lifecycle management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b4ce74fa-f697-46f1-b632-ef9401bc969f",
+          "name": "List policies",
+          "request": {
+            "name": "List policies",
+            "description": {
+              "content": "Returns a paginated list of policies accessible to the authenticated user. Supports filtering by policy number, status, product, and effective date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "policyNumber",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "product",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Guidewire Cloud tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ad47575c-f851-4bb9-8280-f2807935a769",
+              "name": "Policy list returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "policyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"policyNumber\": \"string\",\n      \"status\": \"Cancelled\",\n      \"product\": \"string\",\n      \"effectiveDate\": \"1971-01-10\",\n      \"expirationDate\": \"1997-09-15\",\n      \"issuedDate\": \"2022-08-19\",\n      \"totalPremium\": 1142.0194259896866,\n      \"currency\": \"USD\",\n      \"account\": {\n        \"id\": \"string\",\n        \"accountNumber\": \"string\",\n        \"name\": \"string\"\n      },\n      \"insured\": {\n        \"id\": \"string\",\n        \"displayName\": \"string\"\n      },\n      \"coverages\": [\n        {\n          \"id\": \"string\",\n          \"type\": \"string\",\n          \"limit\": 534.6980236033671,\n          \"deductible\": 5380.607956781909,\n          \"premium\": 7227.124932743295,\n          \"description\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"type\": \"string\",\n          \"limit\": 8503.748524865347,\n          \"deductible\": 8233.78211873938,\n          \"premium\": 1198.1596124262317,\n          \"description\": \"string\"\n        }\n      ],\n      \"createdDate\": \"2017-05-09T22:34:57.425Z\",\n      \"updatedDate\": \"1988-10-28T00:33:23.482Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"policyNumber\": \"string\",\n      \"status\": \"Expired\",\n      \"product\": \"string\",\n      \"effectiveDate\": \"1954-10-12\",\n      \"expirationDate\": \"1989-03-24\",\n      \"issuedDate\": \"2011-07-31\",\n      \"totalPremium\": 4866.270642579704,\n      \"currency\": \"USD\",\n      \"account\": {\n        \"id\": \"string\",\n        \"accountNumber\": \"string\",\n        \"name\": \"string\"\n      },\n      \"insured\": {\n        \"id\": \"string\",\n        \"displayName\": \"string\"\n      },\n      \"coverages\": [\n        {\n          \"id\": \"string\",\n          \"type\": \"string\",\n          \"limit\": 5939.640111282072,\n          \"deductible\": 7404.102257052525,\n          \"premium\": 3715.739237071027,\n          \"description\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"type\": \"string\",\n          \"limit\": 2728.9663827112486,\n          \"deductible\": 2329.9591535413742,\n          \"premium\": 596.4846595267503,\n          \"description\": \"string\"\n        }\n      ],\n      \"createdDate\": \"1978-04-15T09:35:20.289Z\",\n      \"updatedDate\": \"1990-12-24T16:26:19.133Z\"\n    }\n  ],\n  \"total\": 7962,\n  \"pageNumber\": 5824,\n  \"pageSize\": 5303\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "271c0231-a253-4277-ba19-9b6e515c5243",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "policyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "350d54a2-ebda-425d-a0d1-6fdc4befce12",
+          "name": "Get policy details",
+          "request": {
+            "name": "Get policy details",
+            "description": {
+              "content": "Returns complete policy details including coverages, limits, deductibles, insured parties, and premium information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "policies",
+                ":policyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) Unique policy identifier (PublicID)"
+                },
+                {
+                  "description": "Your Guidewire Cloud tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd676bbb-0ed7-4cb6-b931-aacfb465ff84",
+              "name": "Policy details returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) Unique policy identifier (PublicID)"
+                    },
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"policyNumber\": \"string\",\n  \"status\": \"Cancelled\",\n  \"product\": \"string\",\n  \"effectiveDate\": \"1957-04-10\",\n  \"expirationDate\": \"1954-10-19\",\n  \"issuedDate\": \"1949-11-09\",\n  \"totalPremium\": 2308.8813073351334,\n  \"currency\": \"USD\",\n  \"account\": {\n    \"id\": \"string\",\n    \"accountNumber\": \"string\",\n    \"name\": \"string\"\n  },\n  \"insured\": {\n    \"id\": \"string\",\n    \"displayName\": \"string\"\n  },\n  \"coverages\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"limit\": 8804.724778317603,\n      \"deductible\": 6578.739197675679,\n      \"premium\": 4467.837703634941,\n      \"description\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"limit\": 3442.9204573541706,\n      \"deductible\": 5717.164772266894,\n      \"premium\": 6387.368784932047,\n      \"description\": \"string\"\n    }\n  ],\n  \"createdDate\": \"1947-12-13T22:19:09.429Z\",\n  \"updatedDate\": \"2017-08-17T15:19:47.871Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "957d5842-7f59-48ad-b927-f06bfa15977c",
+              "name": "Policy not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) Unique policy identifier (PublicID)"
+                    },
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fcceccf9-b5ef-4052-b3f3-4d089a0329ac",
+          "name": "List policy transactions",
+          "request": {
+            "name": "List policy transactions",
+            "description": {
+              "content": "Returns all transactions (endorsements, renewals, cancellations) associated with a policy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "policies",
+                ":policyId",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Guidewire Cloud tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58235415-e7c7-4c9c-ae17-68398329a5a3",
+              "name": "Transactions returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":policyId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"Submission\",\n      \"status\": \"string\",\n      \"effectiveDate\": \"1968-04-26\",\n      \"premiumChange\": 9974.712189315642,\n      \"reason\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"Renewal\",\n      \"status\": \"string\",\n      \"effectiveDate\": \"2016-09-23\",\n      \"premiumChange\": 6437.76185137531,\n      \"reason\": \"string\"\n    }\n  ],\n  \"total\": 4109\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3cb736a6-2f1e-4728-847a-637125debc54",
+          "name": "Issue policy from submission",
+          "request": {
+            "name": "Issue policy from submission",
+            "description": {
+              "content": "Issues a bound policy from an approved submission. Returns the new policy number and effective dates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submissions",
+                ":submissionId",
+                "issue"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "submissionId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Guidewire Cloud tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44eb25d1-4560-4694-8e1d-2d9e64182c5b",
+              "name": "Policy issued",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "issue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"policyNumber\": \"string\",\n  \"status\": \"Cancelled\",\n  \"product\": \"string\",\n  \"effectiveDate\": \"1957-04-10\",\n  \"expirationDate\": \"1954-10-19\",\n  \"issuedDate\": \"1949-11-09\",\n  \"totalPremium\": 2308.8813073351334,\n  \"currency\": \"USD\",\n  \"account\": {\n    \"id\": \"string\",\n    \"accountNumber\": \"string\",\n    \"name\": \"string\"\n  },\n  \"insured\": {\n    \"id\": \"string\",\n    \"displayName\": \"string\"\n  },\n  \"coverages\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"limit\": 8804.724778317603,\n      \"deductible\": 6578.739197675679,\n      \"premium\": 4467.837703634941,\n      \"description\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"limit\": 3442.9204573541706,\n      \"deductible\": 5717.164772266894,\n      \"premium\": 6387.368784932047,\n      \"description\": \"string\"\n    }\n  ],\n  \"createdDate\": \"1947-12-13T22:19:09.429Z\",\n  \"updatedDate\": \"2017-08-17T15:19:47.871Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64d3bfa8-9490-4dd1-9633-b936ed5f04b2",
+              "name": "Submission not in quotable state",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submissions",
+                    ":submissionId",
+                    "issue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "submissionId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Guidewire Cloud tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Guidewire Cloud tenant identifier",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "yourcompany",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.guidewire.com/cc/rest/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "cc.claims.read cc.claims.write cc.payments.write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.guidewire.com/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.guidewire.com/oauth/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7d011cfc-dbe9-449b-8f1d-3258240cbf54",
+    "name": "Guidewire ClaimCenter Accounts Policies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Guidewire ClaimCenter REST API for P&C insurance claims management. Provides endpoints for first notice of loss (FNOL), claims assignment, investigation, coverage verification, reserving, payment processing, and claims closure.\n\nContact Support:\n Name: Guidewire Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

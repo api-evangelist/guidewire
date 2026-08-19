@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Guidewire ClaimCenter Accounts Exposures API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.guidewire.com/oauth/authorize",
+      "accessTokenUrl": "https://login.guidewire.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Exposures",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List claim exposures",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.guidewire.com/cc/rest/v1/claims/:claimId/exposures",
+            "params": [
+              {
+                "name": "claimId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all exposures (coverage lines being investigated) for a claim."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
