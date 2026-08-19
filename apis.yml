@@ -1,5 +1,6 @@
 aid: guidewire
 url: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/apis.yml
+specificationVersion: '0.23'
 apis:
 - aid: guidewire:guidewire-billingcenter-api
   name: Guidewire BillingCenter API
