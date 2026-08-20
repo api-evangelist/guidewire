@@ -47,6 +47,8 @@ apis:
   humanURL: https://docs.guidewire.com/
   baseURL: https://api.guidewire.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
