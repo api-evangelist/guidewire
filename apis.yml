@@ -167,6 +167,9 @@ apis:
   - type: GraphQL
     url: graphql/guidewire-graphql.md
 common:
+- type: CapabilityMap
+  url: capabilities/guidewire-capability-edges.yml
+  name: Guidewire Business Capability Map
 - type: AgenticAccess
   url: agentic-access/guidewire-agentic-access.yml
 - type: DomainSecurity
