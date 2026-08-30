@@ -20,7 +20,6 @@ apis:
   - Insurance
   - P&C
   - Payments
-  image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
   humanURL: https://docs.guidewire.com/
   baseURL: https://api.guidewire.com
   properties:
@@ -38,7 +37,6 @@ apis:
   - Integration
   - Middleware
   - P&C
-  image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
   humanURL: https://docs.guidewire.com/
   baseURL: https://api.guidewire.com
   properties:
@@ -200,7 +198,6 @@ accessModel:
   - authentication
   generated: '2026-07-22'
   method: derived
-image: https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/image.png
 tags:
 - Insurance
 - Policy
