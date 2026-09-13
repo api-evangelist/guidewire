@@ -1,0 +1,299 @@
+generated: '2026-09-12'
+method: searched
+source: >-
+  Guidewire InsuranceSuite Cloud API Consumer Guide and Configuration/Authentication Guide, read
+  directly from docs.guidewire.com (public, no credentials). Every value below is quoted from a
+  Guidewire page whose URL is recorded on the item.
+provider: guidewire
+providerId: guidewire
+api: InsuranceSuite Cloud API
+docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/p_basic-REST-methods.html
+release: Qusar (2026.07) — topics cited from the 2025.11 (Olos) consumer guide, which is the most
+  recent release for which Guidewire serves these topics as server-rendered HTML.
+
+deployment_note: >-
+  Cloud API is not a multi-tenant public API on a Guidewire-operated host. It is a REST surface served
+  by the customer's own InsuranceSuite deployment. Guidewire documents request URLs as
+  `<applicationURL>/rest/<APIpath>` — the application URL is the customer's Guidewire Cloud instance.
+  Every convention below is therefore a platform contract that ships with the product, not a hosted
+  endpoint an outside agent can call.
+
+auth:
+  style: bearer-jwt
+  methods:
+    - name: Bearer token (JWT)
+      applies_to: every caller type (internal user, external user, anonymous user, service)
+      note: >-
+        The JWT carries both authentication and authorization information as token claims.
+      docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthChoose/overview-authentication/c_authentication-methods.html
+    - name: HTTP Basic
+      applies_to: internal users only
+      note: >-
+        "Basic authentication is not supported in production environments. It can only be used in
+        development environments." Quoted verbatim from the authentication-methods topic.
+      docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthChoose/overview-authentication/c_authentication-methods.html
+  authorization_model:
+    - type: endpoint access
+      description: Which endpoints, which operations on them, and which fields in request/response payloads.
+    - type: resource access
+      description: Which instances of a resource type a caller may reach (base config restricts users, not services).
+    - type: proxy user access
+      description: >-
+        An internal user assigned to an external user or service; domain permissions and authority
+        limits are checked against the proxy user. Applies to external users and services only.
+  docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthChoose/overview-authentication/c_types_of_access.html
+  roles:
+    mechanism: API role files (role.yaml) assigned to callers
+    docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthImplement/endpoint-access/c_API-role-files.html
+    note: >-
+      Authorization is expressed as named API roles bound to endpoints and fields, not as OAuth
+      scope strings. There is no published scope catalog for Cloud API.
+
+idempotency:
+  supported: true
+  coverage: full
+  mechanism: request header
+  header: GW-DBTransaction-ID
+  value: globally unique string, maximum 128 characters
+  scope_note: >-
+    Applies to any Cloud API call that commits to the database — it is not restricted to named
+    operations — which is why coverage is recorded as full. Guidewire states three limitations:
+    it only works on calls that commit, only when the call commits exactly once ("Cloud API calls
+    that commit multiple times are rare"), and only when the commit is the first side effect of the
+    call. Those are documented exceptions to a surface-wide mechanism, not a narrow scope.
+  semantics: >-
+    Duplicate SUPPRESSION, not replay-with-identical-response. The transaction ID is inserted into
+    the application's TransactionID table; if the insert fails the call is rejected with HTTP 400 and
+    a gw.api.webservice.exception.AlreadyExecutedException. Guidewire states plainly: "Duplicate
+    requests do not return identical responses. The first request will succeed, but subsequent
+    requests will fail. It is the responsibility of the caller application to decide how or if to
+    handle this situation." An agent must therefore treat a 400/AlreadyExecutedException as
+    "already applied", not as a failure to retry.
+  retention: >-
+    Indefinite for practical purposes — the value is persisted in the InsuranceSuite operational
+    database's TransactionID table and must be globally unique across all clients, APIs and web
+    services. No expiry window is published.
+  error_on_replay:
+    status: 400
+    error: gw.api.webservice.exception.AlreadyExecutedException
+  docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/07-request-headers/c_preventing-duplicate-database-transactions.html
+
+optimistic_concurrency:
+  supported: true
+  mechanism: request header
+  header: GW-Checksum
+  description: >-
+    Prevents lost updates. When present, Cloud API allows a commit only if the checksum in the header
+    matches the current checksum held by the InsuranceSuite application. Applies to PATCHes, business
+    action POSTs and DELETEs.
+  docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/102-Optim/05-checksums/c_lost-updates-and-checksums.html
+
+dry_run_mode:
+  supported: true
+  mechanism: request header
+  header: GW-DoNotCommit
+  type: boolean
+  description: >-
+    Executes the request but prevents any data from being committed. Guidewire documents it as an
+    endpoint warm-up device (loading Java/Gosu classes on a placeholder POST before real traffic),
+    but it is a genuine no-commit execution path: an agent can send a real payload to a real endpoint
+    and have the write suppressed.
+  caveat: >-
+    Guidewire does not document GW-DoNotCommit as a validation-rehearsal contract, so the response
+    shape on a suppressed write is not specified. Treat it as warm-up-grade, not as a published
+    dry-run API.
+  docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/07-request-headers/c_HTTP-headers.html
+
+reversibility:
+  grade: verified
+  summary: >-
+    Cloud API publishes explicit reversal operations for its two highest-consequence write surfaces
+    (claim intake and claim payment), and in both cases the docs state the window in which the
+    reversal works. Reversal is expressed as a state-bounded business action, not as a generic undo.
+  operations:
+    - write: POST /claim/v1/claims (create a draft claim, FNOL intake)
+      reversal: POST /claim/v1/claims/{claimId}/cancel
+      window: >-
+        Only while the claim is a DRAFT. Guidewire: "You can cancel only draft claims. Once a claim
+        has been submitted, it can be closed. But it can no longer be canceled." A successful cancel
+        discards the draft and removes all information about it from the ClaimCenter database.
+      grade: verified
+      docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/111-CCFNOL/01-executing-FNOL/c_canceling-a-draft-claim.html
+    - write: POST /claim/v1/claims/{claimId}/checks (create a claim payment check)
+      reversal: DELETE /claim/v1/claims/{claimId}/checks/{checkId}
+      window: >-
+        Before the check is escalated. Guidewire: "checks cannot be deleted once they have been
+        escalated." The DELETE is at the check level, not the check-set level — an entire check set
+        must be deleted one check at a time.
+      grade: verified
+      docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/112-CCFin/02-check-creating/c_DELETEing-checks.html
+    - write: PATCH on any resource
+      reversal: none published
+      window: null
+      grade: none
+      note: >-
+        There is no documented undo for a committed PATCH. GW-Checksum prevents clobbering a value
+        you did not read, and GW-DBTransaction-ID prevents applying the same PATCH twice, but neither
+        restores a prior value. An agent must read-before-write and keep its own prior state.
+  docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/06-DELETEs/c_overview-of-DELETEs.html
+
+pagination:
+  style: offset
+  parameters:
+    - name: pageSize
+      description: Maximum resources per page. Default 25, maximum 100, overridable per resource in the API's apiconfig.yaml.
+    - name: pageOffset
+      description: >-
+        Zero-indexed offset of the first resource to return. Root resources only — it cannot page
+        through included resources. Guidewire recommends following the returned prev/next links
+        rather than constructing pageOffset queries.
+    - name: includeTotal
+      description: When true, the payload adds a `total` field carrying the full count of matching resources.
+  response_fields:
+    collection_links: [first, prev, next, self]
+    element_links: [self]
+    total: total (only when includeTotal=true)
+  docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/03-query-parameters/c_the-pagination-query-parameters.html
+
+query_parameters:
+  parameters:
+  - name: fields
+    description: Sparse fieldsets — restricts the response to the named fields.
+  - name: filter
+    description: Server-side filtering on filterable properties.
+  - name: sort
+    description: Sort order for a collection.
+  - name: asOfDate
+    description: Point-in-time query.
+  - name: include
+    description: Request inclusion — returns related resources in the same payload (read and write inclusion both supported).
+  - name: includeLocalizations
+    description: Returns localized variants of localizable fields.
+  docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/03-query-parameters/c_query-parameters.html
+
+request_id_tracing:
+  supported: true
+  header: X-Correlation-ID
+  description: >-
+    Traces a request from initial reception through every downstream application. Repeatable; repeated
+    values arrive as a comma-separated string. The traceability ID actually written to the MDC and logs
+    (and returned on the response) depends on the TraceabilityIDPlugin implementation — the default
+    uses the submitted value if present, otherwise a generated UID.
+  docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/07-request-headers/c_HTTP-headers.html
+
+proprietary_headers:
+  headers:
+  - name: GW-Checksum
+    type: string
+    purpose: optimistic concurrency / lost-update prevention
+  - name: GW-DBTransaction-ID
+    type: string (<=128 chars)
+    purpose: duplicate-request suppression
+  - name: GW-DoNotCommit
+    type: boolean
+    purpose: execute without committing (endpoint warm-up)
+  - name: GW-FailOnValidationWarnings
+    type: boolean
+    purpose: PolicyCenter — fail quote/bind-only/bind-and-issue on validation WARNINGS, not only errors. Default false.
+  - name: GW-IncludeSchemaProperty
+    type: boolean
+    purpose: adds $GW-Schema (fully-qualified JSON Schema definition name) to the response root. Default false.
+  - name: GW-Language
+    type: string
+    purpose: response language
+  - name: GW-Locale
+    type: string
+    purpose: response locale
+  - name: GW-UnknownPropertyHandling
+    type: enum(log, reject, ignore)
+    purpose: behaviour for unknown properties in a request payload. Default reject.
+  - name: GW-UnknownQueryParamHandling
+    type: enum(log, reject, ignore)
+    purpose: behaviour for unknown query parameters. Default reject.
+  - name: GW-User-Context
+    type: string
+    purpose: identifies the represented user on service-for-user / service-for-service calls
+  - name: GW-ValidateResponseHandling
+    type: boolean
+    purpose: extra server-side validation of responses against schema constraints. Disabled by default.
+  - name: Prefer
+    type: string
+    purpose: >-
+      Asynchronous execution. Standard values respond-async and "respond-async, wait=T", plus the
+      Guidewire-specific "respond-async, wait-ms=T".
+  - name: x-gwre-session
+    type: string
+    purpose: sticky-session routing across a clustered InsuranceSuite deployment
+  - name: X-Correlation-ID
+    type: string
+    purpose: distributed request tracing
+  docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/07-request-headers/c_HTTP-headers.html
+
+batching:
+  composite:
+    path: /composite/v1
+    description: >-
+      Composite requests bundle several operations into one call with ordered sub-requests and
+      cross-references between them.
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/102-Optim/03-composite-requests/c_composite_requests.html
+  batch:
+    path: POST /batch on Common API
+    description: Batch requests execute multiple independent operations in one call.
+  async:
+    path: /async/v1
+    description: >-
+      Send with `Prefer: respond-async` and retrieve the response later from the Async API. Supports a
+      bounded synchronous wait via "respond-async, wait=T" / "wait-ms=T".
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/102-Optim/06-asynchronous-calls/c_asynchronous_calls.html
+
+versioning:
+  scheme: three-digit release number (major.minor.patch) for Cloud API as a whole
+  in_path: true
+  path_form: /<api>/v<major> — e.g. /admin/v1, /claim/v1, /policy/v1
+  policy: >-
+    A minor release is identical or additive to the previous release; a major release changes existing
+    functionality and is published at a new /vN path alongside the old one. A single InsuranceSuite
+    release can therefore carry two major versions of an API. What does and does not count as a
+    breaking change is defined in Guidewire's Schema Backwards Compatibility Contract, which is NOT
+    published publicly — the docs say "To access a copy of this contract, consult Guidewire."
+  note: Individual APIs do not carry distinct version numbers; the number is for the whole Cloud API release.
+  docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/01-overview-of-Cloud-API/c_list-of-APIs-in-Cloud-API.html
+
+error_envelope:
+  format: guidewire-exception
+  rfc9457: false
+  description: >-
+    Cloud API returns an HTTP status code plus a response object; failures carry a fully-qualified
+    Guidewire exception class name (e.g. gw.api.webservice.exception.AlreadyExecutedException). There
+    is no application/problem+json media type and no RFC 9457 type/title/detail/instance envelope.
+  status_codes:
+    '200': successful GET or PATCH
+    '201': successful POST
+    '204': successful DELETE
+    4xx: client-side error
+    5xx: server-side fault
+  docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/01-overview-of-Cloud-API/c_requests-and-responses.html
+  see_also: errors/guidewire-error-codes.yml
+
+rate_limit_signaling:
+  published: false
+  note: >-
+    Guidewire publishes no rate-limit numbers, no RateLimit-*/X-RateLimit-* response headers and no
+    documented 429 contract for Cloud API. Throttling is a property of the customer's Guidewire Cloud
+    subscription and tenant configuration. See rate-limits/guidewire-rate-limits.yml.
+
+unknown_input_handling:
+  default: reject
+  description: >-
+    Unknown properties in a request payload and unknown query parameters are both REJECTED by default,
+    and the behaviour is switchable per request via GW-UnknownPropertyHandling and
+    GW-UnknownQueryParamHandling (log | reject | ignore). This is unusually strict and is worth
+    knowing before an agent sends a speculative field.
+  docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/07-request-headers/c_HTTP-headers.html
+
+cross_links:
+  authentication: authentication/guidewire-authentication.yml
+  errors: errors/guidewire-error-codes.yml
+  lifecycle: lifecycle/guidewire-lifecycle.yml
+  rate_limits: rate-limits/guidewire-rate-limits.yml
+  conformance: conformance/guidewire-conformance.yml

@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Guidewire ClaimCenter Accounts Policies API
   description: Guidewire ClaimCenter REST API for P&C insurance claims management. Provides endpoints for first notice of loss (FNOL), claims assignment, investigation, coverage verification, reserving, payment processing, and claims closure.
@@ -140,25 +140,15 @@ components:
           type: string
         displayName:
           type: string
-    Coverage:
+    TransactionList:
       type: object
       properties:
-        id:
-          type: string
-        type:
-          type: string
-          description: Coverage type code
-        limit:
-          type: number
-          format: double
-        deductible:
-          type: number
-          format: double
-        premium:
-          type: number
-          format: double
-        description:
-          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        total:
+          type: integer
     Transaction:
       type: object
       properties:
@@ -182,24 +172,6 @@ components:
           format: double
         reason:
           type: string
-    AccountRef:
-      type: object
-      properties:
-        id:
-          type: string
-        accountNumber:
-          type: string
-        name:
-          type: string
-    TransactionList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
-        total:
-          type: integer
     Policy:
       type: object
       properties:
@@ -247,6 +219,34 @@ components:
         updatedDate:
           type: string
           format: date-time
+    AccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+        accountNumber:
+          type: string
+        name:
+          type: string
+    Coverage:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          description: Coverage type code
+        limit:
+          type: number
+          format: double
+        deductible:
+          type: number
+          format: double
+        premium:
+          type: number
+          format: double
+        description:
+          type: string
     PolicyList:
       type: object
       properties:

@@ -1,0 +1,82 @@
+generated: '2026-09-12'
+method: searched
+source: >-
+  Guidewire InsuranceSuite Cloud API Consumer Guide (docs.guidewire.com). Derived from the documented
+  status-code contract and the named exception classes the guide quotes — NOT from the openapi/ files
+  in this repository, which are documentation-shaped scaffolds rather than harvested Guidewire specs.
+provider: guidewire
+providerId: guidewire
+api: InsuranceSuite Cloud API
+format: guidewire-exception
+media_type: application/json
+rfc9457: false
+envelope:
+  description: >-
+    An HTTP status code plus a response object. Failures name a fully-qualified Guidewire exception
+    class. There is no problem+json envelope and no stable machine error-code registry published on the
+    public documentation surface.
+  fields_observed:
+    - fully-qualified exception class name (e.g. gw.api.webservice.exception.AlreadyExecutedException)
+status_codes:
+  - code: 200
+    meaning: Successful GET or PATCH.
+  - code: 201
+    meaning: Successful POST.
+  - code: 204
+    meaning: Successful DELETE.
+  - code: 3xx
+    meaning: Redirection — the client must take additional action. Note that Postman follows redirects on POST/PATCH in a way Guidewire documents separately.
+  - code: 4xx
+    meaning: Client-side error.
+  - code: 5xx
+    meaning: Server-side fault.
+docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/01-overview-of-Cloud-API/c_requests-and-responses.html
+error_types:
+  - id: AlreadyExecutedException
+    class: gw.api.webservice.exception.AlreadyExecutedException
+    status: 400
+    title: Transaction already committed
+    cause: >-
+      A GW-DBTransaction-ID was submitted whose value already exists in the InsuranceSuite
+      TransactionID table — the request has already been committed once.
+    remediation: >-
+      Treat this as "already applied", not as a retryable failure. Guidewire warns that duplicate
+      requests do NOT return identical responses: the first succeeds and every subsequent one fails.
+      The caller must reconcile by reading current state, not by retrying.
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/07-request-headers/c_preventing-duplicate-database-transactions.html
+  - id: ChecksumMismatch
+    class: null
+    status: 4xx
+    title: Lost-update prevention triggered
+    cause: >-
+      A GW-Checksum header was supplied and did not match the checksum the InsuranceSuite application
+      holds for the resource — the resource changed since it was read.
+    remediation: Re-GET the resource, re-apply the change against the new state, re-send with the new checksum.
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/102-Optim/05-checksums/c_lost-updates-and-checksums.html
+  - id: UnknownProperty
+    class: null
+    status: 4xx
+    title: Unknown property or query parameter rejected
+    cause: >-
+      Cloud API REJECTS unknown request-payload properties and unknown query parameters by default.
+    remediation: >-
+      Send only fields the schema declares, or set GW-UnknownPropertyHandling /
+      GW-UnknownQueryParamHandling to `log` or `ignore` deliberately.
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/07-request-headers/c_HTTP-headers.html
+  - id: ValidationWarning
+    class: null
+    status: 4xx
+    title: Validation warning escalated to failure
+    cause: >-
+      PolicyCenter only. GW-FailOnValidationWarnings=true was sent on a quote, bind-only or
+      bind-and-issue Job action and the action produced validation warnings. By default (false) these
+      actions fail only on validation ERRORS.
+    remediation: Resolve the warnings, or send without the header to allow warnings through.
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/07-request-headers/c_HTTP-headers.html
+coverage_note: >-
+  Guidewire does not publish a public error-code reference for Cloud API in the way it publishes the
+  query-parameter and header references. The authoritative per-operation error list is in each API's
+  own definition (<applicationURL>/rest/<APIpath>/openapi.json), which is served only by a running
+  customer instance. The entries above are the error conditions the public consumer guide documents
+  by name; the list is therefore honest but incomplete, and that incompleteness is the provider's
+  publishing gap, not a gap in this probe.

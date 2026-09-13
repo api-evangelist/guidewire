@@ -1,19 +1,76 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/guidewire-claimcenter-openapi.yml, openapi/guidewire-policycenter-openapi.yml
+generated: '2026-09-12'
+method: searched
+source: >-
+  Guidewire InsuranceSuite Cloud API Configuration & Authentication Guide, read from
+  docs.guidewire.com (public, no credentials).
+docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthChoose/p_choosing-an-authentication-flow.html
+provider: guidewire
+providerId: guidewire
+api: InsuranceSuite Cloud API
+supersedes: >-
+  A derived profile written from openapi/*.yml on 2026-09-12 that reported an OAuth 2.0
+  authorizationCode flow at https://login.guidewire.com/oauth/authorize and /oauth/token. That host
+  does NOT RESOLVE (NXDOMAIN, checked 2026-09-12) and appears nowhere in Guidewire's documentation.
+  The value came from the documentation-shaped scaffold specs in openapi/, not from Guidewire. This
+  file replaces it with what Guidewire actually publishes.
 summary:
-  types:
-  - oauth2
-  oauth2_flows:
-  - authorizationCode
+  types: [http-basic, bearer-jwt]
+  oauth2_authorization_server: null
+  scope_catalog: false
+  authorization_model: named API roles (role.yaml), resource access, proxy-user access
 schemes:
-- name: OAuth2
-  type: oauth2
-  flows:
-  - flow: authorizationCode
-    authorizationUrl: https://login.guidewire.com/oauth/authorize
-    tokenUrl: https://login.guidewire.com/oauth/token
-    scopes: 3
-  sources:
-  - openapi/guidewire-claimcenter-openapi.yml
-  - openapi/guidewire-policycenter-openapi.yml
+  - name: BearerJWT
+    type: http
+    scheme: bearer
+    bearer_format: JWT
+    applies_to: [internal user, external user, anonymous user, standalone service, service-for-user, service-for-service]
+    description: >-
+      The caller presents a JSON Web Token. The JWT carries BOTH authentication and authorization
+      information as token claims. This is the only method supported in production.
+    token_issuer: >-
+      The customer's identity provider, configured per Guidewire Cloud deployment. Guidewire does not
+      operate a public authorization server for Cloud API and publishes no authorization_endpoint,
+      token_endpoint, JWKS URI or grant-type list.
+    docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthChoose/overview-authentication/c_authentication-methods.html
+    construct_jwt_docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthChoose/overview-authentication/c_constructing_jwts.html
+  - name: HTTPBasic
+    type: http
+    scheme: basic
+    applies_to: [internal user]
+    description: >-
+      User name and password in the request header; authentication and authorization are read from the
+      operational database.
+    production_supported: false
+    constraint: >-
+      "Basic authentication is not supported in production environments. It can only be used in
+      development environments." Quoted verbatim.
+    docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthFlows/basic-auth/c_basic-authentication.html
+caller_types:
+  types:
+  - internal user
+  - external user
+  - anonymous user
+  - standalone service
+  - service with user context (GW-User-Context header)
+  - service with service-account mapping
+  docs_note: Each caller type has its own documented authentication flow.
+  docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthChoose/overview-authentication/c_types-of-callers.html
+authorization:
+  model: API roles
+  description: >-
+    Access is granted through named API roles defined in role.yaml files and assigned to callers. A
+    role names the endpoints it opens, the operations allowed on them, and the fields readable or
+    writable. Three orthogonal access types apply: endpoint access (all callers), resource access
+    (users only, in the base configuration) and proxy-user access (external users and services only).
+  reserved_roles: true
+  docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthImplement/endpoint-access/c_API-role-files.html
+  access_types_docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthChoose/overview-authentication/c_types_of_access.html
+failure_handling:
+  docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthChoose/overview-authentication/c_authentication-failure-error-messages.html
+unauthenticated_surface:
+  endpoints:
+  - path: <applicationURL>/rest/<APIpath>/openapi.json
+    note: >-
+      "In the base configuration, the API definition endpoints are available to any caller, including
+      unauthenticated" callers. Deployments may restrict this.
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/01-overview-of-Cloud-API/c_viewing-API-definitions.html

@@ -1,0 +1,169 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  Direct HTTP probes of the five named /.well-known/ paths against every host this record knows:
+  the registrable domain and www, the documentation host, the status host, and the three Salesforce
+  Experience Cloud properties Guidewire operates on its own domain (community, marketplace, partner).
+  api.guidewire.com — the baseURL this record previously carried — does not resolve (NXDOMAIN), so it
+  could not be probed; see the note below.
+provider: guidewire
+providerId: guidewire
+note: >-
+  Three hosts return a real document. community/marketplace/partner.guidewire.com each serve a valid
+  OpenID Connect discovery document whose issuer is the Guidewire host itself — these are Salesforce
+  Experience Cloud portals running under Guidewire's domain, and the metadata is genuine, but it
+  governs sign-in to the community/marketplace/partner portals, NOT the InsuranceSuite Cloud API.
+  status.guidewire.com serves an RFC 9116 security.txt that is ATLASSIAN'S, not Guidewire's: the host
+  is an Atlassian Statuspage instance and the file's Contact, Policy and Canonical fields all point at
+  atlassian.com. It is saved here as evidence but it is NOT credited to Guidewire, and no SecurityTxt
+  pointer is emitted from it. Guidewire's own vulnerability reporting route (psirt@guidewire.com) is
+  published as an HTML policy page instead — see security/guidewire-vulnerability-disclosure.yml.
+  docs.guidewire.com and trust.guidewire.com answer 200 with an SPA shell for every /.well-known/
+  path; both are recorded as misses, not hits.
+hosts:
+  - host: guidewire.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: www.guidewire.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: docs.guidewire.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: SPA shell (1,736 bytes of text/html) — not a document. Treated as a miss.
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: SPA shell (text/html) — not a document. Treated as a miss.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        note: SPA shell (text/html) — not a document. Treated as a miss.
+      - path: /.well-known/api-catalog
+        status: 200
+        note: SPA shell (text/html) — not a document. Treated as a miss.
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        note: SPA shell (text/html) — not a document. Treated as a miss.
+  - host: status.guidewire.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: guidewire-status-security.txt
+        note: >-
+          Real RFC 9116 document, PGP-signed, but it belongs to Atlassian (Statuspage), not Guidewire.
+          Contact/Policy https://www.atlassian.com/trust/security/report-a-vulnerability;
+          Canonical https://www.atlassian.com/.well-known/security.txt. Not credited to Guidewire.
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: community.guidewire.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: guidewire-community-openid-configuration.json
+        note: >-
+          Genuine OIDC discovery document. issuer https://community.guidewire.com; authorization,
+          token, userinfo, revocation, introspection, registration endpoints and jwks_uri all on the
+          Guidewire host. Salesforce Experience Cloud identity for the Guidewire Community portal.
+      - path: /.well-known/security.txt
+        status: 401
+      - path: /.well-known/oauth-authorization-server
+        status: 401
+      - path: /.well-known/api-catalog
+        status: 401
+      - path: /.well-known/ai-plugin.json
+        status: 401
+  - host: marketplace.guidewire.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: guidewire-marketplace-openid-configuration.json
+        note: Genuine OIDC discovery document; issuer https://marketplace.guidewire.com.
+      - path: /.well-known/security.txt
+        status: 401
+      - path: /.well-known/oauth-authorization-server
+        status: 401
+      - path: /.well-known/api-catalog
+        status: 401
+      - path: /.well-known/ai-plugin.json
+        status: 401
+  - host: partner.guidewire.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: guidewire-partner-openid-configuration.json
+        note: Genuine OIDC discovery document; issuer https://partner.guidewire.com.
+      - path: /.well-known/security.txt
+        status: 401
+      - path: /.well-known/oauth-authorization-server
+        status: 401
+      - path: /.well-known/api-catalog
+        status: 401
+      - path: /.well-known/ai-plugin.json
+        status: 401
+  - host: trust.guidewire.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: >-
+          SPA catch-all (92,685 bytes of text/html, identical to the landing page) — not a document.
+          Host is a third-party trust-center platform (CNAME trustcenter.anecdotes.ai). Treated as a miss.
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: SPA catch-all (text/html) — not a document. Treated as a miss.
+      - path: /.well-known/agent-card.json
+        status: 200
+        note: SPA catch-all (text/html) — not a document. Treated as a miss.
+  - host: education.guidewire.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: Generic 1,686-byte XHTML error page for every path — not a document. Treated as a miss.
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: Generic XHTML error page — not a document. Treated as a miss.
+      - path: /.well-known/api-catalog
+        status: 200
+        note: Generic XHTML error page — not a document. Treated as a miss.
+agent_card:
+  probed: '2026-09-12'
+  found: false
+  paths:
+    - /.well-known/agent-card.json
+    - /.well-known/agent.json
+  hosts_probed:
+    - guidewire.com
+    - www.guidewire.com
+    - docs.guidewire.com
+    - status.guidewire.com
+    - community.guidewire.com
+    - marketplace.guidewire.com
+    - partner.guidewire.com
+    - education.guidewire.com
+    - trust.guidewire.com
+  note: >-
+    No A2A Agent Card found on any host. Every 200 returned an HTML shell, not a JSON AgentCard.
+    No a2a/ artifact is written and no AgentCard pointer is emitted.

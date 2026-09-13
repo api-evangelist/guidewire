@@ -1,0 +1,80 @@
+generated: '2026-09-12'
+method: searched
+source: >-
+  Guidewire Cloud Platform release page and the InsuranceSuite Cloud API Consumer Guide on
+  docs.guidewire.com; status page probed directly.
+provider: guidewire
+providerId: guidewire
+
+versioning:
+  published: true
+  scheme: major.minor.patch for the Cloud API release as a whole; major version in the endpoint path (/admin/v1)
+  policy: >-
+    Minor releases are identical or additive to the previous release and are not expected to carry
+    breaking changes. A major release changes existing functionality and is published at a new /vN
+    path ALONGSIDE the previous major version, so one InsuranceSuite release can serve /v1 and /v2 of
+    the same API simultaneously.
+  breaking_change_definition:
+    published: false
+    note: >-
+      Defined in Guidewire's "Schema Backwards Compatibility Contract", which is not published on the
+      public documentation site. The docs say: "To access a copy of this contract, consult Guidewire."
+      This is the single largest lifecycle gap on the public surface — the versioning promise is
+      stated, but the definition of what breaks it is customer-only.
+  docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/01-overview-of-Cloud-API/c_list-of-APIs-in-Cloud-API.html
+
+release_cadence:
+  interval: every four months
+  months: [April, August, December]
+  named_releases: true
+  note: >-
+    Releases carry a ski-resort code name and a YYYY.MM number. The current release is Qusar (2026.07);
+    the public API references are published per release and older releases remain online.
+  docs: https://www.guidewire.com/products/technology/guidewire-cloud-platform-releases
+
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No RFC 8594 Sunset/Deprecation header contract and no public deprecation-policy page were found on
+    the Guidewire developer or documentation surface. Superseded major versions coexist at their own
+    /vN path, but Guidewire does not publish a retirement schedule or a notice period for them. Checked
+    the Cloud API Consumer Guide, the Cloud API Configuration Guide and www.guidewire.com/developers.
+  no_deprecation_pointer_reason: >-
+    No Deprecation pointer is emitted in apis.yml because no deprecation policy is published — the
+    versioning policy above is a compatibility promise, not a deprecation policy.
+
+status_page:
+  url: https://status.guidewire.com/
+  http_status: 200
+  platform: Atlassian Statuspage
+  probed: '2026-09-12'
+  note: >-
+    Public, no login. Covers Guidewire Cloud application and platform availability by region and
+    product. The RFC 9116 security.txt served from this host belongs to Atlassian, not Guidewire.
+
+sla:
+  published: false
+  note: >-
+    Availability and support SLAs are contractual, set in the customer's Guidewire Cloud subscription
+    / Master Services Agreement. No public SLA document was found.
+
+support:
+  channels:
+    - name: Guidewire Community (case submission)
+      url: https://community.guidewire.com/s/case-home-page
+      access: customer login required
+    - name: Guidewire Community (forums, collaboration groups)
+      url: https://community.guidewire.com/
+      access: login required
+    - name: Developer forum
+      url: https://www.guidewire.com/developers/developer-community/guidewire-dev-forum
+      access: public landing page; participation requires community login
+
+end_of_life:
+  published: false
+  note: >-
+    Per-release end-of-support dates are not published on the public site. Older release
+    documentation and API references remain online back to 2022.2 (Flaine) for InsuranceNow and
+    2024.11 (Las Leñas) for the InsuranceSuite Cloud API references.

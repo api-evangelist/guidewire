@@ -21,10 +21,12 @@ apis:
   - P&C
   - Payments
   humanURL: https://docs.guidewire.com/
-  baseURL: https://api.guidewire.com
+  baseURL: https://{applicationURL}/rest
   properties:
   - url: https://docs.guidewire.com/
     type: Documentation
+  - url: https://docs.guidewire.com/cloud/bc/202607/apiref/
+    type: APIReference
   - url: https://www.guidewire.com/developers
     type: GettingStarted
   description: >-
@@ -38,7 +40,7 @@ apis:
   - Middleware
   - P&C
   humanURL: https://docs.guidewire.com/
-  baseURL: https://api.guidewire.com
+  baseURL: https://{applicationURL}/rest
   properties:
   - url: https://docs.guidewire.com/
     type: Documentation
@@ -54,7 +56,7 @@ apis:
   name: Guidewire Accounts API
   description: Customer account management
   humanURL: https://docs.guidewire.com/
-  baseURL: https://api.guidewire.com
+  baseURL: https://{applicationURL}/rest
   tags:
   - Account
   tags_raw:
@@ -64,15 +66,15 @@ apis:
     url: openapi/guidewire-accounts-api-openapi.yml
   - type: Documentation
     url: https://docs.guidewire.com/
+  - type: APIReference
+    url: https://docs.guidewire.com/cloud/pc/202607/apiref/
   - type: GettingStarted
     url: https://www.guidewire.com/developers
-  - type: GraphQL
-    url: graphql/guidewire-graphql.md
 - aid: guidewire:guidewire-claims-api
   name: Guidewire Claims API
   description: Claims lifecycle management
   humanURL: https://docs.guidewire.com/
-  baseURL: https://api.guidewire.com
+  baseURL: https://{applicationURL}/rest
   tags:
   - Claims
   properties:
@@ -80,15 +82,15 @@ apis:
     url: openapi/guidewire-claims-api-openapi.yml
   - type: Documentation
     url: https://docs.guidewire.com/
+  - type: APIReference
+    url: https://docs.guidewire.com/cloud/cc/202607/apiref/
   - type: GettingStarted
     url: https://www.guidewire.com/developers
-  - type: GraphQL
-    url: graphql/guidewire-graphql.md
 - aid: guidewire:guidewire-exposures-api
   name: Guidewire Exposures API
   description: Claim exposure management
   humanURL: https://docs.guidewire.com/
-  baseURL: https://api.guidewire.com
+  baseURL: https://{applicationURL}/rest
   tags:
   - Exposures
   properties:
@@ -96,15 +98,15 @@ apis:
     url: openapi/guidewire-exposures-api-openapi.yml
   - type: Documentation
     url: https://docs.guidewire.com/
+  - type: APIReference
+    url: https://docs.guidewire.com/cloud/cc/202607/apiref/
   - type: GettingStarted
     url: https://www.guidewire.com/developers
-  - type: GraphQL
-    url: graphql/guidewire-graphql.md
 - aid: guidewire:guidewire-fnol-api
   name: Guidewire FNOL API
   description: First Notice of Loss intake
   humanURL: https://docs.guidewire.com/
-  baseURL: https://api.guidewire.com
+  baseURL: https://{applicationURL}/rest
   tags:
   - FNOL
   properties:
@@ -112,15 +114,15 @@ apis:
     url: openapi/guidewire-fnol-api-openapi.yml
   - type: Documentation
     url: https://docs.guidewire.com/
+  - type: APIReference
+    url: https://docs.guidewire.com/cloud/cc/202607/apiref/
   - type: GettingStarted
     url: https://www.guidewire.com/developers
-  - type: GraphQL
-    url: graphql/guidewire-graphql.md
 - aid: guidewire:guidewire-payments-api
   name: Guidewire Payments API
   description: Claim payment and reserves
   humanURL: https://docs.guidewire.com/
-  baseURL: https://api.guidewire.com
+  baseURL: https://{applicationURL}/rest
   tags:
   - Payments
   properties:
@@ -128,15 +130,15 @@ apis:
     url: openapi/guidewire-payments-api-openapi.yml
   - type: Documentation
     url: https://docs.guidewire.com/
+  - type: APIReference
+    url: https://docs.guidewire.com/cloud/cc/202607/apiref/
   - type: GettingStarted
     url: https://www.guidewire.com/developers
-  - type: GraphQL
-    url: graphql/guidewire-graphql.md
 - aid: guidewire:guidewire-policies-api
   name: Guidewire Policies API
   description: Policy lifecycle management
   humanURL: https://docs.guidewire.com/
-  baseURL: https://api.guidewire.com
+  baseURL: https://{applicationURL}/rest
   tags:
   - Policies
   properties:
@@ -144,15 +146,15 @@ apis:
     url: openapi/guidewire-policies-api-openapi.yml
   - type: Documentation
     url: https://docs.guidewire.com/
+  - type: APIReference
+    url: https://docs.guidewire.com/cloud/pc/202607/apiref/
   - type: GettingStarted
     url: https://www.guidewire.com/developers
-  - type: GraphQL
-    url: graphql/guidewire-graphql.md
 - aid: guidewire:guidewire-quotes-api
   name: Guidewire Quotes API
   description: Policy quoting and rating
   humanURL: https://docs.guidewire.com/
-  baseURL: https://api.guidewire.com
+  baseURL: https://{applicationURL}/rest
   tags:
   - Quotes
   properties:
@@ -160,26 +162,95 @@ apis:
     url: openapi/guidewire-quotes-api-openapi.yml
   - type: Documentation
     url: https://docs.guidewire.com/
+  - type: APIReference
+    url: https://docs.guidewire.com/cloud/pc/202607/apiref/
   - type: GettingStarted
     url: https://www.guidewire.com/developers
-  - type: GraphQL
-    url: graphql/guidewire-graphql.md
 common:
-- type: CapabilityMap
-  url: capabilities/guidewire-capability-edges.yml
-  name: Guidewire Business Capability Map
+- type: SignUp
+  url: https://www.guidewire.com/sign-in
+- type: Marketplace
+  url: https://marketplace.guidewire.com/
 - type: AgenticAccess
   url: agentic-access/guidewire-agentic-access.yml
 - type: DomainSecurity
   url: security/guidewire-domain-security.yml
 - type: Authentication
   url: authentication/guidewire-authentication.yml
-- type: OAuthScopes
-  url: scopes/guidewire-scopes.yml
+- type: Conventions
+  url: conventions/guidewire-conventions.yml
+- type: Idempotency
+  url: conventions/guidewire-conventions.yml
+- type: Lifecycle
+  url: lifecycle/guidewire-lifecycle.yml
+- type: ChangeLog
+  url: changelog/guidewire-changelog.yml
+- type: Conformance
+  url: conformance/guidewire-conformance.yml
+- type: Compliance
+  url: conformance/guidewire-conformance.yml
+- type: TrustCenter
+  url: security/guidewire-trust-center.yml
+- type: Security
+  url: security/guidewire-vulnerability-disclosure.yml
+- type: VulnerabilityDisclosure
+  url: security/guidewire-vulnerability-disclosure.yml
+- type: ErrorCatalog
+  url: errors/guidewire-error-codes.yml
+- type: Packages
+  url: packages/guidewire-packages.yml
+- type: WellKnown
+  url: well-known/guidewire-well-known.yml
+- type: RateLimits
+  url: rate-limits/guidewire-rate-limits.yml
+- type: Plans
+  url: plans/guidewire-plans-pricing.yml
+- type: FinOps
+  url: finops/guidewire-finops.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Portal
+  url: https://www.guidewire.com/developers
+- type: Documentation
+  url: https://docs.guidewire.com/
+- type: GettingStarted
+  url: https://www.guidewire.com/developers
+- type: StatusPage
+  url: https://status.guidewire.com/
+- type: Support
+  url: https://community.guidewire.com/
+- type: Blog
+  url: https://www.guidewire.com/resources/blog
+- type: Website
+  url: https://www.guidewire.com/
+- type: APIReference
+  url: https://docs.guidewire.com/cloud/cc/202607/apiref/
+- type: DeveloperPortal
+  url: https://www.guidewire.com/developers/apis
+- type: TermsOfService
+  url: https://www.guidewire.com/legal-notices
+- type: PrivacyPolicy
+  url: https://www.guidewire.com/privacy-policy
+- type: Login
+  url: https://www.guidewire.com/sign-in
+- type: Developer Tools
+  url: https://marketplace.guidewire.com/
+- type: GitHubOrganization
+  url: https://github.com/guidewire-oss
+- type: OpenAPI
+  url: openapi/_original/guidewire-policycenter-openapi.yml
+- type: OpenAPI
+  url: openapi/_original/guidewire-claimcenter-openapi.yml
+- type: JSONSchema
+  url: json-schema/guidewire-policy-schema.json
+- type: JSONLDContext
+  url: json-ld/guidewire-context.jsonld
+- type: AsyncAPI
+  url: asyncapi/guidewire-integration-gateway-asyncapi.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/guidewire-software
-- type: LlmsText
-  url: https://docs.guidewire.com/llms.txt
+- type: LLMsTxt
+  url: llms/guidewire-llms.txt
 name: Guidewire
 description: Guidewire provides the insurance industry's leading platform including
   PolicyCenter, ClaimCenter, and BillingCenter. REST APIs enable policy lifecycle
@@ -204,36 +275,47 @@ tags:
 - Claims
 - Billing
 - P&C
-properties:
-- url: https://www.guidewire.com/developers
-  type: Portal
-- url: https://docs.guidewire.com/
-  type: Documentation
-- url: https://www.guidewire.com/developers
-  type: GettingStarted
-- url: https://status.guidewire.com/
-  type: StatusPage
-- url: https://community.guidewire.com/
-  type: Support
-- url: https://www.guidewire.com/resources/blog
-  type: Blog
-- url: https://www.guidewire.com/
-  type: Website
-- url: https://marketplace.guidewire.com/
-  type: Developer Tools
-- url: https://github.com/guidewire-oss
-  type: GitHubOrganization
-- url: openapi/guidewire-policycenter-openapi.yml
-  type: OpenAPI
-- url: openapi/guidewire-claimcenter-openapi.yml
-  type: OpenAPI
-- url: json-schema/guidewire-policy-schema.json
-  type: JSONSchema
-- url: json-ld/guidewire-context.jsonld
-  type: JSONLDContext
-- url: asyncapi/guidewire-integration-gateway-asyncapi.yml
-  type: AsyncAPI
+image: screenshots/guidewire-2026-06-20T182433.png
 maintainer:
   name: Kin Lane
   email: kin@apievangelist.com
-modified: '2026-04-28'
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+  X-twitter: apievangelist
+  org: API Evangelist
+  url: https://apievangelist.com
+created: '2026-05-01'
+modified: '2026-09-12'
+x-spec-provenance:
+  checked: '2026-09-12'
+  verdict: openapi-files-are-documentation-scaffolds-not-harvested
+  detail: >-
+    The nine files under openapi/ (two in openapi/_original/ plus seven tag-splits of them) were not
+    harvested from Guidewire. Two independent host checks prove it: their securitySchemes declare an
+    OAuth 2.0 authorization server at https://login.guidewire.com/oauth/authorize and /oauth/token,
+    and login.guidewire.com does not resolve (NXDOMAIN); and their servers[] use
+    https://{tenant}.guidewire.com/pc/rest/v1, while Guidewire documents the request form as
+    <applicationURL>/rest/<APIpath> on the customer's own Guidewire Cloud instance (guidewire.net),
+    never under a /pc/rest/v1 path on guidewire.com. Guidewire also does not publish OAuth scopes at
+    all — authorization is expressed as named API roles in role.yaml. The derived
+    authentication/ and scopes/ artifacts that carried these invented values have been rewritten from
+    Guidewire's own documentation, and the GraphQL pointers were removed because
+    graphql/guidewire-graphql.md states in its own text that Guidewire has no GraphQL endpoint.
+    No artifact written in this pass derives anything from openapi/. These files should be removed or
+    replaced with a harvested spec in a dedicated pass.
+  evidence:
+  - url: https://login.guidewire.com/oauth/authorize
+    status: 0
+    note: DNS NXDOMAIN — host does not exist.
+  - url: https://api.guidewire.com/
+    status: 0
+    note: DNS NXDOMAIN — the baseURL this record previously carried does not exist.
+  - url: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/01-overview-of-Cloud-API/c_viewing-API-definitions.html
+    status: 200
+    note: Guidewire's own statement of where the real definition lives.
+x-enrichment:
+  date: '2026-09-12'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v3

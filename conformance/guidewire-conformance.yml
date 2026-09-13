@@ -1,0 +1,130 @@
+generated: '2026-09-12'
+method: searched
+source: >-
+  Guidewire InsuranceSuite Cloud API Consumer and Configuration guides (docs.guidewire.com), the
+  Guidewire Trust and Security page, and the Guidewire trust profile at trust.guidewire.com.
+provider: guidewire
+providerId: guidewire
+note: >-
+  Every entry below is judged against what the CONTRACT and the published docs say, not against
+  marketing copy. Entries recorded false are honest negatives, not gaps we failed to look for.
+
+conformance:
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      Cloud API authenticates callers with a bearer JWT, but Guidewire does not operate an OAuth 2.0
+      authorization server for it and publishes no authorization/token endpoint, scope catalog or
+      grant-type list. The token is minted by the customer's chosen identity provider and validated by
+      the InsuranceSuite deployment. Authorization is expressed as API roles in role.yaml files, not
+      as OAuth scopes.
+    docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthChoose/overview-authentication/c_authentication-methods.html
+  - id: bearer-jwt
+    conforms: true
+    evidence: >-
+      "Bearer token authentication is an authentication method in which the authentication information
+      is stored in a JSON Web Token (JWT) ... Every type of caller can use bearer token authentication."
+      JWT claims carry both authentication and authorization information.
+    docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthChoose/overview-authentication/c_authentication-methods.html
+  - id: http-basic
+    conforms: true
+    evidence: >-
+      Supported for internal users only, and explicitly not supported in production environments —
+      development use only.
+    docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthFlows/basic-auth/c_basic-authentication.html
+  - id: oidc
+    conforms: partial
+    evidence: >-
+      The InsuranceSuite Cloud API itself publishes no OIDC discovery document. Three Guidewire-operated
+      portals do — community, marketplace and partner.guidewire.com each serve a valid
+      /.well-known/openid-configuration whose issuer is the Guidewire host. Those govern portal sign-in,
+      not API access.
+    docs: well-known/guidewire-well-known.yml
+  - id: openapi
+    conforms: true
+    evidence: >-
+      Every Cloud API exposes its own definition at <applicationURL>/rest/<APIpath>/openapi.json
+      (OpenAPI 3.0) and /swagger.json (Swagger 2.0). Guidewire recommends /openapi.json because it is
+      richer and preserves Guidewire-proprietary tags such as x-gw-typelist. In the base configuration
+      the definition endpoints are reachable by any caller, including unauthenticated ones — but only
+      against a running InsuranceSuite instance, which is customer-deployed.
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/01-overview-of-Cloud-API/c_viewing-API-definitions.html
+  - id: swagger2
+    conforms: true
+    evidence: >-
+      "Cloud API is built using the Swagger 2.0 Specification." The OpenAPI 3.0 rendering is a
+      conversion of that source.
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/01-overview-of-Cloud-API/c_viewing-API-definitions.html
+  - id: rfc9457
+    conforms: false
+    evidence: >-
+      No application/problem+json media type and no type/title/detail/instance envelope. Failures carry
+      a fully-qualified Guidewire exception class name (e.g.
+      gw.api.webservice.exception.AlreadyExecutedException) alongside the HTTP status code.
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/01-overview-of-Cloud-API/c_requests-and-responses.html
+  - id: json:api
+    conforms: false
+    evidence: >-
+      Payloads use Guidewire's own envelope (attributes / data / links / included), which resembles
+      JSON:API but does not claim it, uses no application/vnd.api+json media type, and diverges in
+      pagination (pageSize/pageOffset rather than page[size]/page[number]).
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/02-GETs/c_standard-payload-structures.html
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Offset pagination with pageSize (default 25, max 100), pageOffset and includeTotal, plus
+      first/prev/next/self collection links and a `total` field.
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/03-query-parameters/c_the-pagination-query-parameters.html
+  - id: idempotency
+    conforms: true
+    evidence: >-
+      GW-DBTransaction-ID request header (<=128 chars, globally unique) suppresses duplicate committing
+      calls; a replay is rejected with HTTP 400 and AlreadyExecutedException. Duplicate suppression
+      rather than replay-with-identical-response.
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/101-Fund/07-request-headers/c_preventing-duplicate-database-transactions.html
+  - id: optimistic-concurrency
+    conforms: true
+    evidence: GW-Checksum request header gates commits on a matching server-side checksum.
+    docs: https://docs.guidewire.com/cloud/cc/202511/cloudapibf/cloudAPI/topics/102-Optim/05-checksums/c_lost-updates-and-checksums.html
+  - id: rfc8594-sunset
+    conforms: false
+    evidence: No Sunset or Deprecation response header contract is published for Cloud API.
+  - id: acord
+    conforms: false
+    evidence: >-
+      The Cloud API contract declares no ACORD message type, schema or namespace. Guidewire ships Data
+      Mapping Tools for converting between the Guidewire internal model and external industry standards
+      including ACORD, which is adapter tooling around the contract rather than an ACORD-shaped
+      contract. Recorded false so the profile does not claim a standard the contract does not declare.
+    docs: https://www.guidewire.com/developers/developer-tools-and-guides/configuration-guides
+
+domain_standard:
+  declared: false
+  market: property & casualty insurance core systems
+  candidate_standards: [ACORD P&C XML, ACORD AL3, ACORD Nexus]
+  note: >-
+    Reward-only dimension. Guidewire's market has a real standard (ACORD), and Guidewire supports it
+    through mapping tooling, but the published REST contract does not declare an ACORD message type,
+    URN or namespace, so no domain-standard conformance is asserted here. This is a genuine, checkable
+    gap a Guidewire reader could close by declaring ACORD message types in the Cloud API schemas.
+
+compliance:
+  published: true
+  source: https://www.guidewire.com/resources/help-and-support/trust-and-security
+  trust_center: https://trust.guidewire.com/
+  certifications:
+    - name: SOC 1 Type 2
+      note: Report available to customers through the Guidewire Community.
+    - name: SOC 2 Type 2
+      note: Report and bridge letters available to customers through the Guidewire Community.
+    - name: ISO/IEC 27001
+      note: Information security management system certification.
+    - name: ISO/IEC 27701
+      note: Privacy information management system certification.
+    - name: PCI DSS
+      note: Compliance program documented on the Trust and Security page.
+  assessments:
+    - name: External penetration testing
+      note: Third-party penetration-test summaries are made available to customers.
+  gating: >-
+    The certifications are NAMED publicly; the reports themselves require a Guidewire Community login.

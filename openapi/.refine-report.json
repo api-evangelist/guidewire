@@ -21,6 +21,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "guidewire-accounts-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "guidewire-claims-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "guidewire-exposures-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "guidewire-fnol-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "guidewire-payments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "guidewire-policies-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "guidewire-quotes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

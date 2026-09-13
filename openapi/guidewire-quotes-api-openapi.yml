@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Guidewire ClaimCenter Accounts Quotes API
   description: Guidewire ClaimCenter REST API for P&C insurance claims management. Provides endpoints for first notice of loss (FNOL), claims assignment, investigation, coverage verification, reserving, payment processing, and claims closure.
@@ -91,32 +91,6 @@ paths:
           description: Rating error or underwriting declination
 components:
   schemas:
-    ContactRef:
-      type: object
-      properties:
-        id:
-          type: string
-        displayName:
-          type: string
-    Coverage:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          description: Coverage type code
-        limit:
-          type: number
-          format: double
-        deductible:
-          type: number
-          format: double
-        premium:
-          type: number
-          format: double
-        description:
-          type: string
     SubmissionRequest:
       type: object
       required:
@@ -138,6 +112,13 @@ components:
           description: Existing account ID or null to create new
         insuredDetails:
           $ref: '#/components/schemas/ContactDetails'
+    ContactRef:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
     Submission:
       type: object
       properties:
@@ -168,36 +149,6 @@ components:
         createdDate:
           type: string
           format: date-time
-    Quote:
-      type: object
-      properties:
-        submissionId:
-          type: string
-        status:
-          type: string
-          enum:
-          - Quoted
-          - Declined
-          - Referred
-        totalPremium:
-          type: number
-          format: double
-        annualPremium:
-          type: number
-          format: double
-        taxes:
-          type: number
-          format: double
-        fees:
-          type: number
-          format: double
-        coverages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coverage'
-        validUntil:
-          type: string
-          format: date
     AccountRef:
       type: object
       properties:
@@ -234,6 +185,55 @@ components:
               type: string
             country:
               type: string
+    Coverage:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          description: Coverage type code
+        limit:
+          type: number
+          format: double
+        deductible:
+          type: number
+          format: double
+        premium:
+          type: number
+          format: double
+        description:
+          type: string
+    Quote:
+      type: object
+      properties:
+        submissionId:
+          type: string
+        status:
+          type: string
+          enum:
+          - Quoted
+          - Declined
+          - Referred
+        totalPremium:
+          type: number
+          format: double
+        annualPremium:
+          type: number
+          format: double
+        taxes:
+          type: number
+          format: double
+        fees:
+          type: number
+          format: double
+        coverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coverage'
+        validUntil:
+          type: string
+          format: date
   securitySchemes:
     OAuth2:
       type: oauth2

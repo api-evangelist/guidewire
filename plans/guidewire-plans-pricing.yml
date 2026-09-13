@@ -6,8 +6,27 @@ providerId: guidewire
 created: '2026-05-04'
 # Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
 # bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
+method: searched
+modified: '2026-09-12'
+probed: '2026-09-12'
+plan_count: 0
+search_evidence:
+  - url: https://www.guidewire.com/pricing
+    status: 404
+  - url: https://www.guidewire.com/products/pricing
+    status: 404
+  - url: https://www.guidewire.com/plans
+    status: 404
+  - url: https://www.guidewire.com/developers/apis
+    status: 200
+    note: No pricing, plan, quota or API-key signup surface anywhere on the developer area.
+search_note: >-
+  Re-searched 2026-09-12. Guidewire publishes NO plans page and no per-tier pricing of any kind: the
+  three obvious pricing paths return 404 and the developer area offers no self-serve signup. Access to
+  Cloud API is bundled into a Guidewire Cloud / InsuranceSuite subscription negotiated under a Master
+  Services Agreement. plan_count is therefore 0 — an honest zero, backed by the probes above. The
+  single Enterprise entry below is a placeholder describing the commercial shape, not a published tier;
+  it carries no real price or quota and must be reconciled against a customer's own MSA.
 reconciled: false
 tags:
   - Insurance

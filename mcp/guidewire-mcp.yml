@@ -1,0 +1,48 @@
+generated: '2026-09-12'
+method: searched
+source: >-
+  https://www.guidewire.com/products/technology/insurance-ai-from-guidewire and
+  https://www.guidewire.com/products/technology/guidewire-cloud-platform-releases (Qusar, 2026.07),
+  plus a search of docs.guidewire.com's own document index (/api/v2/docs, 182 published documents) for
+  any MCP documentation.
+provider: guidewire
+providerId: guidewire
+status: vendor-announced-not-published
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+tools: []
+findings:
+  vendor_claim: >-
+    Guidewire advertises MCP in two places. (1) Developer Assistants: "Connect your AI coding tool and
+    IDE to Guidewire through Model Context Protocol (MCP), so the AI you already use understands the
+    Guidewire platform" — assistants exist for Gosu, Integrations and the Jutro Digital Platform.
+    (2) The Qusar (2026.07) Agentic Framework, described as AI Connect plus MCP servers plus Cloud
+    APIs, for building and governing AI agents against the core system.
+  what_is_missing:
+    - No MCP endpoint URL is published anywhere on guidewire.com or docs.guidewire.com.
+    - No install command, npx invocation, container image or package name is published.
+    - >-
+      Zero MCP documents exist in the docs.guidewire.com published-document index (182 documents,
+      queried 2026-09-12) — searched for mcp, agent, assistant.
+    - >-
+      No first-party MCP package on npm. The only guidewire-named MCP packages on npm
+      (@intentsolutionsio/guidewire-pack, @intentsolutionsio/guidewire-skill-md-pack) are third-party
+      community work, not Guidewire-published, and are NOT recorded as Guidewire artifacts here.
+  conclusion: >-
+    An MCP capability is announced as part of a licensed platform release, but nothing an agent could
+    reach or a developer could install has been published. mode is therefore `none` and NO MCPServer
+    pointer is wired into apis.yml — emitting one would assert a callable agent surface that does not
+    publicly exist. If Guidewire publishes an endpoint or a package, this artifact should be re-probed
+    and upgraded to `remote` or `local-stdio` with verified: probed.
+no_crosswalk_reason: >-
+  mcp/guidewire-tool-crosswalk.yml is not emitted. A crosswalk binds real MCP tools to real OpenAPI
+  operationIds; there is no published tool list on one side, and on the other side the Cloud API
+  definition is served only by a running customer instance
+  (<applicationURL>/rest/<APIpath>/openapi.json), so neither half of the binding can be read without
+  fabricating it.
+probed: '2026-09-12'

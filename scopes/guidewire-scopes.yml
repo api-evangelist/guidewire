@@ -1,53 +1,44 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/guidewire-claimcenter-openapi.yml, openapi/guidewire-policycenter-openapi.yml
-schemes:
-- name: OAuth2
-  source: openapi/guidewire-claimcenter-openapi.yml
-  flows:
-  - flow: authorizationCode
-    authorizationUrl: https://login.guidewire.com/oauth/authorize
-    tokenUrl: https://login.guidewire.com/oauth/token
-- name: OAuth2
-  source: openapi/guidewire-policycenter-openapi.yml
-  flows:
-  - flow: authorizationCode
-    authorizationUrl: https://login.guidewire.com/oauth/authorize
-    tokenUrl: https://login.guidewire.com/oauth/token
-scopes:
-- scope: cc.claims.read
-  description: Read claim data
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/guidewire-claimcenter-openapi.yml
-- scope: cc.claims.write
-  description: Create and update claims
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/guidewire-claimcenter-openapi.yml
-- scope: cc.payments.write
-  description: Create claim payments
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/guidewire-claimcenter-openapi.yml
-- scope: pc.accounts.read
-  description: Read account data
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/guidewire-policycenter-openapi.yml
-- scope: pc.policies.read
-  description: Read policy data
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/guidewire-policycenter-openapi.yml
-- scope: pc.policies.write
-  description: Write policy data
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/guidewire-policycenter-openapi.yml
+generated: '2026-09-12'
+method: searched
+source: >-
+  Guidewire InsuranceSuite Cloud API Configuration & Authentication Guide on docs.guidewire.com.
+docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthImplement/endpoint-access/c_API-role-files.html
+provider: guidewire
+providerId: guidewire
+scope_count: 0
+oauth2: false
+supersedes: >-
+  A derived scope list written from openapi/*.yml on 2026-09-12 that reported three OAuth scopes
+  (cc.claims.read, cc.claims.write, cc.payments.write) under an authorizationCode flow at
+  https://login.guidewire.com/oauth/authorize. That authorization-server host does NOT RESOLVE
+  (NXDOMAIN, checked 2026-09-12), the scope strings appear nowhere in Guidewire's documentation, and
+  the values came from the documentation-shaped scaffold specs in openapi/ rather than from Guidewire.
+  They are removed here rather than carried forward.
+finding: >-
+  Guidewire's InsuranceSuite Cloud API has NO OAuth 2.0 scope surface. Guidewire does not run an
+  authorization server for it, publishes no scope catalog, and expresses authorization a different way
+  entirely: named API roles, defined in role.yaml files and assigned to callers, which enumerate the
+  endpoints, operations and fields a caller may reach. Bearer JWTs carry authorization as token claims
+  interpreted against those roles.
+scopes: []
+equivalent_mechanism:
+  name: Cloud API roles
+  artifact: role.yaml files shipped and configured per deployment
+  granularity: [endpoint, operation, field]
+  additional_access_types:
+    - endpoint access
+    - resource access
+    - proxy-user access
+  reserved_roles_docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthImplement/endpoint-access/c_reserved-roles.html
+  assignment_docs: https://docs.guidewire.com/cloud/is/202607/cloudapica/cloudAPI/AuthImplement/endpoint-access/c_assigning-API-roles-to-callers.html
+  note: >-
+    Role names are defined per customer deployment, so there is no catalog-wide list to publish. This
+    is why no OAuthScopes pointer is wired in apis.yml — a scope surface that does not exist should not
+    be asserted on Guidewire's behalf.
+other_oauth_surfaces:
+  - host: community.guidewire.com
+    note: >-
+      Salesforce Experience Cloud OIDC for the Guidewire Community portal, with a Salesforce-standard
+      scopes_supported list (openid, profile, email, api, offline_access, …). It governs portal
+      sign-in, NOT Cloud API access, and its scopes are Salesforce's, not Guidewire's.
+    document: well-known/guidewire-community-openid-configuration.json

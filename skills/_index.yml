@@ -1,0 +1,24 @@
+generated: '2026-09-12'
+method: generated
+source: >-
+  Guidewire InsuranceSuite Cloud API Consumer Guide on docs.guidewire.com. Grounded in Guidewire's own
+  published endpoint paths, headers and state rules — not in the openapi/ scaffolds in this repository.
+provider: guidewire
+providerId: guidewire
+skills:
+  - name: guidewire-fnol-claim-intake
+    file: guidewire-fnol-claim-intake.md
+    title: File a First Notice of Loss through Cloud API
+    api: Claim API (/claim/v1)
+    flows: [create draft claim, enrich draft, submit claim, cancel draft, unverified-policy composite]
+  - name: guidewire-safe-writes
+    file: guidewire-safe-writes.md
+    title: Write safely to Cloud API
+    api: all Cloud APIs
+    flows: [duplicate suppression, lost-update protection, no-commit rehearsal, tracing, reversal windows, batching]
+note: >-
+  Only two skills are packaged, and deliberately. Guidewire publishes 3,436 operation reference pages
+  across PolicyCenter, ClaimCenter and BillingCenter for the Qusar (2026.07) release, but it does not
+  publish a downloadable OpenAPI — the definition is served only by a running customer instance. A
+  skill per marquee flow would therefore have to invent operationIds, so the two skills here cover the
+  flows Guidewire documents end to end in prose, and stop there.

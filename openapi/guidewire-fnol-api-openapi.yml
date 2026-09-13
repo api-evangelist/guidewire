@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Guidewire ClaimCenter Accounts FNOL API
   description: Guidewire ClaimCenter REST API for P&C insurance claims management. Provides endpoints for first notice of loss (FNOL), claims assignment, investigation, coverage verification, reserving, payment processing, and claims closure.
@@ -75,6 +75,54 @@ components:
         incurred:
           type: number
           format: double
+    FnolRequest:
+      type: object
+      required:
+      - policyNumber
+      - lossDate
+      - lossType
+      properties:
+        policyNumber:
+          type: string
+        lossDate:
+          type: string
+          format: date
+        lossTime:
+          type: string
+          format: time
+        lossType:
+          type: string
+          description: Loss type code
+        lossDescription:
+          type: string
+          maxLength: 4000
+        lossLocation:
+          type: object
+          properties:
+            addressLine1:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            postalCode:
+              type: string
+            country:
+              type: string
+        reporter:
+          type: object
+          properties:
+            firstName:
+              type: string
+            lastName:
+              type: string
+            phone:
+              type: string
+            email:
+              type: string
+              format: email
+            relationship:
+              type: string
     Claim:
       type: object
       properties:
@@ -132,54 +180,6 @@ components:
         closedDate:
           type: string
           format: date
-    FnolRequest:
-      type: object
-      required:
-      - policyNumber
-      - lossDate
-      - lossType
-      properties:
-        policyNumber:
-          type: string
-        lossDate:
-          type: string
-          format: date
-        lossTime:
-          type: string
-          format: time
-        lossType:
-          type: string
-          description: Loss type code
-        lossDescription:
-          type: string
-          maxLength: 4000
-        lossLocation:
-          type: object
-          properties:
-            addressLine1:
-              type: string
-            city:
-              type: string
-            state:
-              type: string
-            postalCode:
-              type: string
-            country:
-              type: string
-        reporter:
-          type: object
-          properties:
-            firstName:
-              type: string
-            lastName:
-              type: string
-            phone:
-              type: string
-            email:
-              type: string
-              format: email
-            relationship:
-              type: string
   securitySchemes:
     OAuth2:
       type: oauth2

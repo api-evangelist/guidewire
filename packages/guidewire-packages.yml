@@ -1,0 +1,81 @@
+generated: '2026-09-12'
+method: searched
+source: >-
+  Direct registry queries against registry.npmjs.org, pypi.org, search.maven.org and the GitHub API
+  (orgs Guidewire and guidewire-oss), plus the Guidewire developer pages.
+provider: guidewire
+providerId: guidewire
+sdk_count: 0
+package_count: 2
+summary: >-
+  Guidewire publishes NO first-party client SDK for the InsuranceSuite Cloud API on any public package
+  registry. This is consistent with the product's shape: Cloud API is served by the customer's own
+  deployment, each tenant's contract differs (LOB-specific endpoints are generated per customer), and
+  the client libraries Guidewire does ship — the Jutro Digital Platform packages — are distributed
+  through Guidewire's own gated artifact repository to licensed customers, not through npm.
+  The two public packages below are real and first-party, but neither is an API client.
+packages:
+  - name: '@guidewire/web-font-builder'
+    registry: npm
+    url: https://www.npmjs.com/package/@guidewire/web-font-builder
+    official: true
+    official_evidence: Published under the @guidewire npm scope by the account guidewire.cbuckingham.
+    language: JavaScript
+    kind: build tool
+    description: The "pebbles" icon font builder tool.
+    version: 0.0.1-alpha.10
+    published: '2024-01-24'
+    api_client: false
+    note: >-
+      The only package in the @guidewire npm scope. Still on an alpha version, unreleased since
+      January 2024. Not an SDK for any Guidewire API.
+  - name: cda-client
+    registry: null
+    url: https://github.com/Guidewire/cda-client
+    official: true
+    official_evidence: Repository owned by the Guidewire GitHub organization.
+    language: Scala
+    kind: API client
+    description: Cloud Data Access (CDA) client — reads Guidewire Cloud Data Access output.
+    version: null
+    published: null
+    api_client: true
+    note: >-
+      Source-only distribution. Checked for a matching artifact on Maven Central (no com.guidewire
+      coordinate for it exists) and there are zero GitHub Releases on the repository, so there is no
+      published version or release date to record. Last push 2025-04-14, 30 stars. `version: null`
+      here means "checked, nothing published", not "not checked".
+registries_checked:
+  - registry: npm
+    query: 'scope:jutro'
+    result: 0 packages — the Jutro Digital Platform is not published to public npm.
+  - registry: npm
+    query: guidewire
+    result: >-
+      6 results, of which one (@guidewire/web-font-builder) is first-party. The rest are third-party
+      (@intentsolutionsio/guidewire-pack and guidewire-skill-md-pack are community MCP/skill packs,
+      not Guidewire-published).
+  - registry: PyPI
+    query: guidewire
+    result: 404 — no package.
+  - registry: PyPI
+    query: cda-client
+    result: >-
+      200, but it belongs to NCI CRDC ("NCI CRDC CDA Python back-end REST API request handler"), a
+      different organization. NOT Guidewire. Rejected on ownership.
+  - registry: Maven Central
+    query: 'g:com.guidewire'
+    result: 0 artifacts.
+  - registry: Maven Central
+    query: guidewire
+    result: >-
+      2 artifacts, both under com.guidewire.tools — marathon-client_2.10 (0.0.2) and
+      chronos-client_2.10 (0.0.1), both published in February 2014. Mesos-era infrastructure tooling,
+      abandoned, and unrelated to any Guidewire product API.
+  - registry: RubyGems / crates.io / NuGet / pkg.go.dev
+    query: guidewire
+    result: not applicable — Guidewire ships no client in these ecosystems.
+gap_note: >-
+  A first-party SDK whose last release predates the API it wraps is the standard abandonment signal.
+  Here there is no SDK at all to date: the newest first-party public package is a build tool last
+  released 2024-01-24, four platform releases behind the current Qusar (2026.07) API.

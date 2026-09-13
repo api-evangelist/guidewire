@@ -1,0 +1,90 @@
+generated: '2026-09-12'
+method: searched
+source: https://www.guidewire.com/products/technology/guidewire-cloud-platform-releases
+provider: guidewire
+providerId: guidewire
+scheme: >-
+  Named platform releases on a four-month train. Each release carries a ski-resort code name and a
+  YYYY.MM number; the number is what appears in documentation and API-reference URLs
+  (docs.guidewire.com/cloud/<app>/<YYYYMM>/apiref/).
+current_version: '2026.07'
+current_release: Qusar
+cadence: every four months (April, August, December)
+docs: https://www.guidewire.com/products/technology/guidewire-cloud-platform-releases
+note: >-
+  Guidewire does not publish a dated, per-change API changelog on its public site. The release page is
+  the public record of change, and it is written at feature level, not at endpoint level. Per-release
+  "What's New" and release-note documents live on docs.guidewire.com per product. Release months below
+  are as stated on the Guidewire release page; the version numbers are as they appear in Guidewire's
+  own documentation URLs. Breaking-vs-additive classification is NOT published per release — see
+  lifecycle/guidewire-lifecycle.yml (the Schema Backwards Compatibility Contract is customer-only), so
+  `breaking` is recorded as null rather than guessed.
+entries:
+  - version: '2026.07'
+    release: Qusar
+    month: August 2026
+    breaking: null
+    highlights:
+      - Agentic AI capabilities in core insurance operations, on a model-agnostic framework
+      - Developer Assistants (Gosu, Integrations, Jutro) reachable from AI coding tools over MCP
+      - Voice-driven FNOL
+    api_reference:
+      - https://docs.guidewire.com/cloud/pc/202607/apiref/
+      - https://docs.guidewire.com/cloud/cc/202607/apiref/
+      - https://docs.guidewire.com/cloud/bc/202607/apiref/
+  - version: '2026.03'
+    release: Palisades
+    month: April 2026
+    breaking: null
+    highlights:
+      - ProNavigator embedded assistant
+      - PricingCenter cloud integration
+      - Enhanced coinsurance automation
+    api_reference:
+      - https://docs.guidewire.com/cloud/pc/202603/apiref/
+      - https://docs.guidewire.com/cloud/cc/202603/apiref/
+      - https://docs.guidewire.com/cloud/bc/202603/apiref/
+  - version: '2025.11'
+    release: Olos
+    month: December 2025
+    breaking: null
+    highlights:
+      - PricingCenter launch
+      - Claims Intel for workers' compensation
+      - Rules Service automation
+    api_reference:
+      - https://docs.guidewire.com/cloud/pc/202511/apiref/
+      - https://docs.guidewire.com/cloud/cc/202511/apiref/
+      - https://docs.guidewire.com/cloud/bc/202511/apiref/
+  - version: '2025.07'
+    release: Niseko
+    month: August 2025
+    breaking: null
+    highlights:
+      - Wildfire Risk Score 3.0
+      - Insurance Data Models
+      - Multi-tab support and enhanced APIs
+    api_reference:
+      - https://docs.guidewire.com/cloud/pc/202507/apiref/
+      - https://docs.guidewire.com/cloud/cc/202507/apiref/
+      - https://docs.guidewire.com/cloud/bc/202507/apiref/
+  - version: '2025.03'
+    release: Mammoth
+    month: April 2025
+    breaking: null
+    highlights:
+      - Claims-to-billing integration
+      - Seasonal coverage
+      - Autopilot workflow service
+  - version: '2024.11'
+    release: Las Leñas
+    month: December 2024
+    breaking: null
+    highlights:
+      - Claims Intel (formerly Cooperative Scores)
+      - Enhanced HazardHub
+      - APM monitoring
+    api_reference:
+      - https://docs.guidewire.com/cloud/pc/202411/apiref/
+      - https://docs.guidewire.com/cloud/cc/202411/apiref/
+      - https://docs.guidewire.com/cloud/bc/202411/apiref/

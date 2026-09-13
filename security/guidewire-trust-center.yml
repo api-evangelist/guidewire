@@ -1,0 +1,46 @@
+generated: '2026-09-12'
+method: searched
+source: https://www.guidewire.com/resources/help-and-support/trust-and-security
+provider: guidewire
+providerId: guidewire
+published: true
+trust_center:
+  url: https://trust.guidewire.com/
+  http_status: 200
+  probed: '2026-09-12'
+  platform: Anecdotes Trust Center (CNAME trustcenter.anecdotes.ai)
+  note: >-
+    Hosted on a third-party trust-center platform under Guidewire's own subdomain. Landing page is
+    public; individual reports are request-gated.
+overview_page:
+  url: https://www.guidewire.com/resources/help-and-support/trust-and-security
+  http_status: 200
+security_documentation:
+  url: https://docs.guidewire.com/security/
+  http_status: 200
+certifications:
+  - name: SOC 1 Type 2
+    scope: Guidewire Cloud
+    evidence_gating: report available to customers via the Guidewire Community
+  - name: SOC 2 Type 2
+    scope: Guidewire Cloud
+    evidence_gating: report and bridge letters available to customers via the Guidewire Community
+  - name: ISO/IEC 27001
+    scope: information security management system
+  - name: ISO/IEC 27701
+    scope: privacy information management system
+  - name: PCI DSS
+    scope: payment card data handling
+assessments:
+  - name: External security assessment / penetration test
+    evidence_gating: summaries available to customers
+not_found:
+  items:
+  - FedRAMP
+  - HIPAA attestation
+  - CSA STAR
+  note: >-
+    Checked on the Trust and Security page and the trust profile landing page; not named there. Absence
+    here means "not published at these URLs", not "not held".
+status_page: https://status.guidewire.com/
+vulnerability_disclosure: security/guidewire-vulnerability-disclosure.yml
