@@ -2,6 +2,13 @@
   "repo": "guidewire",
   "feeds": [
     {
+      "source": "https://community.guidewire.com/",
+      "feed_url": "https://community.guidewire.com/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://www.guidewire.com/resources/blog",
       "feed_url": "https://www.guidewire.com/resources/blog",
       "title": "",
@@ -10,7 +17,7 @@
     }
   ],
   "post_count": 2,
-  "fetched": "2026-09-06T19:17:18Z",
+  "fetched": "2026-09-13T13:00:00Z",
   "agent_pulled": "2026-07-04",
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
