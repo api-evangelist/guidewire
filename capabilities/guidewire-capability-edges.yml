@@ -1,0 +1,71 @@
+slug: guidewire
+provider: Guidewire
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Insurance
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: FNOL
+  spec_file: guidewire-fnol-api-openapi.yml
+  capability_id: BC-2160.10
+  capability_id_l1: BC-2160
+  capability_name: First Notice of Loss Management
+  confidence: 0.95
+  evidence: '"POST /fnol createFnol Submit First Notice of Loss"; schema FnolRequest'
+  reason: Operation literally submits a first notice of loss, matching FNOL intake and registration.
+- tag: Claims
+  spec_file: guidewire-claims-api-openapi.yml
+  capability_id: BC-2160
+  capability_id_l1: BC-2160
+  capability_name: Insurance Claims Management
+  confidence: 0.9
+  evidence: '"GET /claims listClaims List claims"; schemas ClaimList, Exposure, Claim; "REST API for P&C
+    insurance claims management"'
+  reason: Operations read and list P&C insurance claims; this is core insurance claims management. Spans
+    multiple sub-capabilities (intake, adjustment, reserving), so L1 only.
+- tag: Payments
+  spec_file: guidewire-payments-api-openapi.yml
+  capability_id: BC-2160.50
+  capability_id_l1: BC-2160
+  capability_name: Claims Settlement & Payment
+  confidence: 0.88
+  evidence: '"POST /claims/{claimId}/payments createClaimPayment Create claim payment"; schema ClaimPaymentRequest'
+  reason: Creating and listing payments against a claim is claims settlement and indemnity/expense payment,
+    not premium billing.
+- tag: Exposures
+  spec_file: guidewire-exposures-api-openapi.yml
+  capability_id: BC-2160
+  capability_id_l1: BC-2160
+  capability_name: Insurance Claims Management
+  confidence: 0.8
+  evidence: '"GET /claims/{claimId}/exposures listExposures List claim exposures"'
+  reason: Claim exposures are sub-records of an insurance claim in ClaimCenter; clearly claims management,
+    but the single read operation does not pin a specific sub-capability.
+- tag: Quotes
+  spec_file: guidewire-quotes-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.78
+  evidence: '"POST /submissions createSubmission Create new policy submission"; "POST /submissions/{submissionId}/quote
+    quoteSubmission Request a quote for a submission"'
+  reason: Submission intake and quote generation for insurance applications maps to Quote & Submission
+    Management; could alternatively be read as underwriting intake, hence not higher.
+- tag: Policies
+  spec_file: guidewire-policies-api-openapi.yml
+  capability_id: BC-2140.10
+  capability_id_l1: BC-2140
+  capability_name: Policy Issuance Management
+  confidence: 0.75
+  evidence: '"POST /submissions/{submissionId}/issue issuePolicy Issue policy from submission"; "GET /policies/{policyId}/transactions
+    listPolicyTransactions"'
+  reason: Surface reads in-force policies and issues a policy from a submission — policy administration
+    with issuance as the named write action; some spread across policy records/transactions.
