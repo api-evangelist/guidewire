@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Guidewire ClaimCenter Accounts Policies API
-  description: Guidewire ClaimCenter REST API for P&C insurance claims management. Provides endpoints for first notice of loss (FNOL), claims assignment, investigation, coverage verification, reserving, payment processing, and claims closure.
+  title: Guidewire PolicyCenter Policies API
+  description: Guidewire PolicyCenter REST API for property and casualty insurance policy lifecycle management. Provides endpoints for policy creation, quoting, underwriting, issuance, endorsements, renewals, cancellations, and reinstatement. Deployed on Guidewire Cloud with OAuth 2.0 authentication.
   version: 1.0.0
   contact:
     name: Guidewire Developer Support
@@ -10,7 +10,7 @@ info:
     name: Guidewire License
     url: https://www.guidewire.com/
 servers:
-- url: https://{tenant}.guidewire.com/cc/rest/v1
+- url: https://{tenant}.guidewire.com/pc/rest/v1
   variables:
     tenant:
       default: yourcompany
@@ -133,45 +133,6 @@ paths:
           description: Submission not in quotable state
 components:
   schemas:
-    ContactRef:
-      type: object
-      properties:
-        id:
-          type: string
-        displayName:
-          type: string
-    TransactionList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
-        total:
-          type: integer
-    Transaction:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          enum:
-          - Submission
-          - PolicyChange
-          - Renewal
-          - Cancellation
-          - Reinstatement
-        status:
-          type: string
-        effectiveDate:
-          type: string
-          format: date
-        premiumChange:
-          type: number
-          format: double
-        reason:
-          type: string
     Policy:
       type: object
       properties:
@@ -219,14 +180,35 @@ components:
         updatedDate:
           type: string
           format: date-time
-    AccountRef:
+    Transaction:
       type: object
       properties:
         id:
           type: string
-        accountNumber:
+        type:
           type: string
-        name:
+          enum:
+          - Submission
+          - PolicyChange
+          - Renewal
+          - Cancellation
+          - Reinstatement
+        status:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        premiumChange:
+          type: number
+          format: double
+        reason:
+          type: string
+    ContactRef:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
           type: string
     Coverage:
       type: object
@@ -246,6 +228,24 @@ components:
           type: number
           format: double
         description:
+          type: string
+    TransactionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        total:
+          type: integer
+    AccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+        accountNumber:
+          type: string
+        name:
           type: string
     PolicyList:
       type: object
@@ -268,9 +268,9 @@ components:
           authorizationUrl: https://login.guidewire.com/oauth/authorize
           tokenUrl: https://login.guidewire.com/oauth/token
           scopes:
-            cc.claims.read: Read claim data
-            cc.claims.write: Create and update claims
-            cc.payments.write: Create claim payments
+            pc.policies.read: Read policy data
+            pc.policies.write: Write policy data
+            pc.accounts.read: Read account data
 externalDocs:
-  description: Guidewire ClaimCenter Documentation
+  description: Guidewire PolicyCenter Documentation
   url: https://docs.guidewire.com/

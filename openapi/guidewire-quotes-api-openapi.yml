@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Guidewire ClaimCenter Accounts Quotes API
-  description: Guidewire ClaimCenter REST API for P&C insurance claims management. Provides endpoints for first notice of loss (FNOL), claims assignment, investigation, coverage verification, reserving, payment processing, and claims closure.
+  title: Guidewire PolicyCenter Quotes API
+  description: Guidewire PolicyCenter REST API for property and casualty insurance policy lifecycle management. Provides endpoints for policy creation, quoting, underwriting, issuance, endorsements, renewals, cancellations, and reinstatement. Deployed on Guidewire Cloud with OAuth 2.0 authentication.
   version: 1.0.0
   contact:
     name: Guidewire Developer Support
@@ -10,7 +10,7 @@ info:
     name: Guidewire License
     url: https://www.guidewire.com/
 servers:
-- url: https://{tenant}.guidewire.com/cc/rest/v1
+- url: https://{tenant}.guidewire.com/pc/rest/v1
   variables:
     tenant:
       default: yourcompany
@@ -91,34 +91,6 @@ paths:
           description: Rating error or underwriting declination
 components:
   schemas:
-    SubmissionRequest:
-      type: object
-      required:
-      - product
-      - effectiveDate
-      - accountId
-      properties:
-        product:
-          type: string
-          description: Insurance product code
-        effectiveDate:
-          type: string
-          format: date
-        expirationDate:
-          type: string
-          format: date
-        accountId:
-          type: string
-          description: Existing account ID or null to create new
-        insuredDetails:
-          $ref: '#/components/schemas/ContactDetails'
-    ContactRef:
-      type: object
-      properties:
-        id:
-          type: string
-        displayName:
-          type: string
     Submission:
       type: object
       properties:
@@ -149,61 +121,6 @@ components:
         createdDate:
           type: string
           format: date-time
-    AccountRef:
-      type: object
-      properties:
-        id:
-          type: string
-        accountNumber:
-          type: string
-        name:
-          type: string
-    ContactDetails:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        companyName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        address:
-          type: object
-          properties:
-            addressLine1:
-              type: string
-            city:
-              type: string
-            state:
-              type: string
-            postalCode:
-              type: string
-            country:
-              type: string
-    Coverage:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          description: Coverage type code
-        limit:
-          type: number
-          format: double
-        deductible:
-          type: number
-          format: double
-        premium:
-          type: number
-          format: double
-        description:
-          type: string
     Quote:
       type: object
       properties:
@@ -234,6 +151,89 @@ components:
         validUntil:
           type: string
           format: date
+    SubmissionRequest:
+      type: object
+      required:
+      - product
+      - effectiveDate
+      - accountId
+      properties:
+        product:
+          type: string
+          description: Insurance product code
+        effectiveDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        accountId:
+          type: string
+          description: Existing account ID or null to create new
+        insuredDetails:
+          $ref: '#/components/schemas/ContactDetails'
+    ContactDetails:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        companyName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: object
+          properties:
+            addressLine1:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            postalCode:
+              type: string
+            country:
+              type: string
+    ContactRef:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
+    Coverage:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          description: Coverage type code
+        limit:
+          type: number
+          format: double
+        deductible:
+          type: number
+          format: double
+        premium:
+          type: number
+          format: double
+        description:
+          type: string
+    AccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+        accountNumber:
+          type: string
+        name:
+          type: string
   securitySchemes:
     OAuth2:
       type: oauth2
@@ -242,9 +242,9 @@ components:
           authorizationUrl: https://login.guidewire.com/oauth/authorize
           tokenUrl: https://login.guidewire.com/oauth/token
           scopes:
-            cc.claims.read: Read claim data
-            cc.claims.write: Create and update claims
-            cc.payments.write: Create claim payments
+            pc.policies.read: Read policy data
+            pc.policies.write: Write policy data
+            pc.accounts.read: Read account data
 externalDocs:
-  description: Guidewire ClaimCenter Documentation
+  description: Guidewire PolicyCenter Documentation
   url: https://docs.guidewire.com/

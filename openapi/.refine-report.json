@@ -1,20 +1,15 @@
 {
   "provider": "guidewire",
   "sources": [
-    "guidewire-accounts-api-openapi.yml",
-    "guidewire-claims-api-openapi.yml",
-    "guidewire-exposures-api-openapi.yml",
-    "guidewire-fnol-api-openapi.yml",
-    "guidewire-payments-api-openapi.yml",
-    "guidewire-policies-api-openapi.yml",
-    "guidewire-quotes-api-openapi.yml"
+    "_original/guidewire-claimcenter-openapi.yml",
+    "_original/guidewire-policycenter-openapi.yml"
   ],
   "outputs": [
-    "guidewire-accounts-api-openapi.yml",
     "guidewire-claims-api-openapi.yml",
     "guidewire-exposures-api-openapi.yml",
     "guidewire-fnol-api-openapi.yml",
     "guidewire-payments-api-openapi.yml",
+    "guidewire-accounts-api-openapi.yml",
     "guidewire-policies-api-openapi.yml",
     "guidewire-quotes-api-openapi.yml"
   ],
@@ -22,14 +17,18 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "guidewire-accounts-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "guidewire-claims-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "guidewire-exposures-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "guidewire-fnol-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "guidewire-payments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "guidewire-policies-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "guidewire-quotes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "guidewire-claimcenter-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "guidewire-policycenter-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "guidewire-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "guidewire-claims-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "guidewire-exposures-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "guidewire-fnol-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "guidewire-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "guidewire-policies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "guidewire-quotes-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
