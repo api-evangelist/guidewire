@@ -91,36 +91,27 @@ paths:
           description: Rating error or underwriting declination
 components:
   schemas:
-    Submission:
+    SubmissionRequest:
       type: object
+      required:
+      - product
+      - effectiveDate
+      - accountId
       properties:
-        id:
-          type: string
-        submissionNumber:
-          type: string
-        status:
-          type: string
-          enum:
-          - Draft
-          - Quoted
-          - Declined
-          - Bound
-          - Withdrawn
         product:
           type: string
+          description: Insurance product code
         effectiveDate:
           type: string
           format: date
         expirationDate:
           type: string
           format: date
-        account:
-          $ref: '#/components/schemas/AccountRef'
-        insured:
-          $ref: '#/components/schemas/ContactRef'
-        createdDate:
+        accountId:
           type: string
-          format: date-time
+          description: Existing account ID or null to create new
+        insuredDetails:
+          $ref: '#/components/schemas/ContactDetails'
     Quote:
       type: object
       properties:
@@ -151,27 +142,71 @@ components:
         validUntil:
           type: string
           format: date
-    SubmissionRequest:
+    Submission:
       type: object
-      required:
-      - product
-      - effectiveDate
-      - accountId
       properties:
+        id:
+          type: string
+        submissionNumber:
+          type: string
+        status:
+          type: string
+          enum:
+          - Draft
+          - Quoted
+          - Declined
+          - Bound
+          - Withdrawn
         product:
           type: string
-          description: Insurance product code
         effectiveDate:
           type: string
           format: date
         expirationDate:
           type: string
           format: date
-        accountId:
+        account:
+          $ref: '#/components/schemas/AccountRef'
+        insured:
+          $ref: '#/components/schemas/ContactRef'
+        createdDate:
           type: string
-          description: Existing account ID or null to create new
-        insuredDetails:
-          $ref: '#/components/schemas/ContactDetails'
+          format: date-time
+    AccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+        accountNumber:
+          type: string
+        name:
+          type: string
+    ContactRef:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
+    Coverage:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          description: Coverage type code
+        limit:
+          type: number
+          format: double
+        deductible:
+          type: number
+          format: double
+        premium:
+          type: number
+          format: double
+        description:
+          type: string
     ContactDetails:
       type: object
       properties:
@@ -199,41 +234,6 @@ components:
               type: string
             country:
               type: string
-    ContactRef:
-      type: object
-      properties:
-        id:
-          type: string
-        displayName:
-          type: string
-    Coverage:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          description: Coverage type code
-        limit:
-          type: number
-          format: double
-        deductible:
-          type: number
-          format: double
-        premium:
-          type: number
-          format: double
-        description:
-          type: string
-    AccountRef:
-      type: object
-      properties:
-        id:
-          type: string
-        accountNumber:
-          type: string
-        name:
-          type: string
   securitySchemes:
     OAuth2:
       type: oauth2

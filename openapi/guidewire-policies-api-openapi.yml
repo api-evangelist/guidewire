@@ -133,6 +133,38 @@ paths:
           description: Submission not in quotable state
 components:
   schemas:
+    TransactionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        total:
+          type: integer
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - Submission
+          - PolicyChange
+          - Renewal
+          - Cancellation
+          - Reinstatement
+        status:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        premiumChange:
+          type: number
+          format: double
+        reason:
+          type: string
     Policy:
       type: object
       properties:
@@ -180,28 +212,27 @@ components:
         updatedDate:
           type: string
           format: date-time
-    Transaction:
+    PolicyList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Policy'
+        total:
+          type: integer
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+    AccountRef:
       type: object
       properties:
         id:
           type: string
-        type:
+        accountNumber:
           type: string
-          enum:
-          - Submission
-          - PolicyChange
-          - Renewal
-          - Cancellation
-          - Reinstatement
-        status:
-          type: string
-        effectiveDate:
-          type: string
-          format: date
-        premiumChange:
-          type: number
-          format: double
-        reason:
+        name:
           type: string
     ContactRef:
       type: object
@@ -229,37 +260,6 @@ components:
           format: double
         description:
           type: string
-    TransactionList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
-        total:
-          type: integer
-    AccountRef:
-      type: object
-      properties:
-        id:
-          type: string
-        accountNumber:
-          type: string
-        name:
-          type: string
-    PolicyList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Policy'
-        total:
-          type: integer
-        pageNumber:
-          type: integer
-        pageSize:
-          type: integer
   securitySchemes:
     OAuth2:
       type: oauth2
