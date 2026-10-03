@@ -72,6 +72,39 @@ paths:
           description: Reserve insufficient
 components:
   schemas:
+    ClaimPaymentRequest:
+      type: object
+      required:
+      - exposureId
+      - amount
+      - payeeId
+      - paymentType
+      properties:
+        exposureId:
+          type: string
+        amount:
+          type: number
+          format: double
+          minimum: 0.01
+        payeeId:
+          type: string
+        paymentType:
+          type: string
+          enum:
+          - Check
+          - EFT
+        memo:
+          type: string
+          maxLength: 255
+    ClaimPaymentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClaimPayment'
+        total:
+          type: integer
     ClaimPayment:
       type: object
       properties:
@@ -116,39 +149,6 @@ components:
         createdDate:
           type: string
           format: date-time
-    ClaimPaymentList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClaimPayment'
-        total:
-          type: integer
-    ClaimPaymentRequest:
-      type: object
-      required:
-      - exposureId
-      - amount
-      - payeeId
-      - paymentType
-      properties:
-        exposureId:
-          type: string
-        amount:
-          type: number
-          format: double
-          minimum: 0.01
-        payeeId:
-          type: string
-        paymentType:
-          type: string
-          enum:
-          - Check
-          - EFT
-        memo:
-          type: string
-          maxLength: 255
   securitySchemes:
     OAuth2:
       type: oauth2

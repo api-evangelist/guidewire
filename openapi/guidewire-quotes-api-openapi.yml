@@ -91,57 +91,59 @@ paths:
           description: Rating error or underwriting declination
 components:
   schemas:
-    SubmissionRequest:
-      type: object
-      required:
-      - product
-      - effectiveDate
-      - accountId
-      properties:
-        product:
-          type: string
-          description: Insurance product code
-        effectiveDate:
-          type: string
-          format: date
-        expirationDate:
-          type: string
-          format: date
-        accountId:
-          type: string
-          description: Existing account ID or null to create new
-        insuredDetails:
-          $ref: '#/components/schemas/ContactDetails'
-    Quote:
+    ContactDetails:
       type: object
       properties:
-        submissionId:
+        firstName:
           type: string
-        status:
+        lastName:
           type: string
-          enum:
-          - Quoted
-          - Declined
-          - Referred
-        totalPremium:
-          type: number
-          format: double
-        annualPremium:
-          type: number
-          format: double
-        taxes:
-          type: number
-          format: double
-        fees:
-          type: number
-          format: double
-        coverages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Coverage'
-        validUntil:
+        companyName:
           type: string
-          format: date
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: object
+          properties:
+            addressLine1:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            postalCode:
+              type: string
+            country:
+              type: string
+    Coverage:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          description: Coverage type code
+        limit:
+          type: number
+          format: double
+        deductible:
+          type: number
+          format: double
+        premium:
+          type: number
+          format: double
+        description:
+          type: string
+    ContactRef:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
     Submission:
       type: object
       properties:
@@ -181,59 +183,57 @@ components:
           type: string
         name:
           type: string
-    ContactRef:
+    Quote:
       type: object
       properties:
-        id:
+        submissionId:
           type: string
-        displayName:
+        status:
           type: string
-    Coverage:
+          enum:
+          - Quoted
+          - Declined
+          - Referred
+        totalPremium:
+          type: number
+          format: double
+        annualPremium:
+          type: number
+          format: double
+        taxes:
+          type: number
+          format: double
+        fees:
+          type: number
+          format: double
+        coverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coverage'
+        validUntil:
+          type: string
+          format: date
+    SubmissionRequest:
       type: object
+      required:
+      - product
+      - effectiveDate
+      - accountId
       properties:
-        id:
+        product:
           type: string
-        type:
+          description: Insurance product code
+        effectiveDate:
           type: string
-          description: Coverage type code
-        limit:
-          type: number
-          format: double
-        deductible:
-          type: number
-          format: double
-        premium:
-          type: number
-          format: double
-        description:
+          format: date
+        expirationDate:
           type: string
-    ContactDetails:
-      type: object
-      properties:
-        firstName:
+          format: date
+        accountId:
           type: string
-        lastName:
-          type: string
-        companyName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        address:
-          type: object
-          properties:
-            addressLine1:
-              type: string
-            city:
-              type: string
-            state:
-              type: string
-            postalCode:
-              type: string
-            country:
-              type: string
+          description: Existing account ID or null to create new
+        insuredDetails:
+          $ref: '#/components/schemas/ContactDetails'
   securitySchemes:
     OAuth2:
       type: oauth2

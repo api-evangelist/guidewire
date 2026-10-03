@@ -70,6 +70,13 @@ paths:
           description: Account not found
 components:
   schemas:
+    ContactRef:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
     Account:
       type: object
       properties:
@@ -102,13 +109,6 @@ components:
             $ref: '#/components/schemas/Account'
         total:
           type: integer
-    ContactRef:
-      type: object
-      properties:
-        id:
-          type: string
-        displayName:
-          type: string
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -47,63 +47,6 @@ paths:
           description: Policy not found
 components:
   schemas:
-    Claim:
-      type: object
-      properties:
-        id:
-          type: string
-        claimNumber:
-          type: string
-        status:
-          type: string
-          enum:
-          - Open
-          - Closed
-          - Reopened
-        lossType:
-          type: string
-          description: Type of loss (e.g., "AUTO", "PROPERTY", "LIABILITY")
-        lossDate:
-          type: string
-          format: date
-        lossDescription:
-          type: string
-        reportedDate:
-          type: string
-          format: date-time
-        policyNumber:
-          type: string
-        insured:
-          type: object
-          properties:
-            id:
-              type: string
-            displayName:
-              type: string
-        assignedAdjuster:
-          type: object
-          properties:
-            id:
-              type: string
-            displayName:
-              type: string
-        totalIncurred:
-          type: number
-          format: double
-          description: Total incurred losses (reserves + paid)
-        totalPaid:
-          type: number
-          format: double
-        exposures:
-          type: array
-          items:
-            $ref: '#/components/schemas/Exposure'
-        createdDate:
-          type: string
-          format: date-time
-        closedDate:
-          type: string
-          format: date
     FnolRequest:
       type: object
       required:
@@ -180,6 +123,63 @@ components:
         incurred:
           type: number
           format: double
+    Claim:
+      type: object
+      properties:
+        id:
+          type: string
+        claimNumber:
+          type: string
+        status:
+          type: string
+          enum:
+          - Open
+          - Closed
+          - Reopened
+        lossType:
+          type: string
+          description: Type of loss (e.g., "AUTO", "PROPERTY", "LIABILITY")
+        lossDate:
+          type: string
+          format: date
+        lossDescription:
+          type: string
+        reportedDate:
+          type: string
+          format: date-time
+        policyNumber:
+          type: string
+        insured:
+          type: object
+          properties:
+            id:
+              type: string
+            displayName:
+              type: string
+        assignedAdjuster:
+          type: object
+          properties:
+            id:
+              type: string
+            displayName:
+              type: string
+        totalIncurred:
+          type: number
+          format: double
+          description: Total incurred losses (reserves + paid)
+        totalPaid:
+          type: number
+          format: double
+        exposures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Exposure'
+        createdDate:
+          type: string
+          format: date-time
+        closedDate:
+          type: string
+          format: date
   securitySchemes:
     OAuth2:
       type: oauth2
