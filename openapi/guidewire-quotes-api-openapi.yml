@@ -91,33 +91,6 @@ paths:
           description: Rating error or underwriting declination
 components:
   schemas:
-    ContactDetails:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        companyName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        address:
-          type: object
-          properties:
-            addressLine1:
-              type: string
-            city:
-              type: string
-            state:
-              type: string
-            postalCode:
-              type: string
-            country:
-              type: string
     Coverage:
       type: object
       properties:
@@ -137,13 +110,27 @@ components:
           format: double
         description:
           type: string
-    ContactRef:
+    SubmissionRequest:
       type: object
+      required:
+      - product
+      - effectiveDate
+      - accountId
       properties:
-        id:
+        product:
           type: string
-        displayName:
+          description: Insurance product code
+        effectiveDate:
           type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        accountId:
+          type: string
+          description: Existing account ID or null to create new
+        insuredDetails:
+          $ref: '#/components/schemas/ContactDetails'
     Submission:
       type: object
       properties:
@@ -183,6 +170,13 @@ components:
           type: string
         name:
           type: string
+    ContactRef:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
     Quote:
       type: object
       properties:
@@ -213,27 +207,33 @@ components:
         validUntil:
           type: string
           format: date
-    SubmissionRequest:
+    ContactDetails:
       type: object
-      required:
-      - product
-      - effectiveDate
-      - accountId
       properties:
-        product:
+        firstName:
           type: string
-          description: Insurance product code
-        effectiveDate:
+        lastName:
           type: string
-          format: date
-        expirationDate:
+        companyName:
           type: string
-          format: date
-        accountId:
+        email:
           type: string
-          description: Existing account ID or null to create new
-        insuredDetails:
-          $ref: '#/components/schemas/ContactDetails'
+          format: email
+        phone:
+          type: string
+        address:
+          type: object
+          properties:
+            addressLine1:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            postalCode:
+              type: string
+            country:
+              type: string
   securitySchemes:
     OAuth2:
       type: oauth2

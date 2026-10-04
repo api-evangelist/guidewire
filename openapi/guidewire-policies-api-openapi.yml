@@ -133,42 +133,6 @@ paths:
           description: Submission not in quotable state
 components:
   schemas:
-    Transaction:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          enum:
-          - Submission
-          - PolicyChange
-          - Renewal
-          - Cancellation
-          - Reinstatement
-        status:
-          type: string
-        effectiveDate:
-          type: string
-          format: date
-        premiumChange:
-          type: number
-          format: double
-        reason:
-          type: string
-    PolicyList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Policy'
-        total:
-          type: integer
-        pageNumber:
-          type: integer
-        pageSize:
-          type: integer
     Coverage:
       type: object
       properties:
@@ -187,13 +151,6 @@ components:
           type: number
           format: double
         description:
-          type: string
-    ContactRef:
-      type: object
-      properties:
-        id:
-          type: string
-        displayName:
           type: string
     Policy:
       type: object
@@ -242,15 +199,6 @@ components:
         updatedDate:
           type: string
           format: date-time
-    TransactionList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
-        total:
-          type: integer
     AccountRef:
       type: object
       properties:
@@ -260,6 +208,58 @@ components:
           type: string
         name:
           type: string
+    TransactionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        total:
+          type: integer
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - Submission
+          - PolicyChange
+          - Renewal
+          - Cancellation
+          - Reinstatement
+        status:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        premiumChange:
+          type: number
+          format: double
+        reason:
+          type: string
+    ContactRef:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
+    PolicyList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Policy'
+        total:
+          type: integer
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
   securitySchemes:
     OAuth2:
       type: oauth2

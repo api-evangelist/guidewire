@@ -70,6 +70,15 @@ paths:
           description: Account not found
 components:
   schemas:
+    AccountList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        total:
+          type: integer
     ContactRef:
       type: object
       properties:
@@ -100,15 +109,6 @@ components:
         createdDate:
           type: string
           format: date-time
-    AccountList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-        total:
-          type: integer
   securitySchemes:
     OAuth2:
       type: oauth2
