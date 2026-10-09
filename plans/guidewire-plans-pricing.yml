@@ -87,3 +87,21 @@ plans:
       - name: Guidewire BillingCenter API
       - name: Guidewire Integration Gateway API
 maintainers: []
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - period
+  - request
+  plans:
+  - name: Enterprise (InsuranceSuite Cloud)
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    - request
+    periods:
+    - month

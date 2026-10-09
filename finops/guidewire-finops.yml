@@ -159,8 +159,6 @@ apis:
 unitEconomics:
   - name: Cost per Policy In-Force
     metric: billed_cost / policies_in_force
-    target: TBD
   - name: Cost per Claim Processed
     metric: billed_cost / claims_processed
-    target: TBD
 maintainers: []
