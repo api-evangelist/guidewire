@@ -2114,6 +2114,7 @@
   arazzo: null
 - slug: guidewire-friss
   label: FRISS
+  partner: friss
   partner_name: FRISS
   category: Accelerator; Fraud Detection & Investigation; ClaimCenter
   type: marketplace
@@ -2334,6 +2335,7 @@
   arazzo: null
 - slug: guidewire-ivans
   label: Ivans
+  partner: ivans
   partner_name: Ivans
   category: Accelerator; Distribution & Producer Management; InsuranceNow
   type: marketplace

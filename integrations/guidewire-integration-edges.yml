@@ -6068,8 +6068,8 @@ edges:
   - 'Partner tier: Premier'
 - partner_name: FRISS
   app: FRISS Accelerator for Claims Analytics for ClaimCenter
-  partner: null
-  partner_match: null
+  partner: friss
+  partner_match: domain
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -6672,8 +6672,8 @@ edges:
   - Other
 - partner_name: Ivans
   app: IVANS Accelerator for Download Data Extractor for InsuranceNow
-  partner: null
-  partner_match: null
+  partner: ivans
+  partner_match: domain
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -7760,8 +7760,8 @@ edges:
   - 'Partner tier: Growth'
 - partner_name: Ivans
   app: Ivans Data Exchange Accelerator for ClaimCenter
-  partner: null
-  partner_match: null
+  partner: ivans
+  partner_match: domain
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -8145,8 +8145,8 @@ edges:
   - 'Partner tier: Growth'
 - partner_name: Ivans
   app: Ivans Data Exchange Accelerator for PolicyCenter
-  partner: null
-  partner_match: null
+  partner: ivans
+  partner_match: domain
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -8697,8 +8697,8 @@ edges:
   - 'Partner tier: Premier'
 - partner_name: FRISS
   app: FRISS Accelerator for Underwriting Risk Assessment for PolicyCenter 10
-  partner: null
-  partner_match: null
+  partner: friss
+  partner_match: domain
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -12398,8 +12398,8 @@ edges:
   - 'Partner tier: Growth'
 - partner_name: FRISS
   app: FRISS Add-on for Fraud Detection at Claims
-  partner: null
-  partner_match: null
+  partner: friss
+  partner_match: domain
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -13053,8 +13053,8 @@ edges:
   - 'Partner tier: Global Premier'
 - partner_name: Ivans
   app: IVANS Data Exchange Accelerator for BillingCenter
-  partner: null
-  partner_match: null
+  partner: ivans
+  partner_match: domain
   partner_candidate: null
   type: marketplace
   marketplace: own
