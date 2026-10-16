@@ -167,6 +167,8 @@ apis:
   - type: GettingStarted
     url: https://www.guidewire.com/developers
 common:
+- type: OAuthScopes
+  url: scopes/guidewire-scopes.yml
 - type: SignUp
   url: https://www.guidewire.com/sign-in
 - type: Marketplace
