@@ -116,6 +116,15 @@ components:
         createdDate:
           type: string
           format: date-time
+    ClaimPaymentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClaimPayment'
+        total:
+          type: integer
     ClaimPaymentRequest:
       type: object
       required:
@@ -140,15 +149,6 @@ components:
         memo:
           type: string
           maxLength: 255
-    ClaimPaymentList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClaimPayment'
-        total:
-          type: integer
   securitySchemes:
     OAuth2:
       type: oauth2

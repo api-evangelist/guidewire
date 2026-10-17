@@ -154,6 +154,19 @@ components:
         closedDate:
           type: string
           format: date
+    ClaimList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Claim'
+        total:
+          type: integer
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
     Exposure:
       type: object
       properties:
@@ -182,19 +195,6 @@ components:
         incurred:
           type: number
           format: double
-    ClaimList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Claim'
-        total:
-          type: integer
-        pageNumber:
-          type: integer
-        pageSize:
-          type: integer
   securitySchemes:
     OAuth2:
       type: oauth2

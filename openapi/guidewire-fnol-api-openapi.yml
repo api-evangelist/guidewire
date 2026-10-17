@@ -104,34 +104,6 @@ components:
         closedDate:
           type: string
           format: date
-    Exposure:
-      type: object
-      properties:
-        id:
-          type: string
-        coverageType:
-          type: string
-        claimant:
-          type: object
-          properties:
-            id:
-              type: string
-            displayName:
-              type: string
-        status:
-          type: string
-          enum:
-          - Open
-          - Closed
-        reserve:
-          type: number
-          format: double
-        paid:
-          type: number
-          format: double
-        incurred:
-          type: number
-          format: double
     FnolRequest:
       type: object
       required:
@@ -180,6 +152,34 @@ components:
               format: email
             relationship:
               type: string
+    Exposure:
+      type: object
+      properties:
+        id:
+          type: string
+        coverageType:
+          type: string
+        claimant:
+          type: object
+          properties:
+            id:
+              type: string
+            displayName:
+              type: string
+        status:
+          type: string
+          enum:
+          - Open
+          - Closed
+        reserve:
+          type: number
+          format: double
+        paid:
+          type: number
+          format: double
+        incurred:
+          type: number
+          format: double
   securitySchemes:
     OAuth2:
       type: oauth2
