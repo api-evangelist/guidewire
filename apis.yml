@@ -18,6 +18,11 @@ apis:
   tags:
   - Billing
   - Insurance
+  - Property and Casualty
+  - Payments
+  tags_raw:
+  - Billing
+  - Insurance
   - P&C
   - Payments
   humanURL: https://docs.guidewire.com/
@@ -35,6 +40,11 @@ apis:
 - aid: guidewire:guidewire-integration-gateway-api
   name: Guidewire Integration Gateway API
   tags:
+  - Insurance
+  - Integration
+  - Middleware
+  - Property and Casualty
+  tags_raw:
   - Insurance
   - Integration
   - Middleware
@@ -272,6 +282,12 @@ accessModel:
   generated: '2026-07-22'
   method: derived
 tags:
+- Insurance
+- Policy
+- Claims
+- Billing
+- Property and Casualty
+tags_raw:
 - Insurance
 - Policy
 - Claims
