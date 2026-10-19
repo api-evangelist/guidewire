@@ -1,9 +1,16 @@
 generated: '2026-10-13'
 method: searched
 checked:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
 - https://fivetran.com/docs-sitemap.xml
 - https://fivetran.com/docs/connectors/partner-built-program
 - https://marketplace.guidewire.com/
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 marketplace_apps:
 - marketplace: own
   channel: partner-built
@@ -13132,6 +13139,36 @@ edges:
     vendor_link: https://www.guidewire.com/
     builder: Fivetran
   detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@guidewire/web-font-builder
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@guidewire/web-font-builder'
+      version: 0.0.1-alpha.10
+      released: '2024-01-24'
+      released_field: modified
+      lapsed: true
+      page: https://www.npmjs.com/package/@guidewire/web-font-builder
+      repo_leg: domain:guidewire.com
+      publisher_leg: email:guidewire.com
+      matched_by: domain+name-among-holders
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
   first_seen: '2026-10-18'
 source:
 - https://fivetran.com/docs-sitemap.xml

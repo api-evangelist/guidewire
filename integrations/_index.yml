@@ -5035,3 +5035,34 @@
     builder: Fivetran
   status: not-a-workflow
   arazzo: null
+- slug: guidewire-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/@guidewire/web-font-builder
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@guidewire/web-font-builder'
+      version: 0.0.1-alpha.10
+      released: '2024-01-24'
+      released_field: modified
+      lapsed: true
+      page: https://www.npmjs.com/package/@guidewire/web-font-builder
+      repo_leg: domain:guidewire.com
+      publisher_leg: email:guidewire.com
+      matched_by: domain+name-among-holders
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
