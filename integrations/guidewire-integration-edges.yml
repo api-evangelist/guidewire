@@ -16,11 +16,67 @@ marketplace_apps:
   channel: partner-built
   app: guidewire
   url: https://marketplace.guidewire.com/
-  app_count: 741
+  app_count: 742
   adapter: sweep-insurance.py:salesforce-lwr-guest-api
-  listed: 741
+  listed: 742
   accounts: 159
 edges:
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@guidewire/web-font-builder
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@guidewire/web-font-builder'
+      version: 0.0.1-alpha.10
+      released: '2024-01-24'
+      released_field: modified
+      lapsed: true
+      page: https://www.npmjs.com/package/@guidewire/web-font-builder
+      repo_leg: domain:guidewire.com
+      publisher_leg: email:guidewire.com
+      matched_by: domain+name-among-holders
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: Fivetran
+  partner: fivetran
+  partner_match: aggregator
+  type: marketplace
+  marketplace: fivetran-connectors
+  channel: elt-connector
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://fivetran.com/docs/connectors/applications/guidewire-cloud-data-access
+  category: null
+  contract_reference:
+    register: Fivetran connectors (fivetran.com/docs/connectors, docs-sitemap.xml + Partner-Built program)
+    spec_file: null
+    role: elt-connector:fivetran
+    registered_name: Guidewire Cloud Data Access
+    matched_domain: guidewire.com
+    matched_by: domain+name-among-holders
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    connector_paths:
+    - connectors/applications/guidewire-cloud-data-access
+    vendor_link: https://www.guidewire.com/
+    builder: Fivetran
+  detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
 - partner_name: Capgemini Financial Services
   app: Japan Cyber Insurance Product Model by Capgemini
   partner: null
@@ -41,8 +97,8 @@ edges:
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: USA Crime & Fidelity Insurance Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -53,14 +109,14 @@ edges:
   category: Extensions; Tools & Utilities; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: Global Holiday Insurance Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -71,7 +127,7 @@ edges:
   category: Extensions; Data Tools & Utilities; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
@@ -232,8 +288,8 @@ edges:
   - Other
 - partner_name: Ernst & Young LLP
   app: USA Personal Auto MA SDIP Integration Gateway by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -244,7 +300,7 @@ edges:
   category: Extensions; Data & Reports;Underwriting Inspection; PolicyCenter
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
@@ -393,8 +449,8 @@ edges:
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: USA E&S Commercial Property - Quote & Buy Digital Experience Template by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -405,7 +461,7 @@ edges:
   category: Extensions; Underwriting Inspection; Digital Experiences
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
@@ -429,8 +485,8 @@ edges:
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: USA E&S Commercial Property Insurance Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -441,7 +497,7 @@ edges:
   category: Extensions; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
@@ -537,8 +593,8 @@ edges:
   - 'Partner tier: Advantage'
 - partner_name: Ernst & Young LLP
   app: USA Personal EV Insurance Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -549,14 +605,14 @@ edges:
   category: Extensions; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: USA Pet Insurance Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -567,7 +623,7 @@ edges:
   category: Extensions; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
@@ -1831,6 +1887,25 @@ edges:
   badges:
   - Ready for Guidewire
   - 'Partner tier: Growth'
+- partner_name: Floatbot Inc
+  app: Floatbot.AI Voice FNOL & Adjuster AI Assistant Accelerator for ClaimCenter
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.guidewire.com/product/01tPW00000B9syvYAB/01tPW00000B9syvYAB
+  category: Accelerator; Claim Intake;Claims Automation;Claims Estimating & Servicing;Customer Experience Management;
+    ClaimCenter
+  partner_domain: floatbot.ai
+  detected_by: sweep-insurance.py
+  detected: '2026-10-13'
+  badges:
+  - Ready for Guidewire
+  - 'Partner tier: Growth'
 - partner_name: PricewaterhouseCoopers
   app: USA Workers' Compensation Quote & Buy Digital Experience Template by PwC
   partner: pricewaterhousecoopers
@@ -2221,7 +2296,7 @@ edges:
   detected: '2026-10-13'
   badges:
   - Ready for Guidewire
-- partner_name: Social Discovery Corp
+- partner_name: Social Discovery
   app: Social Discovery Social Media Background Reporting Accelerator for ClaimCenter
   partner: null
   partner_match: null
@@ -2235,7 +2310,7 @@ edges:
   category: Accelerator; Fraud Detection & Investigation; ClaimCenter
   partner_domain: socialdiscoverycorp.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Growth'
@@ -2314,8 +2389,8 @@ edges:
   - 'Partner tier: Growth'
 - partner_name: Ernst & Young LLP
   app: USA Commercial Management Liability Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -2326,14 +2401,14 @@ edges:
   category: Extensions; Tools & Utilities; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: Watercraft Quote & Buy Digital Experience Template by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -2344,14 +2419,14 @@ edges:
   category: Extensions; Data & Reports;Rating & Pricing; Digital Experiences
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: Homeowners FNOL Digital Experience Template by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -2362,14 +2437,14 @@ edges:
   category: Extensions; Claim Intake;Claims Automation;Customer Experience Management; Digital Experiences
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: USA Directors & Officers Insurance Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -2380,7 +2455,7 @@ edges:
   category: Extensions; Tools & Utilities; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
@@ -2632,8 +2707,8 @@ edges:
   - 'Partner tier: Growth'
 - partner_name: Ernst & Young LLP
   app: EY CDA Snowflake Connector for Guidewire
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -2644,7 +2719,7 @@ edges:
   category: Accelerator; Data & Reports;Regulatory Reporting; BillingCenter;ClaimCenter;Cloud Data Access (CDA);ContactManager;PolicyCenter
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Global Strategic'
@@ -3132,8 +3207,8 @@ edges:
   - Other
 - partner_name: Ernst & Young LLP
   app: EY Insurance Product Rationalizer 360 (EYIPR 360)
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -3144,7 +3219,7 @@ edges:
   category: Accelerator; Tools & Utilities; PolicyCenter
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Global Strategic'
@@ -3705,8 +3780,8 @@ edges:
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: Global Personal Travel Line Q&B Digital Experience Template by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -3717,7 +3792,7 @@ edges:
   category: Extensions; Digital Experiences
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
@@ -4757,8 +4832,8 @@ edges:
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: USA Excess Casualty Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -4769,14 +4844,14 @@ edges:
   category: Extensions; Tools & Utilities; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: US & Canada Commercial Cyber Insurance Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -4787,14 +4862,14 @@ edges:
   category: Extensions; Tools & Utilities; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: Global Personal Travel Insurance Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -4805,14 +4880,14 @@ edges:
   category: Extensions; Tools & Utilities; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: UK Commercial Cyber Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -4823,14 +4898,14 @@ edges:
   category: Extensions; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: AUS Business Pack Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -4841,14 +4916,14 @@ edges:
   category: Extensions; Tools & Utilities; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: US Professional Liability Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -4859,7 +4934,7 @@ edges:
   category: Extensions; Tools & Utilities; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
@@ -5423,8 +5498,8 @@ edges:
   - 'Partner tier: Growth'
 - partner_name: LexisNexis
   app: LexisNexis® Risk Solutions Police Records through Claims Compass For ClaimCenter
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -5435,14 +5510,14 @@ edges:
   category: Integration; Data & Reports; ClaimCenter
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Built by Guidewire
   - 'Partner tier: Advantage'
 - partner_name: LexisNexis
   app: LexisNexis® Risk Solutions National Credit File (NCF) For PolicyCenter
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -5453,14 +5528,14 @@ edges:
   category: Integration; Data & Reports; PolicyCenter
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Built by Guidewire
   - 'Partner tier: Advantage'
 - partner_name: LexisNexis
   app: LexisNexis® Risk Solutions Motor Vehicle Records For PolicyCenter
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -5471,14 +5546,14 @@ edges:
   category: Integration; Data & Reports; PolicyCenter
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Built by Guidewire
   - 'Partner tier: Advantage'
 - partner_name: LexisNexis
   app: LexisNexis® C.L.U.E.® Property For PolicyCenter
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -5489,14 +5564,14 @@ edges:
   category: Integration; Data & Reports; PolicyCenter
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Built by Guidewire
   - 'Partner tier: Advantage'
 - partner_name: LexisNexis
   app: LexisNexis® C.L.U.E.® Auto For PolicyCenter
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -5507,7 +5582,7 @@ edges:
   category: Integration; Data & Reports; PolicyCenter
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Built by Guidewire
   - 'Partner tier: Advantage'
@@ -5558,12 +5633,12 @@ edges:
   relationship: platform-app
   direction: partner-built
   evidence: https://marketplace.guidewire.com/product/01t3n00000TGYyvAAH/01t3n00000TGYyvAAH
-  category: Accelerator; Customer Communication;Customer Experience Management; ClaimCenter
+  category: Integration; Customer Communication;Customer Experience Management; ClaimCenter
   partner_domain: himarley.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
-  - Ready for Guidewire
+  - Built by Guidewire
   - 'Partner tier: Premier'
 - partner_name: Blue Prism
   app: SS&C Blue Prism Intelligent Automation for InsuranceSuite
@@ -5987,8 +6062,8 @@ edges:
   - GO Products
 - partner_name: LexisNexis
   app: LexisNexis® Claims Datafill For ClaimCenter
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -5999,7 +6074,7 @@ edges:
   category: Integration; Data & Reports; ClaimCenter
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Built by Guidewire
   - 'Partner tier: Advantage'
@@ -7552,6 +7627,24 @@ edges:
   badges:
   - Ready for Guidewire
   - 'Partner tier: Growth'
+- partner_name: Copart
+  app: Copart Accelerator for Salvage Claims for ClaimCenter
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.guidewire.com/product/01t3n00000SqIb1AAF/01t3n00000SqIb1AAF
+  category: Accelerator; Auto Total Loss, Salvage & Disposal; ClaimCenter
+  partner_domain: copart.com
+  detected_by: sweep-insurance.py
+  detected: '2026-10-19'
+  badges:
+  - Ready for Guidewire
+  - 'Partner tier: Growth'
 - partner_name: Hertz
   app: Hertz APAC Accelerator for Insurance Claim Rental Management for ClaimCenter 10
   partner: hertz
@@ -7590,8 +7683,8 @@ edges:
   - 'Partner tier: Premier'
 - partner_name: Ernst & Young LLP
   app: USA Inland Marine Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -7602,14 +7695,14 @@ edges:
   category: Extensions; Tools & Utilities; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: USA Large Farm Product Model by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -7620,14 +7713,14 @@ edges:
   category: Extensions; Tools & Utilities; PolicyCenter;Product Models (APD)
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
 - partner_name: Ernst & Young LLP
   app: EY & Databricks Insurance Insights Platform for Guidewire
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -7638,7 +7731,7 @@ edges:
   category: Accelerator; Data & Reports;Regulatory Reporting; BillingCenter;ClaimCenter;Cloud Data Access (CDA);ContactManager;PolicyCenter
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Global Strategic'
@@ -10709,8 +10802,8 @@ edges:
   - 'Partner tier: Advantage'
 - partner_name: LexisNexis
   app: LexisNexis® Driver Discovery for InsuranceNow
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -10721,14 +10814,14 @@ edges:
   category: Accelerator; Data & Reports; InsuranceNow
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Advantage'
 - partner_name: LexisNexis
   app: LexisNexis® Bridger Insight XG for InsuranceNow
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -10739,14 +10832,14 @@ edges:
   category: Accelerator; Data & Reports; InsuranceNow
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Advantage'
 - partner_name: LexisNexis
   app: LexisNexis® Auto Data Prefill for InsuranceNow
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -10757,7 +10850,7 @@ edges:
   category: Accelerator; Data & Reports; InsuranceNow
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Advantage'
@@ -10968,8 +11061,8 @@ edges:
   - SurePath
 - partner_name: LexisNexis
   app: LexisNexis® C.L.U.E.® Auto for InsuranceNow
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -10980,7 +11073,7 @@ edges:
   category: Accelerator; Data & Reports; InsuranceNow
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Advantage'
@@ -11004,8 +11097,8 @@ edges:
   - 'Partner tier: Growth'
 - partner_name: LexisNexis
   app: LexisNexis® Current Carrier® for InsuranceNow
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -11016,7 +11109,7 @@ edges:
   category: Accelerator; Data & Reports; InsuranceNow
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Advantage'
@@ -11075,8 +11168,8 @@ edges:
   - 'Partner tier: Advantage'
 - partner_name: LexisNexis
   app: LexisNexis® National Credit File for InsuranceNow
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -11087,7 +11180,7 @@ edges:
   category: Accelerator; Data & Reports; InsuranceNow
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Advantage'
@@ -11339,8 +11432,8 @@ edges:
   - 'Partner tier: Advantage'
 - partner_name: LexisNexis
   app: LexisNexis® C.L.U.E.® Property for InsuranceNow
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -11351,7 +11444,7 @@ edges:
   category: Accelerator; Data & Reports; InsuranceNow
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Advantage'
@@ -11409,8 +11502,8 @@ edges:
   - 'Partner tier: Premier'
 - partner_name: LexisNexis
   app: LexisNexis® Property Data Prefill for InsuranceNow
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -11421,14 +11514,14 @@ edges:
   category: Accelerator; Data & Reports; InsuranceNow
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Advantage'
 - partner_name: LexisNexis
   app: LexisNexis® Motor Vehicle Records for InsuranceNow
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -11439,14 +11532,14 @@ edges:
   category: Accelerator; Data & Reports; InsuranceNow
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Advantage'
 - partner_name: LexisNexis
   app: LexisNexis® FIRSt for InsuranceNow
-  partner: lexisnexis
-  partner_match: domain+name-among-holders
+  partner: lexisnexis-risk-solutions
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -11457,7 +11550,7 @@ edges:
   category: Accelerator; Data & Reports; InsuranceNow
   partner_domain: lexisnexis.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Advantage'
@@ -11826,6 +11919,60 @@ edges:
   badges:
   - Ready for Guidewire
   - 'Partner tier: Growth'
+- partner_name: FurtherAI
+  app: FurtherAI Accelerator for PolicyCenter
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.guidewire.com/product/01tPW00000HGX9VYAX/01tPW00000HGX9VYAX
+  category: Accelerator; Underwriting Data & Insights;Workflow; PolicyCenter
+  partner_domain: furtherai.com
+  detected_by: sweep-insurance.py
+  detected: '2026-10-13'
+  badges:
+  - Ready for Guidewire
+  - 'Partner tier: Growth'
+- partner_name: Uniban Canada
+  app: Driven Brands Accelerator for Glass Claims for ClaimCenter
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.guidewire.com/product/01tPW00000KKc5dYAD/01tPW00000KKc5dYAD
+  category: Accelerator; Claims Estimating & Servicing;Repair Network; ClaimCenter
+  partner_domain: unibancanada.ca
+  detected_by: sweep-insurance.py
+  detected: '2026-10-13'
+  badges:
+  - Ready for Guidewire
+  - 'Partner tier: Growth'
+- partner_name: hyperexponential
+  app: hyperexponential Accelerator for Pricing and Rating for PolicyCenter
+  partner: hyperexponential
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.guidewire.com/product/01tKj00000PuXcFIAV/01tKj00000PuXcFIAV
+  category: Accelerator; Rating & Pricing; PolicyCenter
+  partner_domain: hyperexponential.com
+  detected_by: sweep-insurance.py
+  detected: '2026-10-13'
+  badges:
+  - Ready for Guidewire
+  - 'Partner tier: Growth'
 - partner_name: Gradient AI
   app: Gradient AI Claims Solutions Accelerator for ClaimCenter
   partner: null
@@ -11880,25 +12027,6 @@ edges:
   badges:
   - Ready for Guidewire
   - 'Partner tier: Growth'
-- partner_name: Floatbot Inc
-  app: Floatbot.AI Accelerator for ClaimCenter
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  relationship: platform-app
-  direction: partner-built
-  evidence: https://marketplace.guidewire.com/product/01tPW00000B9syvYAB/01tPW00000B9syvYAB
-  category: Accelerator; Claim Intake;Claims Automation;Claims Estimating & Servicing;Customer Experience Management;
-    ClaimCenter
-  partner_domain: floatbot.ai
-  detected_by: sweep-insurance.py
-  detected: '2026-10-13'
-  badges:
-  - Ready for Guidewire
-  - 'Partner tier: Growth'
 - partner_name: DataMasque
   app: DataMasque Accelerator for Data Masking InsuranceSuite
   partner: null
@@ -11912,24 +12040,6 @@ edges:
   evidence: https://marketplace.guidewire.com/product/01tPW00000LU10zYAD/01tPW00000LU10zYAD
   category: Accelerator; Data Tools & Utilities; BillingCenter;ClaimCenter;PolicyCenter
   partner_domain: datamasque.com
-  detected_by: sweep-insurance.py
-  detected: '2026-10-13'
-  badges:
-  - Ready for Guidewire
-  - 'Partner tier: Growth'
-- partner_name: Uniban Canada
-  app: Driven Brands Accelerator for Glass Claims for ClaimCenter
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  relationship: platform-app
-  direction: partner-built
-  evidence: https://marketplace.guidewire.com/product/01tPW00000KKc5dYAD/01tPW00000KKc5dYAD
-  category: Accelerator; Claims Estimating & Servicing;Repair Network; ClaimCenter
-  partner_domain: unibancanada.ca
   detected_by: sweep-insurance.py
   detected: '2026-10-13'
   badges:
@@ -12169,24 +12279,6 @@ edges:
   badges:
   - Ready for Guidewire
   - 'Partner tier: Global Premier'
-- partner_name: FurtherAI
-  app: FurtherAI Accelerator for PolicyCenter
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  relationship: platform-app
-  direction: partner-built
-  evidence: https://marketplace.guidewire.com/product/01tPW00000HGX9VYAX/01tPW00000HGX9VYAX
-  category: Accelerator; Underwriting Data & Insights;Workflow; PolicyCenter
-  partner_domain: furtherai.com
-  detected_by: sweep-insurance.py
-  detected: '2026-10-13'
-  badges:
-  - Ready for Guidewire
-  - 'Partner tier: Growth'
 - partner_name: AutoClaims Direct
   app: ACD’s Clarity Add-on for Vehicle Damage Appraisals
   partner: null
@@ -12387,7 +12479,7 @@ edges:
   badges:
   - Ready for Guidewire
   - 'Partner tier: Growth'
-- partner_name: Social Discovery Corp
+- partner_name: Social Discovery
   app: Social Discovery Corporation add-on for Social Media Background Reporting
   partner: null
   partner_match: null
@@ -12401,7 +12493,7 @@ edges:
   category: Add-on; Fraud Detection & Investigation;Records Retrieval; ClaimCenter
   partner_domain: socialdiscoverycorp.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - Ready for Guidewire
   - 'Partner tier: Growth'
@@ -12847,24 +12939,6 @@ edges:
   badges:
   - Ready for Guidewire
   - 'Partner tier: Growth'
-- partner_name: hyperexponential
-  app: hyperexponential Accelerator for Pricing and Rating for PolicyCenter
-  partner: hyperexponential
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  relationship: platform-app
-  direction: partner-built
-  evidence: https://marketplace.guidewire.com/product/01tKj00000PuXcFIAV/01tKj00000PuXcFIAV
-  category: Accelerator; Rating & Pricing; PolicyCenter
-  partner_domain: hyperexponential.com
-  detected_by: sweep-insurance.py
-  detected: '2026-10-13'
-  badges:
-  - Ready for Guidewire
-  - 'Partner tier: Growth'
 - partner_name: Livegenic
   app: Wilbur Accelerator for Repair Management for ClaimCenter
   partner: null
@@ -12990,8 +13064,8 @@ edges:
   - GO Products
 - partner_name: Ernst & Young LLP
   app: Global Personal Travel - Quote & Buy Digital Experience Template by EY
-  partner: null
-  partner_match: null
+  partner: ey
+  partner_match: domain+verified
   partner_candidate: null
   type: marketplace
   marketplace: own
@@ -13002,7 +13076,7 @@ edges:
   category: Extensions; Digital Experiences
   partner_domain: ey.com
   detected_by: sweep-insurance.py
-  detected: '2026-10-13'
+  detected: '2026-10-19'
   badges:
   - GO Products
   - 'Partner tier: Global Strategic'
@@ -13114,62 +13188,6 @@ edges:
   badges:
   - Ready for Guidewire
   - 'Partner tier: Growth'
-- partner_name: Fivetran
-  partner: fivetran
-  partner_match: aggregator
-  type: marketplace
-  marketplace: fivetran-connectors
-  channel: elt-connector
-  relationship: ipaas-bridge
-  direction: third-party
-  evidence: https://fivetran.com/docs/connectors/applications/guidewire-cloud-data-access
-  category: null
-  contract_reference:
-    register: Fivetran connectors (fivetran.com/docs/connectors, docs-sitemap.xml + Partner-Built program)
-    spec_file: null
-    role: elt-connector:fivetran
-    registered_name: Guidewire Cloud Data Access
-    matched_domain: guidewire.com
-    matched_by: domain+name-among-holders
-    detected_by: sweep-data-integration.py
-    detected: '2026-10-18'
-    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
-    connector_paths:
-    - connectors/applications/guidewire-cloud-data-access
-    vendor_link: https://www.guidewire.com/
-    builder: Fivetran
-  detected_by: sweep-data-integration.py
-  first_seen: '2026-10-18'
-- partner_name: npm registry
-  partner: npm
-  partner_match: register
-  type: register
-  direction: provider-built
-  category: official SDK (JavaScript/TypeScript)
-  evidence: https://www.npmjs.com/package/@guidewire/web-font-builder
-  channel: package-registry
-  relationship: distribution-channel
-  contract_reference:
-    register: npm registry (public registry JSON)
-    spec_file: null
-    language: JavaScript/TypeScript
-    packages:
-    - name: '@guidewire/web-font-builder'
-      version: 0.0.1-alpha.10
-      released: '2024-01-24'
-      released_field: modified
-      lapsed: true
-      page: https://www.npmjs.com/package/@guidewire/web-font-builder
-      repo_leg: domain:guidewire.com
-      publisher_leg: email:guidewire.com
-      matched_by: domain+name-among-holders
-    current: false
-    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
-      24 months'
-    detected_by: sweep-official-sdks.py
-    detected: '2026-10-18'
-  detected_by: sweep-official-sdks.py
-  first_seen: '2026-10-18'
 source:
 - https://fivetran.com/docs-sitemap.xml
 - https://fivetran.com/docs/connectors/partner-built-program
