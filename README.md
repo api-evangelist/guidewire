@@ -1,4 +1,4 @@
-# Guidewire (guidewire)
+# Guidewire
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,114 +66,190 @@
 
 Guidewire provides the insurance industry's leading platform including PolicyCenter, ClaimCenter, and BillingCenter. REST APIs enable policy lifecycle management, claims processing, payment orchestration, and underwriting workflows for P&C insurance carriers on the Guidewire Cloud platform.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/guidewire/refs/heads/main/apis.yml)
+**Areas:** Insurance · Policy · Claims · Billing · Property and Casualty
 
-## Tags
+## Guidewire on APIs.io
 
-- Insurance
-- Policy
-- Claims
-- Billing
-- P&C
+Everything profiled for Guidewire is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/guidewire/](https://apis.io/providers/guidewire/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (9)
 
-- **Modified:** 2026-04-28
+- [Guidewire BillingCenter API](https://apis.io/apis/guidewire/guidewire-billingcenter-api/) — The Guidewire BillingCenter API provides REST endpoints for payment orchestration, invoice generation, payment plans, disbursements, and collections…
+- [Guidewire Integration Gateway API](https://apis.io/apis/guidewire/guidewire-integration-gateway-api/) — The Guidewire Integration Gateway provides a managed API layer for connecting Guidewire Cloud applications to third-party systems, enabling event-driven…
+- [Guidewire Accounts API](https://apis.io/apis/guidewire/guidewire-accounts-api/) — Customer account management
+- [Guidewire Claims API](https://apis.io/apis/guidewire/guidewire-claims-api/) — Claims lifecycle management
+- [Guidewire Exposures API](https://apis.io/apis/guidewire/guidewire-exposures-api/) — Claim exposure management
+- [Guidewire FNOL API](https://apis.io/apis/guidewire/guidewire-fnol-api/) — First Notice of Loss intake
+- [Guidewire Payments API](https://apis.io/apis/guidewire/guidewire-payments-api/) — Claim payment and reserves
+- [Guidewire Policies API](https://apis.io/apis/guidewire/guidewire-policies-api/) — Policy lifecycle management
+- [Guidewire Quotes API](https://apis.io/apis/guidewire/guidewire-quotes-api/) — Policy quoting and rating
 
-## APIs
+### Published properties
 
-### Guidewire PolicyCenter API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The Guidewire PolicyCenter API provides REST endpoints for policy lifecycle management, underwriting workflows, policy issuance, endorsements, renewals, and cancellations for property and casualty insurance carriers.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://docs.guidewire.com/](https://docs.guidewire.com/)
-- **Base URL:** `https://api.guidewire.com`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Guidewire Integration Gateway Events](https://apis.io/asyncapis/guidewire/guidewire-integration-gateway-asyncapi/)
 
-- Insurance
-- P&C
-- Policy
-- Underwriting
+#### Event channels (6)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
+- [claim/closed](https://apis.io/channels/guidewire/claim-closed/)
+- [claim/created](https://apis.io/channels/guidewire/claim-created/)
+- [payment/issued](https://apis.io/channels/guidewire/payment-issued/)
+- [policy/cancelled](https://apis.io/channels/guidewire/policy-cancelled/)
+- [policy/issued](https://apis.io/channels/guidewire/policy-issued/)
+- [policy/renewed](https://apis.io/channels/guidewire/policy-renewed/)
+
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Moved to /providers/guidewire/](https://apis.io/graphqls/guidewire/guidewire-graphql/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Guidewire Agentic Access](https://apis.io/agentic-access/guidewire/guidewire-agentic-access/)
+
+#### JSON Schema (1)
+
+The data models the API reads and writes.
+
+- [Guidewire Policy](https://apis.io/schemas/guidewire/guidewire-policy/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Guidewire Context](https://apis.io/jsonld/guidewire/guidewire-context/)
+
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [Guidewire ClaimCenter Accounts API](https://apis.io/collections/guidewire/open-guidewire-accounts-api/)
+- [Guidewire ClaimCenter API](https://apis.io/collections/guidewire/open-guidewire-claimcenter/)
+- [Guidewire ClaimCenter Accounts Claims API](https://apis.io/collections/guidewire/open-guidewire-claims-api/)
+- [Guidewire ClaimCenter Accounts Exposures API](https://apis.io/collections/guidewire/open-guidewire-exposures-api/)
+- [Guidewire ClaimCenter Accounts FNOL API](https://apis.io/collections/guidewire/open-guidewire-fnol-api/)
+- [Guidewire ClaimCenter Accounts Payments API](https://apis.io/collections/guidewire/open-guidewire-payments-api/)
+- [Guidewire ClaimCenter Accounts Policies API](https://apis.io/collections/guidewire/open-guidewire-policies-api/)
+- [Guidewire PolicyCenter API](https://apis.io/collections/guidewire/open-guidewire-policycenter/)
+- [Guidewire ClaimCenter Accounts Quotes API](https://apis.io/collections/guidewire/open-guidewire-quotes-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Guidewire — asyncapi rules](https://apis.io/rules/guidewire/guidewire-asyncapi-spectral-rules/)
+- [Guidewire — jsonschema rules](https://apis.io/rules/guidewire/guidewire-jsonschema-spectral-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Guidewire Authentication](https://apis.io/security/guidewire/guidewire-authentication/)
+- [Guidewire Domain Security](https://apis.io/security/guidewire/guidewire-domain-security/)
+- [Guidewire Trust Center](https://apis.io/security/guidewire/guidewire-trust-center/)
+- [Guidewire Vulnerability Disclosure](https://apis.io/security/guidewire/guidewire-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Guidewire Scopes](https://apis.io/scopes/guidewire/guidewire-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Guidewire Plans Pricing](https://apis.io/plans/guidewire/guidewire-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Guidewire Rate Limits](https://apis.io/rate-limits/guidewire/guidewire-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Guidewire Finops](https://apis.io/finops/guidewire/guidewire-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.guidewire.com/)
 - [Documentation](https://docs.guidewire.com/)
-- [Getting Started](https://www.guidewire.com/developers)
-- [OpenAPI](openapi/guidewire-policycenter-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/guidewire-policycenter.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/guidewire-policycenter.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Getting started](https://www.guidewire.com/developers)
+- [API reference](https://docs.guidewire.com/cloud/cc/202607/apiref/)
+- [Sign up](https://www.guidewire.com/sign-in)
+- [Support](https://community.guidewire.com/)
+- [Blog](https://www.guidewire.com/resources/blog)
+- [Terms of service](https://www.guidewire.com/legal-notices)
+- [Privacy policy](https://www.guidewire.com/privacy-policy)
+- [GitHub](https://github.com/guidewire-oss)
+- [Status](https://status.guidewire.com/)
 
-### Guidewire ClaimCenter API
+## API Evangelist rating
 
-The Guidewire ClaimCenter API provides REST endpoints for claims intake, assignment, investigation, reserving, payment processing, and closure workflows for P&C insurance claim operations.
+**Kin Score 63.6** — strong · rubric 0.25.0 · scored 2026-10-23
 
-- **Human URL:** [https://docs.guidewire.com/](https://docs.guidewire.com/)
-- **Base URL:** `https://api.guidewire.com`
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 64.2 |
+| Contract governance | 31.8 |
+| Operational transparency | 65.8 |
+| Developer ergonomics | 49.4 |
+| Access clarity | 71.1 |
 
-#### Tags
+**Agent readiness 42.0** — agent-native
 
-- Claims
-- Insurance
-- Loss Adjustment
-- P&C
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
 
-#### Properties
+**Regulatory alignment 46.5** — Insurance
 
-- [Documentation](https://docs.guidewire.com/)
-- [Getting Started](https://www.guidewire.com/developers)
-- [OpenAPI](openapi/guidewire-claimcenter-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/guidewire-claimcenter.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/guidewire-claimcenter.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/guidewire/](https://apis.io/providers/guidewire/).
 
-### Guidewire BillingCenter API
+## How this profile is made
 
-The Guidewire BillingCenter API provides REST endpoints for payment orchestration, invoice generation, payment plans, disbursements, and collections management for insurance billing operations.
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- **Human URL:** [https://docs.guidewire.com/](https://docs.guidewire.com/)
-- **Base URL:** `https://api.guidewire.com`
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Guidewire: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-#### Tags
+## Open an issue
 
-- Billing
-- Insurance
-- P&C
-- Payments
-
-#### Properties
-
-- [Documentation](https://docs.guidewire.com/)
-- [Getting Started](https://www.guidewire.com/developers)
-- [Postman Collection](collections/guidewire-claimcenter.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/guidewire-claimcenter.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/guidewire-policycenter.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/guidewire-policycenter.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Guidewire Integration Gateway API
-
-The Guidewire Integration Gateway provides a managed API layer for connecting Guidewire Cloud applications to third-party systems, enabling event-driven integrations and REST API extensions for the Guidewire insurance platform.
-
-- **Human URL:** [https://docs.guidewire.com/](https://docs.guidewire.com/)
-- **Base URL:** `https://api.guidewire.com`
-
-#### Tags
-
-- Insurance
-- Integration
-- Middleware
-- P&C
-
-#### Properties
-
-- [Documentation](https://docs.guidewire.com/)
-- [Getting Started](https://www.guidewire.com/developers)
-- [AsyncAPI](asyncapi/guidewire-integration-gateway-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/guidewire-claimcenter.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/guidewire-claimcenter.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/guidewire-policycenter.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/guidewire-policycenter.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/guidewire-software)
-- [L L Ms Txt](https://docs.guidewire.com/llms.txt)
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/guidewire/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
