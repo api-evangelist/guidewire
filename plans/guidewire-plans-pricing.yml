@@ -1,0 +1,107 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: guidewire
+providerId: guidewire
+created: '2026-05-04'
+# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
+# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
+method: searched
+modified: '2026-09-12'
+probed: '2026-09-12'
+plan_count: 0
+search_evidence:
+  - url: https://www.guidewire.com/pricing
+    status: 404
+  - url: https://www.guidewire.com/products/pricing
+    status: 404
+  - url: https://www.guidewire.com/plans
+    status: 404
+  - url: https://www.guidewire.com/developers/apis
+    status: 200
+    note: No pricing, plan, quota or API-key signup surface anywhere on the developer area.
+search_note: >-
+  Re-searched 2026-09-12. Guidewire publishes NO plans page and no per-tier pricing of any kind: the
+  three obvious pricing paths return 404 and the developer area offers no self-serve signup. Access to
+  Cloud API is bundled into a Guidewire Cloud / InsuranceSuite subscription negotiated under a Master
+  Services Agreement. plan_count is therefore 0 — an honest zero, backed by the probes above. The
+  single Enterprise entry below is a placeholder describing the commercial shape, not a published tier;
+  it carries no real price or quota and must be reconciled against a customer's own MSA.
+reconciled: false
+tags:
+  - Insurance
+  - P&C
+  - Policy
+  - Claims
+  - Billing
+description: Guidewire's APIs (PolicyCenter, ClaimCenter, BillingCenter, Integration Gateway) are
+  delivered as part of Guidewire Cloud / InsuranceSuite contracts to property-and-casualty insurance
+  carriers. There is no public per-tier pricing page. Access is enterprise-only via a Master
+  Services Agreement; pricing is bundled into the cloud subscription and is not publicly disclosed.
+notes: No public pricing is published. The plan below is a placeholder Enterprise tier; reconcile
+  with the customer's MSA / Statement of Work before relying on quota numbers.
+sources:
+  - https://www.guidewire.com/products
+  - https://www.guidewire.com/developers
+plans:
+  - id: guidewire-enterprise
+    name: Enterprise (InsuranceSuite Cloud)
+    type: enterprise
+    description: Enterprise contract negotiated with Guidewire as part of an InsuranceSuite Cloud
+      subscription. Volumes, SLAs, and entitlements are defined in the customer's contract.
+    entries:
+      - label: Plan price
+        description: Custom-quoted as part of the InsuranceSuite Cloud contract
+        name: plan_price
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: configurable
+        domains:
+          - https://api.guidewire.com
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+      - label: API Requests
+        description: Negotiated request volume per the customer's contract
+        name: api_requests
+        type: quota
+        metric: requests
+        limit: contract-defined
+        timeFrame: month
+        geo: configurable
+        domains:
+          - https://api.guidewire.com
+        unit: 1
+        price: included
+        userMultiplied: false
+    elements:
+      - name: 24/7 Dedicated Support
+      - name: Contractual SLA
+      - name: Security & Compliance Review
+      - name: Dedicated Account Manager
+      - name: Custom Data Residency
+      - name: Guidewire PolicyCenter API
+      - name: Guidewire ClaimCenter API
+      - name: Guidewire BillingCenter API
+      - name: Guidewire Integration Gateway API
+maintainers: []
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - period
+  - request
+  plans:
+  - name: Enterprise (InsuranceSuite Cloud)
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    - request
+    periods:
+    - month
