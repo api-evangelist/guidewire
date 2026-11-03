@@ -88,7 +88,7 @@ plans:
       - name: Guidewire Integration Gateway API
 maintainers: []
 x-canonical:
-  generated: '2026-11-01'
+  generated: '2026-11-02'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - subscription
