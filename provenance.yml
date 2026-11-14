@@ -14,6 +14,12 @@ artifacts:
   capabilities/guidewire-capability-edges.yml:
     method: unknown
     evidence: no authorship recorded
+  certification/observations-2026-11-11.jsonl:
+    method: unknown
+    evidence: no authorship recorded
+  certification/status.yml:
+    method: unknown
+    evidence: no authorship recorded
   changelog/guidewire-changelog.yml:
     method: searched
     evidence: declared in the artifact
@@ -71,11 +77,20 @@ artifacts:
   collections/guidewire-quotes-api.postman_collection.json:
     method: derived
     evidence: openapi/guidewire-quotes-api
+  compliance/guidewire-compliance.yml:
+    method: harvested
+    evidence: declared in the artifact
   conformance/guidewire-conformance.yml:
     method: searched
     evidence: declared in the artifact
   conventions/guidewire-conventions.yml:
     method: searched
+    evidence: declared in the artifact
+  data-license/guidewire-data-license.yml:
+    method: harvested
+    evidence: declared in the artifact
+  eligibility/guidewire-eligibility.yml:
+    method: harvested
     evidence: declared in the artifact
   errors/guidewire-error-codes.yml:
     method: searched
@@ -90,6 +105,9 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   heartbeat/2026-11-06.yml:
+    method: unknown
+    evidence: no authorship recorded
+  heartbeat/2026-11-13.yml:
     method: unknown
     evidence: no authorship recorded
   integrations/_index.yml:
@@ -107,7 +125,7 @@ artifacts:
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-11-02T082323.yml:
+  kin/checks-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -173,6 +191,9 @@ artifacts:
   kin/score-2026-11-02T082323.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-11-06T143934.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/guidewire-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
@@ -220,6 +241,9 @@ artifacts:
   plans/guidewire-plans-pricing.yml:
     method: searched
     evidence: declared in the artifact
+  privacy/guidewire-privacy-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
   rate-limits/guidewire-rate-limits.yml:
     method: searched
     evidence: declared in the artifact
@@ -252,6 +276,9 @@ artifacts:
     evidence: declared in the artifact
   sla/guidewire-sla.yml:
     method: generated
+    evidence: declared in the artifact
+  terms/guidewire-terms-of-service.yml:
+    method: harvested
     evidence: declared in the artifact
   well-known/guidewire-community-openid-configuration.json:
     method: unknown
